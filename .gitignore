@@ -1,5 +1,10 @@
 # Compiled class file
 *.class
+TrickOrTreater.java
+Robbable.java
+Ghost.java
+Witch.java
+HalloweenNight.java
 
 # Log file
 *.log

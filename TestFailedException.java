@@ -1,4 +1,4 @@
-public class TestFailedException extends Exception {
+class TestFailedException extends Exception {
     public TestFailedException() {
 
     }
