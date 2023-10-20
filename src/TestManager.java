@@ -22,7 +22,7 @@ class TestManager {
                     if (e.getCause() instanceof TestFailedException) {
                         TestFailedException tfe = (TestFailedException) e.getCause();
 
-                        System.out.println("FAILED: " + tfe.getMessage());
+                        System.out.println(ColorUtils.formatColorString(AsciiColorCode.BRIGHT_RED_BACKGROUND, AsciiColorCode.BRIGHT_WHITE_FOREGROUND, " FAILED: \u00BB ") + " " + tfe.getMessage());
                         if (tip != null) System.out.println("HINT: " + tip.tip());
                     } else {
                         e.getCause().printStackTrace();
