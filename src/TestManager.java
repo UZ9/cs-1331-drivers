@@ -1,4 +1,3 @@
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -12,10 +11,19 @@ class TestManager {
         // TODO: Move to annotation scanning
         testClasses.add(StudentTests.class);
 
+        int totalTests = 0;
+        int totalTestsFailed = 0;
+
         for (Class<?> testClass : testClasses) {
             try {
+                StringUtils.printHorizontalLine();
+                StringUtils.printTextCentered(testClass.getName());
+                System.out.println();
 
                 Object instance = testClass.getDeclaredConstructor().newInstance();
+
+                int classTests = 0;
+                int classTestsFailed = 0;
 
                 for (Method m : testClass.getMethods()) {
                     TestCase testCase = (TestCase) m.getAnnotation(TestCase.class);
@@ -23,22 +31,26 @@ class TestManager {
 
                     if (testCase != null) {
                         try {
-                            StringUtils.printHorizontalLine();
-
-                            System.out.println("Testing: " + testCase.name());
 
                             m.invoke(instance);
+                            
 
-                            System.out.println("Success!");
+                            System.out.println(ColorUtils.formatColorString(AsciiColorCode.BRIGHT_GREEN_BACKGROUND,
+                                    AsciiColorCode.BRIGHT_WHITE_FOREGROUND, " PASSED: \u00BB ") + " "
+                                    + testCase.name());
                         } catch (InvocationTargetException e) {
                             if (e.getCause() instanceof TestFailedException) {
                                 TestFailedException tfe = (TestFailedException) e.getCause();
 
                                 System.out.println(ColorUtils.formatColorString(AsciiColorCode.BRIGHT_RED_BACKGROUND,
                                         AsciiColorCode.BRIGHT_WHITE_FOREGROUND, " FAILED: \u00BB ") + " "
-                                        + tfe.getMessage());
+                                        + testCase.name());
+
+                                System.out.println("\t" + tfe.getMessage());
+
+                                classTestsFailed++;
                                 if (tip != null)
-                                    System.out.println("HINT: " + tip.tip());
+                                    System.out.printf("\tHINT: %s\n", tip.tip());
                             } else {
                                 e.getCause().printStackTrace();
                             }
@@ -47,12 +59,29 @@ class TestManager {
                         } catch (IllegalArgumentException e) {
                             e.printStackTrace();
                         }
+
+                        classTests++;
                     }
                 }
+
+                
+                totalTests += classTests;
+                totalTestsFailed += classTestsFailed;
+
+                System.out.println();
+                StringUtils.printTextCentered(String.format("TESTS PASSED: %d/%d", classTests - classTestsFailed, classTests));
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+
+        StringUtils.printHorizontalLine();
+
+        StringUtils.printTextCentered("Test Results");
+        System.out.println();
+        StringUtils.printTextCentered(String.format("TOTAL TESTS PASSED: %d/%d", totalTests - totalTestsFailed, totalTests));
+        StringUtils.printHorizontalLine();
 
     }
 
