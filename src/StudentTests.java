@@ -4,6 +4,6 @@ class StudentTests {
     public void studentConstructor_shouldSetNameToInput_whenInitialized() throws TestFailedException {
         Student student = new Student("Bob");
 
-        TestFunction.shouldEqual(student.getName(), "Bob");
+        TestFunction.assertEqual(student.getName(), "Bob");
     }
 }
