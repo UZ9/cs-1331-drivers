@@ -2,6 +2,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Tip {
+@interface Tip {
     public String tip() default "";
 }

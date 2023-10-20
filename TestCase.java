@@ -5,6 +5,6 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD})
-public @interface TestCase {
+@interface TestCase {
     public String name() default "UNNAMED_TEST";
 }

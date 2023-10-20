@@ -1,7 +1,7 @@
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-public class TestManager {
+class TestManager {
     public static void main(String[] args) {
 
         StudentTests studentTests = new StudentTests();
