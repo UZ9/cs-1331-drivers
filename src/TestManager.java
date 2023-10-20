@@ -4,17 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 class TestManager {
+    private static List<Class<?>> testClazzes = new ArrayList<>();
     public static void main(String[] args) {
+        registerClass(StudentTests.class);
+        
+        executeTests();
+    }
 
-        List<Class<?>> testClasses = new ArrayList<>();
+    public static void registerClass(Class<?> clazz) {
+        testClazzes.add(clazz);
+    }
 
-        // TODO: Move to annotation scanning
-        testClasses.add(StudentTests.class);
-
+    public static void executeTests() {
         int totalTests = 0;
         int totalTestsFailed = 0;
 
-        for (Class<?> testClass : testClasses) {
+        for (Class<?> testClass : testClazzes) {
             try {
                 StringUtils.printHorizontalLine();
                 StringUtils.printTextCentered(testClass.getName());
@@ -33,7 +38,6 @@ class TestManager {
                         try {
 
                             m.invoke(instance);
-                            
 
                             System.out.println(ColorUtils.formatColorString(AsciiColorCode.BRIGHT_GREEN_BACKGROUND,
                                     AsciiColorCode.BRIGHT_WHITE_FOREGROUND, " PASSED: \u00BB ") + " "
@@ -64,12 +68,12 @@ class TestManager {
                     }
                 }
 
-                
                 totalTests += classTests;
                 totalTestsFailed += classTestsFailed;
 
                 System.out.println();
-                StringUtils.printTextCentered(String.format("TESTS PASSED: %d/%d", classTests - classTestsFailed, classTests));
+                StringUtils.printTextCentered(
+                        String.format("TESTS PASSED: %d/%d", classTests - classTestsFailed, classTests));
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -80,7 +84,8 @@ class TestManager {
 
         StringUtils.printTextCentered("Test Results");
         System.out.println();
-        StringUtils.printTextCentered(String.format("TOTAL TESTS PASSED: %d/%d", totalTests - totalTestsFailed, totalTests));
+        StringUtils.printTextCentered(
+                String.format("TOTAL TESTS PASSED: %d/%d", totalTests - totalTestsFailed, totalTests));
         StringUtils.printHorizontalLine();
 
     }

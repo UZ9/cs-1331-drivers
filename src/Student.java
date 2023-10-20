@@ -4,6 +4,8 @@ public class Student {
     
     public Student(String name) {
         this.name = name;
+
+        System.out.println("Hello there.");
     }
 
     public String getName() {
