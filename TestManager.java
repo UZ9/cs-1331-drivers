@@ -34,8 +34,6 @@ public class TestManager {
                 }
             }
         }
-        
-        Student.class.getMethods();
     }
     
 
