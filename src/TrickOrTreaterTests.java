@@ -283,9 +283,9 @@ class TrickOrTreaterTests {
         boolean testFailed = false;
         String trickOrTreaterX = "", trickOrTreaterY = "", trickOrTreaterZ = "";
         
-        TrickOrTreaterSubclass[] possibleX = getAllTrickOrTreatersOnInterval("Xander", 0, 12, 0, 20);
-        TrickOrTreaterSubclass[] possibleY = getAllTrickOrTreatersOnInterval("Yang", 0, 12, 0, 20);
-        TrickOrTreaterSubclass[] possibleZ = getAllTrickOrTreatersOnInterval("Zan", 0, 12, 0, 20);
+        TrickOrTreaterSubclass[] possibleX = getAllTrickOrTreatersOnInterval("Xander", 0, 12, 0, 50);
+        TrickOrTreaterSubclass[] possibleY = getAllTrickOrTreatersOnInterval("Yang", 0, 12, 0, 50);
+        TrickOrTreaterSubclass[] possibleZ = getAllTrickOrTreatersOnInterval("Zan", 0, 12, 0, 50);
 
         for (int i = 0; i < possibleX.length; i++) {
             for (int j = 0; j < possibleY.length; j++) {

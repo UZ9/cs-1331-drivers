@@ -28,55 +28,40 @@ class TestFunction {
      * @param expected
      * @throws TestFailedException
      */
-    public static void assertEqual(int a, int b) throws TestFailedException {
-        boolean failed = (a != b);
+    public static void assertEqual(int received, int expected) throws TestFailedException {
+        boolean failed = (received != expected);
         if (failed) {
-            throw new TestFailedException("Integer value difference: " + a + " != " + b);
+            throw new TestFailedException("Integer value difference: Received " + received + ", expected " + expected);
         }
     }
 
     /**
      * Detects if the given doubles are not within 1.0e-6 of one another.
-     * @param a
-     * @param b
+     * @param received
+     * @param expected
      * @throws TestFailedException
      */
-    public static void assertEqual(double a, double b) throws TestFailedException {
+    public static void assertEqual(double received, double expected) throws TestFailedException {
         final double ALLOWABLE_ERROR = 0.000001;
 
-        boolean failed = (Math.abs(a - b) > ALLOWABLE_ERROR);
+        boolean failed = (Math.abs(received - expected) > ALLOWABLE_ERROR);
 
         if (failed) {
-            throw new TestFailedException("Double value difference: " + a + " != " + b);
+            throw new TestFailedException("Double value difference: Received " + received + ", expected " + expected);
         }
     }
 
     /**
      * Detects if the given booleans do not have equal values.
-     * @param a
-     * @param b
+     * @param received
+     * @param expected
      * @throws TestFailedException
      */
-    public static void assertEqual(boolean a, boolean b) throws TestFailedException {
-        assertEqual(a, b, "");
-    }
-
-    /**
-     * Detects if the given booleans do not have equal values.
-     * @param a
-     * @param b
-     * @param label
-     * @throws TestFailedException
-     */
-    public static void assertEqual(boolean a, boolean b, String label) throws TestFailedException {
-        boolean failed = (a != b);
+    public static void assertEqual(boolean received, boolean expected) throws TestFailedException {
+        boolean failed = (received != expected);
 
         if (failed) {
-            if (label.isEmpty()) {
-                throw new TestFailedException("Boolean value difference: " + a + " != " + b);
-            } else {
-                throw new TestFailedException(label + "\nBoolean value difference: " + a + " != " + b);
-            }
+            throw new TestFailedException("Boolean value difference: Received " + received + ", expected " + expected);
         }
     }
 
@@ -84,15 +69,15 @@ class TestFunction {
      * Detects if the given Exceptions are the same TYPE, not if they are caused by the same thing. Any two
      * NullPointerExceptions will, when passed into this function, return true, even if they are cuased by
      * two unrelated issues.
-     * @param a
-     * @param b
+     * @param received
+     * @param expected
      * @throws TestFailedException
      */
-    public static void assertEqual(Exception a, Exception b) throws TestFailedException {
-        boolean failed = (a.getCause().getClass() != b.getCause().getClass());
+    public static void assertEqual(Exception received, Exception expected) throws TestFailedException {
+        boolean failed = (received.getCause().getClass() != expected.getCause().getClass());
         
         if (failed) {
-            throw new TestFailedException("Exception class difference: " + a.getCause().getClass() + " != " + b.getCause().getClass());
+            throw new TestFailedException("Exception class difference: Received " + received.getCause().getClass() + ", but expected " + expected.getCause().getClass());
         }
     }
 }
