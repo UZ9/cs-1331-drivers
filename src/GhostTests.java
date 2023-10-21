@@ -1,7 +1,7 @@
 class GhostTests {
 
     @TestCase(name = "Constructor: Valid inputs passed in.")
-    @Tip(tip = "What should numberOfRobberies default to?")
+    @Tip(description = "What should numberOfRobberies default to?")
     public void constructorThreeArgs() throws TestFailedException {
 
         Ghost ghost = new Ghost("Yoon", 6, 7);
@@ -11,7 +11,7 @@ class GhostTests {
     }
 
     @TestCase(name = "Constructor: No args")
-    @Tip(tip = "What should each of Ghost's fields default to?")
+    @Tip(description = "What should each of Ghost's fields default to?")
     public void constructorNoArgs() throws TestFailedException {
 
         Ghost ghost = new Ghost();
@@ -21,7 +21,7 @@ class GhostTests {
     }
 
     @TestCase(name = "trickOrTreat() method: Printed message (when run once).")
-    @Tip(tip = "One thing should be printed each time trickOrTreat() gets called. What is it?")
+    @Tip(description = "One thing should be printed each time trickOrTreat() gets called. What is it?")
     public void trickOrTreatPrintWhenRunOnce() throws TestFailedException {
         IOHijacker hijacker = IOHijacker.getInstance();
 
@@ -36,7 +36,7 @@ class GhostTests {
     }
 
     @TestCase(name = "trickOrTreat() method: Printed message (when run twice).")
-    @Tip(tip = "One thing should be printed each time trickOrTreat() gets called. What is it?")
+    @Tip(description = "One thing should be printed each time trickOrTreat() gets called. What is it?")
     public void trickOrTreatPrintWhenRunTwice() throws TestFailedException {
         IOHijacker hijacker = IOHijacker.getInstance();
 
@@ -52,7 +52,7 @@ class GhostTests {
     }
 
     @TestCase(name = "trickOrTreat() method: Printed message (when run three times).")
-    @Tip(tip = "One thing should be printed each time trickOrTreat() gets called. What is it?")
+    @Tip(description = "One thing should be printed each time trickOrTreat() gets called. What is it?")
     public void trickOrTreatPrintWhenRunThrice() throws TestFailedException {
         IOHijacker hijacker = IOHijacker.getInstance();
 
@@ -69,7 +69,7 @@ class GhostTests {
     }
 
     @TestCase(name = "trickOrTreat() method: Ghost's candy is properly added after one trickOrTreat()")
-    @Tip(tip = "How many pieces of candy does a Ghost get every time it runs trickOrTreat()?")
+    @Tip(description = "How many pieces of candy does a Ghost get every time it runs trickOrTreat()?")
     public void trickOrTreatOneRun() throws TestFailedException {
         IOHijacker hijacker = IOHijacker.getInstance();
 
@@ -85,7 +85,7 @@ class GhostTests {
     }
 
     @TestCase(name = "trickOrTreat() method: Ghost's candy is properly added after two trickOrTreat()'s")
-    @Tip(tip = "How many pieces of candy does a Ghost get every time it runs trickOrTreat()?")
+    @Tip(description = "How many pieces of candy does a Ghost get every time it runs trickOrTreat()?")
     public void trickOrTreatTwoRuns() throws TestFailedException {
         IOHijacker hijacker = IOHijacker.getInstance();
 
@@ -102,7 +102,7 @@ class GhostTests {
     }
 
     @TestCase(name = "trickOrTreat() method: Ghost's candy is properly added after three trickOrTreat()'s")
-    @Tip(tip = "How many pieces of candy does a Ghost get every time it runs trickOrTreat()?")
+    @Tip(description = "How many pieces of candy does a Ghost get every time it runs trickOrTreat()?")
     public void trickOrTreatThreeRuns() throws TestFailedException {
         IOHijacker hijacker = IOHijacker.getInstance();
 
@@ -120,7 +120,7 @@ class GhostTests {
     }
 
     @TestCase(name = "rob() method: Increments robberiesConducted when given a valid Robbale")
-    @Tip(tip = "Make sure you're incrementing robberiesConducted!")
+    @Tip(description = "Make sure you're incrementing robberiesConducted!")
     public void robValidInputs() throws TestFailedException {
         Ghost ghost = new Ghost();
         String string = ghost.toString();
