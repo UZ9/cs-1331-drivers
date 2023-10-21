@@ -4,7 +4,7 @@ class GhostTests {
                                                         + "    1 means that compareTo() returned a positive number, -1 means a negative number, 0 means 0.";
 
     @TestCase(name = "Constructor: Valid inputs passed in.")
-    @Tip(description = "What should numberOfRobberies default to?")
+    @Tip(description = "\nMake sure there isn't any field shadowing in your constructor!\nWhat should numberOfRobberies default to?")
     public void constructorThreeArgs() throws TestFailedException {
 
         Ghost ghost = new Ghost("Yoon", 6, 7);
@@ -189,7 +189,7 @@ class GhostTests {
         TestFunction.assertEqual(string, "Grey/9/7/3");
     }
 
-    @TestCase(name = "compareTo: other has greater candy, smaller age")
+    @TestCase(name = "compareTo: other has greater candy, smaller age, equal robberies")
     @Tip(description = COMPARE_TO_METHOD_TIP)
     public void compareToGreaterSmaller() throws TestFailedException {
 
@@ -200,7 +200,7 @@ class GhostTests {
         TestFunction.assertEqual(result, -1);
     }
 
-    @TestCase(name = "compareTo: other has greater candy, equal age")
+    @TestCase(name = "compareTo: other has greater candy, equal age, equal robberies")
     @Tip(description = COMPARE_TO_METHOD_TIP)
     public void compareToGreaterEqual() throws TestFailedException {
 
@@ -211,7 +211,7 @@ class GhostTests {
         TestFunction.assertEqual(result, -1);
     }
 
-    @TestCase(name = "compareTo: other has greater candy, greater age")
+    @TestCase(name = "compareTo: other has greater candy, greater age, equal robberies")
     @Tip(description = COMPARE_TO_METHOD_TIP)
     public void compareToGreaterGreater() throws TestFailedException {
 
@@ -222,7 +222,7 @@ class GhostTests {
         TestFunction.assertEqual(result, -1);
     }
 
-    @TestCase(name = "compareTo: other has equal candy, smaller age")
+    @TestCase(name = "compareTo: other has equal candy, smaller age, equal robberies")
     @Tip(description = COMPARE_TO_METHOD_TIP)
     public void compareToEqualSmaller() throws TestFailedException {
 
@@ -233,7 +233,7 @@ class GhostTests {
         TestFunction.assertEqual(result, 1);
     }
 
-    @TestCase(name = "compareTo: other has equal candy, equal age")
+    @TestCase(name = "compareTo: other has equal candy, equal age, equal robberies")
     @Tip(description = COMPARE_TO_METHOD_TIP)
     public void compareToEqualEqual() throws TestFailedException {
 
@@ -244,7 +244,7 @@ class GhostTests {
         TestFunction.assertEqual(result, 0);
     }
 
-    @TestCase(name = "compareTo: other has equal candy, greater age")
+    @TestCase(name = "compareTo: other has equal candy, greater age, equal robberies")
     @Tip(description = COMPARE_TO_METHOD_TIP)
     public void compareToEqualGreater() throws TestFailedException {
 
@@ -255,7 +255,7 @@ class GhostTests {
         TestFunction.assertEqual(result, -1);
     }
 
-    @TestCase(name = "compareTo: other has fewer candy, smaller age")
+    @TestCase(name = "compareTo: other has fewer candy, smaller age, equal robberies")
     @Tip(description = COMPARE_TO_METHOD_TIP)
     public void compareToSmallerSmaller() throws TestFailedException {
 
@@ -266,7 +266,7 @@ class GhostTests {
         TestFunction.assertEqual(result, 1);
     }
 
-    @TestCase(name = "compareTo: other has fewer candy, equal age")
+    @TestCase(name = "compareTo: other has fewer candy, equal age, equal robberies")
     @Tip(description = COMPARE_TO_METHOD_TIP)
     public void compareToSmallerEqual() throws TestFailedException {
 
@@ -277,12 +277,37 @@ class GhostTests {
         TestFunction.assertEqual(result, 1);
     }
 
-    @TestCase(name = "compareTo: other has fewer candy, greater age")
+    @TestCase(name = "compareTo: other has fewer candy, greater age, equal robberies")
     @Tip(description = COMPARE_TO_METHOD_TIP)
     public void compareToSmallerGreater() throws TestFailedException {
 
         Ghost ghost1 = new Ghost("Skipper", 1, 10);
         Ghost ghost2 = new Ghost("Sun Tzu", 2, 9);
+        int result = TestUtils.signOf(ghost1.compareTo(ghost2));
+
+        TestFunction.assertEqual(result, 1);
+    }
+
+    @TestCase(name = "compareTo: other has equal candy, equal age, greater robberies")
+    @Tip(description = COMPARE_TO_METHOD_TIP)
+    public void compareToEqualEqualGreater() throws TestFailedException {
+        RobbableSubclass dummy = new RobbableSubclass("dummy", 0, 1);
+        Ghost ghost1 = new Ghost("Skipper", 1, 10);
+        Ghost ghost2 = new Ghost("Sun Tzu", 1, 10);
+        ghost2.rob(dummy);
+        int result = TestUtils.signOf(ghost1.compareTo(ghost2));
+
+        TestFunction.assertEqual(result, -1);
+    }
+
+    @TestCase(name = "compareTo: other has equal candy, equal age, fewer robberies")
+    @Tip(description = COMPARE_TO_METHOD_TIP)
+    public void compareToEqualEqualSmaller() throws TestFailedException {
+        RobbableSubclass dummy = new RobbableSubclass("dummy", 0, 1);
+
+        Ghost ghost1 = new Ghost("Skipper", 1, 10);
+        ghost1.rob(dummy);
+        Ghost ghost2 = new Ghost("Sun Tzu", 1, 10);
         int result = TestUtils.signOf(ghost1.compareTo(ghost2));
 
         TestFunction.assertEqual(result, 1);
@@ -313,7 +338,7 @@ class GhostTests {
                         System.out.println(ColorUtils.formatColorString(AsciiColorCode.BRIGHT_RED_BACKGROUND,
                                 AsciiColorCode.BRIGHT_WHITE_FOREGROUND, " TRANSITIVITY TEST FAILED: \u00BB ") + "\nWhen "
                                 + "x = \"" + ghostX + "\", y = \"" + ghostY + "\", z = \"" + ghostZ + "\"");
-                        TestFunction.assertEqual(x.compareTo(z), 1);
+                        TestFunction.assertEqual(TestUtils.signOf(x.compareTo(z)), 1);
                     }
                 }
             }
