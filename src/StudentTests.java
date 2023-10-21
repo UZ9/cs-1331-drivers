@@ -13,7 +13,7 @@ class StudentTests {
         List<String> output = hijacker.stopRecording();
 
         TestFunction.assertEqual(output.size() ,1);
-        TestFunction.assertEqual(output.get(0), "Hello there");
+        TestFunction.assertEqual(output.get(0), "Hello there.\nI'm a student.");
 
         TestFunction.assertEqual(student.getName(), "Bob");
     }
