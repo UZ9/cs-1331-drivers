@@ -6,6 +6,7 @@ public class Student {
         this.name = name;
 
         System.out.println("Hello there.");
+        System.out.println("I'm a student.");
     }
 
     public String getName() {

@@ -7,6 +7,7 @@ class TestManager {
     private static List<Class<?>> testClazzes = new ArrayList<>();
     public static void main(String[] args) {
         registerClass(StudentTests.class);
+        registerClass(TrickOrTreaterTests.class);
         
         executeTests();
     }
