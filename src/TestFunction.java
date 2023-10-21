@@ -1,3 +1,5 @@
+import java.util.List;
+
 class TestFunction {
     /**
      * Detects if the given Strings do not have the same content (case-sensitive)
@@ -21,6 +23,33 @@ class TestFunction {
         if (failed) {
             throw new TestFailedException(
                     "Strings different! Received \"" + actual + "\", expected \"" + expected + "\"");
+        }
+    }
+
+    public static void assertEqual(List<String> actual, List<String> expected) throws TestFailedException {
+        boolean failed = false;
+
+        if (actual == null || expected == null || actual.size() != expected.size()) {
+            failed = actual == expected;
+        } else {
+            for (int i = 0; i < expected.size(); i++) {
+            if (expected.get(i) == null) {
+                    failed = actual.get(i) != null;
+                    
+                    if (failed) break;
+                } else {
+                    failed = !actual.get(i).equals(expected.get(i));
+
+                    if (failed) break;
+                }
+            }
+        }
+
+        
+
+        if (failed) {
+            throw new TestFailedException(
+                    "List Differnet! Received \"" + actual + "\", expected \"" + expected + "\"");
         }
     }
 

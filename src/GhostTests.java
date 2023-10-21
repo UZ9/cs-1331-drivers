@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 class GhostTests {
     private static final String COMPARE_TO_METHOD_TIP = "What criteria should compareTo use to determine greater/less than? What order should these be compared?\n"
                                                         + "    Note: This test only checks the SIGN of compareTo, since the intended number is not specified.\n"
@@ -33,9 +36,9 @@ class GhostTests {
         Ghost ghost = new Ghost("Katia", 9, 7);
         ghost.trickOrTreat();
 
-        String output = TestUtils.combinePrintStatements(hijacker.stopRecording());
+        String output = hijacker.stopRecording();
         
-        TestFunction.assertEqual(output, "Boo! Trick or treat!");
+        TestFunction.assertEqual(output, "Boo! Trick or treat!\n");
     }
 
     @TestCase(name = "trickOrTreat() method: Printed message (when run twice).")
@@ -49,9 +52,9 @@ class GhostTests {
         ghost.trickOrTreat();
         ghost.trickOrTreat();
 
-        String output = TestUtils.combinePrintStatements(hijacker.stopRecording());
-        
-        TestFunction.assertEqual(output, "Boo! Trick or treat!\nBoo! Trick or treat!");
+        String output = hijacker.stopRecording();
+
+        TestFunction.assertEqual(output, "Boo! Trick or treat!\nBoo! Trick or treat!\n");
     }
 
     @TestCase(name = "trickOrTreat() method: Printed message (when run three times).")
@@ -66,9 +69,9 @@ class GhostTests {
         ghost.trickOrTreat();
         ghost.trickOrTreat();
 
-        String output = TestUtils.combinePrintStatements(hijacker.stopRecording());
-        
-        TestFunction.assertEqual(output, "Boo! Trick or treat!\nBoo! Trick or treat!\nBoo! Trick or treat!");
+        String output = hijacker.stopRecording();
+
+        TestFunction.assertEqual(output, "Boo! Trick or treat!\nBoo! Trick or treat!\nBoo! Trick or treat!\n");
     }
 
     @TestCase(name = "trickOrTreat() method: Ghost's candy is properly added after one trickOrTreat()")
@@ -82,7 +85,7 @@ class GhostTests {
         ghost.trickOrTreat();
         String string = ghost.toString();
 
-        String output = TestUtils.combinePrintStatements(hijacker.stopRecording());
+        String output = hijacker.stopRecording();
 
         TestFunction.assertEqual(string, "Laura/6/7/0");
     }
@@ -99,7 +102,7 @@ class GhostTests {
         ghost.trickOrTreat();
         String string = ghost.toString();
 
-        String output = TestUtils.combinePrintStatements(hijacker.stopRecording());
+        String output = hijacker.stopRecording();
 
         TestFunction.assertEqual(string, "Skyla/6/7/0");
     }
@@ -117,7 +120,7 @@ class GhostTests {
         ghost.trickOrTreat();
         String string = ghost.toString();
 
-        String output = TestUtils.combinePrintStatements(hijacker.stopRecording());
+        String output = hijacker.stopRecording();
 
         TestFunction.assertEqual(string, "Radhika/6/7/0");
     }
