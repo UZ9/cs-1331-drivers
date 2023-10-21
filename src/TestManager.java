@@ -4,28 +4,39 @@ import java.util.ArrayList;
 import java.util.List;
 
 class TestManager {
+    /**
+     * A list of the currently registered classes to test
+     */
     private static List<Class<?>> testClazzes = new ArrayList<>();
+
     public static void main(String[] args) {
-        registerClass(StudentTests.class);
+
+        // REGISTER CLASSES HERE
         registerClass(TrickOrTreaterTests.class);
         registerClass(GhostTests.class);
         
         executeTests();
     }
 
+    /**
+     * Registers and marks test class to be scanned during test execution.
+     * 
+     * @param clazz The input class
+     */
     public static void registerClass(Class<?> clazz) {
         testClazzes.add(clazz);
     }
 
+    /**
+     * Executes all registered tests.
+     */
     public static void executeTests() {
         int totalTests = 0;
         int totalTestsFailed = 0;
 
         for (Class<?> testClass : testClazzes) {
             try {
-                StringUtils.printHorizontalLine();
-                StringUtils.printTextCentered(testClass.getName());
-                System.out.println();
+                printTestCategory(testClass.getName());
 
                 Object instance = testClass.getDeclaredConstructor().newInstance();
 
@@ -56,7 +67,7 @@ class TestManager {
 
                                 classTestsFailed++;
                                 if (tip != null)
-                                    System.out.printf("\tHINT: %s\n", tip.tip());
+                                    System.out.printf("\tHINT: %s\n", tip.description());
                             } else {
                                 e.getCause().printStackTrace();
                             }
@@ -92,4 +103,14 @@ class TestManager {
 
     }
 
+    /**
+     * Prints a formatted test category section
+     * 
+     * @param category The name of the section (most likely the class name)
+     */
+    private static void printTestCategory(String category) {
+        StringUtils.printHorizontalLine();
+        StringUtils.printTextCentered(category);
+        System.out.println();
+    }
 }
