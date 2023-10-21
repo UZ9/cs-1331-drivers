@@ -181,7 +181,7 @@ class TrickOrTreaterTests {
 
         TrickOrTreater treater1 = new TrickOrTreaterSubclass("Coke", 2, 9);
         TrickOrTreater treater2 = new TrickOrTreaterSubclass("Pepsi", 1, 10);
-        int result = Math.abs(treater1.compareTo(treater2))/treater1.compareTo(treater2);
+        int result = TestUtils.signOf(treater1.compareTo(treater2));
 
         TestFunction.assertEqual(result, -1);
     }
@@ -192,7 +192,7 @@ class TrickOrTreaterTests {
 
         TrickOrTreater treater1 = new TrickOrTreaterSubclass("Coke", 1, 9);
         TrickOrTreater treater2 = new TrickOrTreaterSubclass("Pepsi", 1, 10);
-        int result = Math.abs(treater1.compareTo(treater2))/treater1.compareTo(treater2);
+        int result = TestUtils.signOf(treater1.compareTo(treater2));
 
         TestFunction.assertEqual(result, -1);
     }
@@ -203,7 +203,7 @@ class TrickOrTreaterTests {
 
         TrickOrTreater treater1 = new TrickOrTreaterSubclass("Coke", 1, 9);
         TrickOrTreater treater2 = new TrickOrTreaterSubclass("Pepsi", 2, 10);
-        int result = Math.abs(treater1.compareTo(treater2))/treater1.compareTo(treater2);
+        int result = TestUtils.signOf(treater1.compareTo(treater2));
 
         TestFunction.assertEqual(result, -1);
     }
@@ -214,7 +214,7 @@ class TrickOrTreaterTests {
 
         TrickOrTreater treater1 = new TrickOrTreaterSubclass("Coke", 2, 10);
         TrickOrTreater treater2 = new TrickOrTreaterSubclass("Pepsi", 1, 10);
-        int result = Math.abs(treater1.compareTo(treater2))/treater1.compareTo(treater2);
+        int result = TestUtils.signOf(treater1.compareTo(treater2));
 
         TestFunction.assertEqual(result, 1);
     }
@@ -236,7 +236,7 @@ class TrickOrTreaterTests {
 
         TrickOrTreater treater1 = new TrickOrTreaterSubclass("Coke", 1, 10);
         TrickOrTreater treater2 = new TrickOrTreaterSubclass("Pepsi", 2, 10);
-        int result = Math.abs(treater1.compareTo(treater2))/treater1.compareTo(treater2);
+        int result = TestUtils.signOf(treater1.compareTo(treater2));
 
         TestFunction.assertEqual(result, -1);
     }
@@ -247,7 +247,7 @@ class TrickOrTreaterTests {
 
         TrickOrTreater treater1 = new TrickOrTreaterSubclass("Coke", 2, 10);
         TrickOrTreater treater2 = new TrickOrTreaterSubclass("Pepsi", 1, 9);
-        int result = Math.abs(treater1.compareTo(treater2))/treater1.compareTo(treater2);
+        int result = TestUtils.signOf(treater1.compareTo(treater2));
 
         TestFunction.assertEqual(result, 1);
     }
@@ -258,7 +258,7 @@ class TrickOrTreaterTests {
 
         TrickOrTreater treater1 = new TrickOrTreaterSubclass("Coke", 1, 10);
         TrickOrTreater treater2 = new TrickOrTreaterSubclass("Pepsi", 1, 9);
-        int result = Math.abs(treater1.compareTo(treater2))/treater1.compareTo(treater2);
+        int result = TestUtils.signOf(treater1.compareTo(treater2));
 
         TestFunction.assertEqual(result, 1);
     }
@@ -269,7 +269,7 @@ class TrickOrTreaterTests {
 
         TrickOrTreater treater1 = new TrickOrTreaterSubclass("Coke", 1, 10);
         TrickOrTreater treater2 = new TrickOrTreaterSubclass("Pepsi", 2, 9);
-        int result = Math.abs(treater1.compareTo(treater2))/treater1.compareTo(treater2);
+        int result = TestUtils.signOf(treater1.compareTo(treater2));
 
         TestFunction.assertEqual(result, 1);
     }
