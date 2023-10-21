@@ -1,5 +1,3 @@
-import java.util.List;
-
 class TrickOrTreaterTests {
 
     private static final String COMPARE_TO_METHOD_TIP = "What criteria should compareTo use to determine greater/less than? What order should these be compared?\n"

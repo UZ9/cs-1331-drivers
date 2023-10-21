@@ -8,6 +8,7 @@ class TestManager {
     public static void main(String[] args) {
         registerClass(StudentTests.class);
         registerClass(TrickOrTreaterTests.class);
+        registerClass(GhostTests.class);
         
         executeTests();
     }

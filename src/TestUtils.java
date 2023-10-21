@@ -1,3 +1,5 @@
+import java.util.List;
+
 class TestUtils {
     public static void printDebug(String s) {
         System.out.println("DEBUG: " + s);
@@ -14,5 +16,18 @@ class TestUtils {
         } else {
             return Math.abs(input) / input;
         }
+    }
+
+    public static String combinePrintStatements(List<String> printedMessages) {
+        if (printedMessages == null || printedMessages.size() == 0) {
+            return "";
+        }
+
+        StringBuilder builder = new StringBuilder(printedMessages.get(0));
+        for (int i = 1; i < printedMessages.size(); i++) {
+            builder.append("\n");
+            builder.append(printedMessages.get(i));
+        }
+        return builder.toString();
     }
 }
