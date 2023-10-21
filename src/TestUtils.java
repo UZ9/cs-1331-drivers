@@ -1,10 +1,7 @@
 class TestUtils {
-    public static void printDebug(String s) {
-        System.out.println("DEBUG: " + s);
-    }
-
     /**
      * Returns either 1, 0, or -1 depending on the sign of the input.
+     * 
      * @param input
      * @return -1 if input < 0, 0 if input = 0, 1 if input > 0
      */
