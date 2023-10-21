@@ -1,3 +1,5 @@
+import java.util.List;
+
 class WitchTests {
     private static final String COMPARE_TO_METHOD_TIP = "What criteria should compareTo use to determine greater/less than? What order should these be compared?\n"
                                                         + "    Note: This test only checks the SIGN of compareTo, since the intended number is not specified.\n"
@@ -63,9 +65,9 @@ class WitchTests {
         Witch witch = new Witch("Skipper", 6, 70,null);
         witch.trickOrTreat();
 
-        String consoleOutput = TestUtils.combinePrintStatements(hijacker.stopRecording());
-        
-        TestFunction.assertEqual(consoleOutput, "Bwahaha! I'll get you my pretty!");
+        String consoleOutput = hijacker.stopRecording();
+
+        TestFunction.assertEqual(consoleOutput, "Bwahaha! I'll get you my pretty!\n");
     }
 
     @TestCase(name = "Constructor: empty signatureCackle")
@@ -78,9 +80,9 @@ class WitchTests {
         Witch witch = new Witch("Skipper", 6, 70,"");
         witch.trickOrTreat();
 
-        String consoleOutput = TestUtils.combinePrintStatements(hijacker.stopRecording());
-        
-        TestFunction.assertEqual(consoleOutput, "Bwahaha! I'll get you my pretty!");
+        String consoleOutput = hijacker.stopRecording();
+
+        TestFunction.assertEqual(consoleOutput, "Bwahaha! I'll get you my pretty!\n");
     }
 
 
@@ -94,9 +96,9 @@ class WitchTests {
         Witch witch = new Witch("Skipper", 6, 70,"     ");
         witch.trickOrTreat();
 
-        String consoleOutput = TestUtils.combinePrintStatements(hijacker.stopRecording());
-        
-        TestFunction.assertEqual(consoleOutput, "Bwahaha! I'll get you my pretty!");
+        String consoleOutput = hijacker.stopRecording();
+
+        TestFunction.assertEqual(consoleOutput, "Bwahaha! I'll get you my pretty!\n");
     }
 
     @TestCase(name = "trickOrTreat: run once (checking for console output)")
@@ -109,9 +111,9 @@ class WitchTests {
         Witch witch = new Witch("Grey", 9, 70, "Yippee");
         witch.trickOrTreat();
 
-        String consoleOutput = TestUtils.combinePrintStatements(hijacker.stopRecording());
-        
-        TestFunction.assertEqual(consoleOutput, "Yippee! I'll get you my pretty!");
+        String consoleOutput = hijacker.stopRecording();
+
+        TestFunction.assertEqual(consoleOutput, "Yippee! I'll get you my pretty!\n");
     }
 
     @TestCase(name = "trickOrTreat: run twice (checking for console output)")
@@ -125,9 +127,9 @@ class WitchTests {
         witch.trickOrTreat();
         witch.trickOrTreat();
 
-        String consoleOutput = TestUtils.combinePrintStatements(hijacker.stopRecording());
-        
-        TestFunction.assertEqual(consoleOutput, "Hooray! I'll get you my pretty!\nHooray! I'll get you my pretty!");
+        String consoleOutput = hijacker.stopRecording();
+
+        TestFunction.assertEqual(consoleOutput, "Hooray! I'll get you my pretty!\nHooray! I'll get you my pretty!\n");
     }
 
     @TestCase(name = "trickOrTreat: run three times (checking for console output)")
@@ -142,9 +144,9 @@ class WitchTests {
         witch.trickOrTreat();
         witch.trickOrTreat();
 
-        String consoleOutput = TestUtils.combinePrintStatements(hijacker.stopRecording());
-        
-        TestFunction.assertEqual(consoleOutput, "Wahoo! I'll get you my pretty!\nWahoo! I'll get you my pretty!\nWahoo! I'll get you my pretty!");
+        String consoleOutput = hijacker.stopRecording();
+
+        TestFunction.assertEqual(consoleOutput, "Wahoo! I'll get you my pretty!\nWahoo! I'll get you my pretty!\nWahoo! I'll get you my pretty!\n");
     }
 
     @TestCase(name = "trickOrTreat: run once (checking for number of candy)")
@@ -158,7 +160,8 @@ class WitchTests {
         witch.trickOrTreat();
         String output = witch.toString();
 
-        String consoleOutput = TestUtils.combinePrintStatements(hijacker.stopRecording());
+
+        // String consoleOutput = TestUtils.combinePrintStatements(hijacker.stopRecording());
         
         TestFunction.assertEqual(output, "Grey/9/73");
     }
@@ -175,8 +178,8 @@ class WitchTests {
         witch.trickOrTreat();
         String output = witch.toString();
 
-        String consoleOutput = TestUtils.combinePrintStatements(hijacker.stopRecording());
-        
+        String consoleOutput = hijacker.stopRecording();
+
         TestFunction.assertEqual(output, "Spartan/9/71");
     }
 
@@ -193,8 +196,8 @@ class WitchTests {
         witch.trickOrTreat();
         String output = witch.toString();
 
-        String consoleOutput = TestUtils.combinePrintStatements(hijacker.stopRecording());
-        
+        String consoleOutput = hijacker.stopRecording();
+
         TestFunction.assertEqual(output, "Poof/2/54");
     }
 

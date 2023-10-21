@@ -1,5 +1,6 @@
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -8,7 +9,7 @@ import java.util.List;
 class IOHijacker {
     private static IOHijacker INSTANCE;
 
-    private List<String> log = new ArrayList<>();
+    private String log = "";
     private PrintStream originalStream;
     private PrintStream redirectedStream;
     private boolean recording = false;
@@ -24,7 +25,7 @@ class IOHijacker {
      * Until stopRecording is called, no System.out messages will appear.
      */
     public void startRecording() {
-        log.clear();
+        log = "";
 
         if (redirectedStream == null)
             redirectedStream = getRedirectedStream();
@@ -39,7 +40,7 @@ class IOHijacker {
      * 
      * @return A list of all messages sent during the recording
      */
-    public List<String> stopRecording() {
+    public String stopRecording() {
         recording = false;
 
         System.setOut(originalStream);
@@ -52,7 +53,7 @@ class IOHijacker {
      * 
      * @return The current log of messages
      */
-    public List<String> getCurrentLog() {
+    public String getCurrentLog() {
         return log;
     }
 
@@ -65,8 +66,20 @@ class IOHijacker {
         return new PrintStream(System.out, true) {
             @Override
             public void print(String s) {
-                IOHijacker.logMessage(s);
+                IOHijacker.appendMessage(s);
             }
+
+            @Override
+            public PrintStream printf(String message, Object... args) {
+                IOHijacker.appendMessage(String.format(message, args));
+                return this;
+            }
+
+            @Override
+            public void println(String s) {
+                IOHijacker.appendMessage(s + "\n");
+            }
+
         };
     }
 
@@ -84,16 +97,17 @@ class IOHijacker {
     }
 
     /**
-     * Logs a string message to the log ONLY if recording.
+     * Appends a string message to the log ONLY if recording.
      * 
      * @param message The message to be recorded
      */
-    private static void logMessage(String message) {
+    private static void appendMessage(String message) {
         IOHijacker instance = getInstance();
 
         if (!instance.recording)
             return;
 
-        instance.log.add(message);
+        instance.log += message;
+
     }
 }
