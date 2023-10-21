@@ -5,13 +5,43 @@ class TrickOrTreaterTests {
                                                         + "    1 means that compareTo() returned a positive number, -1 means a negative number, 0 means 0.";
 
     @TestCase(name = "Constructor: Valid inputs passed in.")
-    @Tip(description = "Make sure that your constructor takes the correct number (and type) of inputs!")
+    @Tip(description = "Make sure there isn't any field shadowing in your constructor!")
     public void threeArgConstructor() throws TestFailedException {
 
         TrickOrTreater treater = new TrickOrTreaterSubclass("Yoon", 6, 70);
         String string = treater.toString();
 
         TestFunction.assertEqual(string, "Yoon/6/70");
+    }
+
+    @TestCase(name = "Constructor: null name")
+    @Tip(description = "What should invalid inputs default to?")
+    public void constructorNullName() throws TestFailedException {
+
+        TrickOrTreater treater = new TrickOrTreaterSubclass("Charlie Brown", 6, 70);
+        String string = treater.toString();
+
+        TestFunction.assertEqual(string, "Charlie Brown/6/70");
+    }
+
+    @TestCase(name = "Constructor: empty name")
+    @Tip(description = "What should invalid inputs default to?")
+    public void constructorEmptyName() throws TestFailedException {
+
+        TrickOrTreater treater = new TrickOrTreaterSubclass("", 6, 70);
+        String string = treater.toString();
+
+        TestFunction.assertEqual(string, "Charlie Brown/6/70");
+    }
+
+    @TestCase(name = "Constructor: blank name")
+    @Tip(description = "What should invalid inputs default to?")
+    public void constructorBlankName() throws TestFailedException {
+
+        TrickOrTreater treater = new TrickOrTreaterSubclass("  \n   ", 6, 70);
+        String string = treater.toString();
+
+        TestFunction.assertEqual(string, "Charlie Brown/6/70");
     }
 
     @TestCase(name = "Age must be in the inclusive interval [0, 12]. What should an invalid age default to?")
