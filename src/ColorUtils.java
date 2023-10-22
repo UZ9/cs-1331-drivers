@@ -1,4 +1,4 @@
-public class ColorUtils {
+class ColorUtils {
     /**
      * Formats a string to have an ASCII background in terminal.
      * 

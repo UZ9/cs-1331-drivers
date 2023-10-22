@@ -1,4 +1,4 @@
-public class StringUtils {
+class StringUtils {
     /**
      * The ASCII character to use for horizontal lines
      */
