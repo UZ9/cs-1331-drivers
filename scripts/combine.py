@@ -9,6 +9,7 @@ read_files = glob.glob("../src/*.java")
 
 with open(filename, "wb") as outfile:
     code_lines = []
+    import_lines = []
 
     for f in read_files:
         with open(f, "rb") as infile:
@@ -17,7 +18,8 @@ with open(filename, "wb") as outfile:
                 line = str(line, 'UTF-8')
                 line = line.replace("public class", "class")
 
-                if line.startswith("import") and not (line in code_lines) :
+                if line.startswith("import") and not (line in import_lines):
+                    import_lines.append(line);
                     outfile.write(line.encode())
 
                     continue

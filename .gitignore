@@ -6,6 +6,8 @@ Ghost.java
 Witch.java
 HalloweenNight.java
 
+Driver.java
+
 # Log file
 *.log
 
