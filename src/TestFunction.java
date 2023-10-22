@@ -21,8 +21,19 @@ class TestFunction {
         }
 
         if (failed) {
+            
+            String actualString = "\"" + actual + "\" ";
+            String expectedString = "\"" + expected + "\"";
+            
+            if (actual.trim().contains("\n")) {
+                actualString = "\n\"" + actual + "\"\n";
+            }
+            if (expected.trim().contains("\n")) {
+                expectedString = "\n\"" + expected + "\"\n";
+            }
+
             throw new TestFailedException(
-                    "Strings different! Received \"" + actual + "\", expected \"" + expected + "\"");
+                    "Strings different! Received " + actualString + "but expected " + expectedString);
         }
     }
 
