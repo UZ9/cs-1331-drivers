@@ -1,5 +1,3 @@
-import java.util.List;
-
 class WitchTests {
     private static final String COMPARE_TO_METHOD_TIP = "What criteria should compareTo use to determine greater/less than? What order should these be compared?\n"
                                                         + "    Note: This test only checks the SIGN of compareTo, since the intended number is not specified.\n"
@@ -160,8 +158,7 @@ class WitchTests {
         witch.trickOrTreat();
         String output = witch.toString();
 
-
-        // String consoleOutput = TestUtils.combinePrintStatements(hijacker.stopRecording());
+        hijacker.stopRecording();
         
         TestFunction.assertEqual(output, "Grey/9/73");
     }
@@ -178,7 +175,7 @@ class WitchTests {
         witch.trickOrTreat();
         String output = witch.toString();
 
-        String consoleOutput = hijacker.stopRecording();
+        hijacker.stopRecording();
 
         TestFunction.assertEqual(output, "Spartan/9/71");
     }
@@ -196,7 +193,7 @@ class WitchTests {
         witch.trickOrTreat();
         String output = witch.toString();
 
-        String consoleOutput = hijacker.stopRecording();
+        hijacker.stopRecording();
 
         TestFunction.assertEqual(output, "Poof/2/54");
     }
@@ -322,7 +319,7 @@ class WitchTests {
         TestFunction.assertEqual(result, 1);
     }
 
-    @TestCase(name = "compareTo: transitivity check...")
+    @TestCase(name = "compareTo: Check for transitivity (not necessarily correctness)")
     @Tip(description = "Read the Java 11 compareTo() documentation for info on transitivity.\n"
                + "\t      If x.compareTo(y) > 0 and y.compareTo(z) > 0, then x.compareTo(z) MUST be > 0.\n"
                + "\t      This method checks MANY combinations of ages and numCandys for transitivity.\n")
