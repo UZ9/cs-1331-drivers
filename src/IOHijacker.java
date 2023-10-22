@@ -1,7 +1,4 @@
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * A helper class used for redirecting System.out to check against
