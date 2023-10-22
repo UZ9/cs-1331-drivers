@@ -325,26 +325,23 @@ class WitchTests {
                + "\t      This method checks MANY combinations of ages and numCandys for transitivity.\n")
     public void compareToTransitivity() throws TestFailedException {
 
-        String witchX = "", witchY = "", witchZ = "";
+        String witchX, witchY, witchZ;
         
         Witch[] possibleX = getAllWitchesOnInterval("Xander", 0,12, 0, 10, 0, 3);
         Witch[] possibleY = getAllWitchesOnInterval("Yang", 0, 12, 0, 10, 0, 3);
         Witch[] possibleZ = getAllWitchesOnInterval("Zan", 0, 12, 0, 10, 0, 3);
 
-        for (int i = 0; i < possibleX.length; i++) {
-            for (int j = 0; j < possibleY.length; j++) {
-                for (int k = 0; k < possibleZ.length; k++) {
-                    Witch x = possibleX[i];
-                    Witch y = possibleY[j];
-                    Witch z = possibleZ[k];
-                    if (x.compareTo(y) > 0 && y.compareTo(z) > 0 && x.compareTo(z) <= 0) { // This comes directly from the compareTo docs
-                        witchX = x.toString();
-                        witchY = y.toString();
-                        witchZ = z.toString();
+        for (Witch witchOne : possibleX) {
+            for (Witch witchTwo : possibleY) {
+                for (Witch witchThree : possibleZ) {
+                    if (witchOne.compareTo(witchTwo) > 0 && witchTwo.compareTo(witchThree) > 0 && witchOne.compareTo(witchThree) <= 0) { // This comes directly from the compareTo docs
+                        witchX = witchOne.toString();
+                        witchY = witchTwo.toString();
+                        witchZ = witchThree.toString();
                         System.out.println(ColorUtils.formatColorString(AsciiColorCode.BRIGHT_RED_BACKGROUND,
                                 AsciiColorCode.BRIGHT_WHITE_FOREGROUND, " TRANSITIVITY TEST FAILED: \u00BB ") + "\nWhen "
                                 + "x = \"" + witchX + "\", y = \"" + witchY + "\", z = \"" + witchZ + "\"");
-                        TestFunction.assertEqual(TestUtils.signOf(x.compareTo(z)), 1);
+                        TestFunction.assertEqual(TestUtils.signOf(witchOne.compareTo(witchThree)), 1);
                     }
                 }
             }

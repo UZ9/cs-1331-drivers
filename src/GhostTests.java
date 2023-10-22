@@ -319,26 +319,23 @@ class GhostTests {
                + "\t      This method checks MANY combinations of ages and numCandys for transitivity.\n")
     public void compareToTransitivity() throws TestFailedException {
 
-        String ghostX = "", ghostY = "", ghostZ = "";
+        String ghostX, ghostY, ghostZ;
         
         Ghost[] possibleX = getAllGhostsOnInterval("Xander", 0,12, 0, 10, 0, 3);
         Ghost[] possibleY = getAllGhostsOnInterval("Yang", 0, 12, 0, 10, 0, 3);
         Ghost[] possibleZ = getAllGhostsOnInterval("Zan", 0, 12, 0, 10, 0, 3);
 
-        for (int i = 0; i < possibleX.length; i++) {
-            for (int j = 0; j < possibleY.length; j++) {
-                for (int k = 0; k < possibleZ.length; k++) {
-                    Ghost x = possibleX[i];
-                    Ghost y = possibleY[j];
-                    Ghost z = possibleZ[k];
-                    if (x.compareTo(y) > 0 && y.compareTo(z) > 0 && x.compareTo(z) <= 0) { // This comes directly from the compareTo docs
-                        ghostX = x.toString();
-                        ghostY = y.toString();
-                        ghostZ = z.toString();
+        for (Ghost ghostOne : possibleX) {
+            for (Ghost ghostTwo : possibleY) {
+                for (Ghost ghostThree : possibleZ) {
+                    if (ghostOne.compareTo(ghostTwo) > 0 && ghostTwo.compareTo(ghostThree) > 0 && ghostOne.compareTo(ghostThree) <= 0) { // This comes directly from the compareTo docs
+                        ghostX = ghostOne.toString();
+                        ghostY = ghostTwo.toString();
+                        ghostZ = ghostThree.toString();
                         System.out.println(ColorUtils.formatColorString(AsciiColorCode.BRIGHT_RED_BACKGROUND,
                                 AsciiColorCode.BRIGHT_WHITE_FOREGROUND, " TRANSITIVITY TEST FAILED: \u00BB ") + "\nWhen "
                                 + "x = \"" + ghostX + "\", y = \"" + ghostY + "\", z = \"" + ghostZ + "\"");
-                        TestFunction.assertEqual(TestUtils.signOf(x.compareTo(z)), 1);
+                        TestFunction.assertEqual(TestUtils.signOf(ghostOne.compareTo(ghostThree)), 1);
                     }
                 }
             }
@@ -348,7 +345,7 @@ class GhostTests {
     /**
      * Private class to test Ghost's rob() function.
      */
-    private class RobbableSubclass extends TrickOrTreater implements Robbable {
+    private static class RobbableSubclass extends TrickOrTreater implements Robbable {
 
         public RobbableSubclass(String name, int age, int numCandy) {
             super(name, age, numCandy);
