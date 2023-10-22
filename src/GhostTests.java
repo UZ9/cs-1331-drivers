@@ -147,17 +147,17 @@ class GhostTests {
         TestFunction.assertEqual(string, "Tremor/6/7/0");
     }
 
-    @TestCase(name = "rob() method: Increments robberiesConducted when stealing 0 candies.")
-    @Tip(description = "As written, the instructions are unclear whether or not stealing 0 candies should increment the counter or not.")
+    @TestCase(name = "rob() method: Does not increment robberiesConducted when stealing 0 candies.")
+    @Tip(description = "As mentioned in the HW04 clarification thread, robberiesConducted should only increment when 1 or more candies are stolen.")
     public void robZero() throws TestFailedException {
-        Ghost ghost = new Ghost("Spartan", 9, 7);
+        Ghost ghost = new Ghost("Skipper", 6, 7);
         RobbableSubclass victim = new RobbableSubclass("Clarence", 5, 0);
 
         ghost.rob(victim);
 
         String string = ghost.toString();
 
-        TestFunction.assertEqual(string, "Spartan/9/7/1");
+        TestFunction.assertEqual(string, "Skipper/6/7/0");
     }
 
     @TestCase(name = "rob() method: Increments robberiesConducted when doing 2 robberies.")

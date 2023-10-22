@@ -15,6 +15,7 @@ class TestManager {
         registerClass(TrickOrTreaterTests.class);
         registerClass(GhostTests.class);
         registerClass(WitchTests.class);
+        registerClass(HalloweenNightTests.class);
         
         executeTests();
     }
