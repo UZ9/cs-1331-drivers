@@ -104,7 +104,6 @@ class IOHijacker {
         if (!instance.recording)
             return;
 
-        instance.log += message;
-
+        instance.log += message.replaceAll("\r","");
     }
 }
