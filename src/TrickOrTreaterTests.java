@@ -308,26 +308,23 @@ class TrickOrTreaterTests {
                + "\t      This method checks MANY combinations of ages and numCandys for transitivity.\n")
     public void compareToTransitivity() throws TestFailedException {
 
-        String trickOrTreaterX = "", trickOrTreaterY = "", trickOrTreaterZ = "";
+        String trickOrTreaterX, trickOrTreaterY, trickOrTreaterZ;
         
         TrickOrTreaterSubclass[] possibleX = getAllTrickOrTreatersOnInterval("Xander", 0, 12, 0, 50);
         TrickOrTreaterSubclass[] possibleY = getAllTrickOrTreatersOnInterval("Yang", 0, 12, 0, 50);
         TrickOrTreaterSubclass[] possibleZ = getAllTrickOrTreatersOnInterval("Zan", 0, 12, 0, 50);
 
-        for (int i = 0; i < possibleX.length; i++) {
-            for (int j = 0; j < possibleY.length; j++) {
-                for (int k = 0; k < possibleZ.length; k++) {
-                    TrickOrTreaterSubclass x = possibleX[i];
-                    TrickOrTreaterSubclass y = possibleY[j];
-                    TrickOrTreaterSubclass z = possibleZ[k];
-                    if (x.compareTo(y) > 0 && y.compareTo(z) > 0 && x.compareTo(z) <= 0) { // This comes directly from the compareTo docs
-                        trickOrTreaterX = x.toString();
-                        trickOrTreaterY = y.toString();
-                        trickOrTreaterZ = z.toString();
+        for (TrickOrTreaterSubclass totOne : possibleX) {
+            for (TrickOrTreaterSubclass totTwo : possibleY) {
+                for (TrickOrTreaterSubclass totThree : possibleZ) {
+                    if (totOne.compareTo(totTwo) > 0 && totTwo.compareTo(totThree) > 0 && totOne.compareTo(totThree) <= 0) { // This comes directly from the compareTo docs
+                        trickOrTreaterX = totOne.toString();
+                        trickOrTreaterY = totTwo.toString();
+                        trickOrTreaterZ = totThree.toString();
                         System.out.println(ColorUtils.formatColorString(AsciiColorCode.BRIGHT_RED_BACKGROUND,
                                 AsciiColorCode.BRIGHT_WHITE_FOREGROUND, " TRANSITIVITY TEST FAILED: \u00BB ") + "\nWhen "
                                 + "x = \"" + trickOrTreaterX + "\", y = \"" + trickOrTreaterY + "\", z = \"" + trickOrTreaterZ + "\"");
-                        TestFunction.assertEqual(x.compareTo(z), 1);
+                        TestFunction.assertEqual(totOne.compareTo(totThree), 1);
                     }
                 }
             }
@@ -345,16 +342,13 @@ class TrickOrTreaterTests {
         TrickOrTreaterSubclass[] possibleY = getAllTrickOrTreatersOnInterval("Yang", 0, 12, 0, 50);
         TrickOrTreaterSubclass[] possibleZ = getAllTrickOrTreatersOnInterval("Zan", 0, 12, 0, 50);
 
-        for (int i = 0; i < possibleX.length; i++) {
-            for (int j = 0; j < possibleY.length; j++) {
-                for (int k = 0; k < possibleZ.length; k++) {
-                    TrickOrTreaterSubclass x = possibleX[i];
-                    TrickOrTreaterSubclass y = possibleY[j];
-                    TrickOrTreaterSubclass z = possibleZ[k];
-                    if (x.compareTo(y) == 0 && TestUtils.signOf(x.compareTo(z)) != TestUtils.signOf(y.compareTo(z))) {
-                        trickOrTreaterX = x.toString();
-                        trickOrTreaterY = y.toString();
-                        trickOrTreaterZ = z.toString();
+        for (TrickOrTreaterSubclass totOne : possibleX) {
+            for (TrickOrTreaterSubclass totTwo : possibleY) {
+                for (TrickOrTreaterSubclass totThree : possibleZ) {
+                    if (totOne.compareTo(totTwo) == 0 && TestUtils.signOf(totOne.compareTo(totThree)) != TestUtils.signOf(totTwo.compareTo(totThree))) {
+                        trickOrTreaterX = totOne.toString();
+                        trickOrTreaterY = totTwo.toString();
+                        trickOrTreaterZ = totThree.toString();
                         System.out.println(ColorUtils.formatColorString(AsciiColorCode.BRIGHT_RED_BACKGROUND,
                                 AsciiColorCode.BRIGHT_WHITE_FOREGROUND, " THIRD COMPARETO() CONDITION FAILED: \u00BB ") + "\nWhen "
                                 + "x = \"" + trickOrTreaterX + "\", y = \"" + trickOrTreaterY + "\", z = \"" + trickOrTreaterZ + "\"");
@@ -389,7 +383,7 @@ class TrickOrTreaterTests {
     /**
      * Placeholder subclass to force-call TrickOrTreater's methods
      */
-    class TrickOrTreaterSubclass extends TrickOrTreater {
+    static class TrickOrTreaterSubclass extends TrickOrTreater {
 
         public TrickOrTreaterSubclass(String name, int age, int numCandy) {
             super(name, age, numCandy);

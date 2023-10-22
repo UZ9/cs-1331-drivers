@@ -7,7 +7,7 @@ class TestManager {
     /**
      * A list of the currently registered classes to test
      */
-    private static List<Class<?>> testClazzes = new ArrayList<>();
+    private static final List<Class<?>> testClazzes = new ArrayList<>();
 
     public static void main(String[] args) {
 
@@ -45,8 +45,8 @@ class TestManager {
                 int classTestsFailed = 0;
 
                 for (Method m : testClass.getMethods()) {
-                    TestCase testCase = (TestCase) m.getAnnotation(TestCase.class);
-                    Tip tip = (Tip) m.getAnnotation(Tip.class);
+                    TestCase testCase = m.getAnnotation(TestCase.class);
+                    Tip tip = m.getAnnotation(Tip.class);
 
                     if (testCase != null) {
                         try {

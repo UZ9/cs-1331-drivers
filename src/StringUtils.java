@@ -32,6 +32,6 @@ public class StringUtils {
         // We can add half of the string length as well to correct it:
         // xxxxhelloxxxx = CENTERED! (or at least as close as it can get)
 
-        System.out.println(String.format("%" + (HORIZONTAL_LINE_LENGTH / 2 + text.length() / 2) + "s", text));
+        System.out.printf("%" + (HORIZONTAL_LINE_LENGTH / 2 + text.length() / 2) + "s%n", text);
     }
 }
