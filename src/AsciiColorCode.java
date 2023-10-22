@@ -1,4 +1,4 @@
-public final class AsciiColorCode {
+final class AsciiColorCode {
 
     public static final String RESET_COLOR = "\033[0m";
 
