@@ -3,19 +3,19 @@ import java.util.List;
 class TestFunction {
     /**
      * Detects if the given Strings do not have the same content (case-sensitive)
-     * 
-     * @param actual
-     * @param expected
-     * @throws TestFailedException
+     *
+     * @param actual   The actual value
+     * @param expected The expected value
+     * @throws TestFailedException if the test fails
      */
     public static void assertEqual(String actual, String expected) throws TestFailedException {
         boolean failed = false;
 
         if (actual == null) {
-            failed = actual != expected;
+            failed = expected == null;
         } else {
 
-            if (!actual.equals(expected)) {
+            if (!actual.replaceAll("\n", System.lineSeparator()).equals(expected.replaceAll("\n", System.lineSeparator()))) {
                 failed = true;
             }
         }
@@ -33,32 +33,29 @@ class TestFunction {
             failed = actual == expected;
         } else {
             for (int i = 0; i < expected.size(); i++) {
-            if (expected.get(i) == null) {
+                if (expected.get(i) == null) {
                     failed = actual.get(i) != null;
-                    
-                    if (failed) break;
+
                 } else {
                     failed = !actual.get(i).equals(expected.get(i));
 
-                    if (failed) break;
                 }
+                if (failed) break;
             }
         }
 
-        
-
         if (failed) {
             throw new TestFailedException(
-                    "List Differnet! Received \"" + actual + "\", expected \"" + expected + "\"");
+                    "List Different! Received \"" + actual + "\", expected \"" + expected + "\"");
         }
     }
 
     /**
      * Detects if the given integers are not equal.
-     * 
-     * @param actual
-     * @param expected
-     * @throws TestFailedException
+     *
+     * @param actual   The actual value
+     * @param expected The expected value
+     * @throws TestFailedException if the test fails
      */
     public static void assertEqual(int actual, int expected) throws TestFailedException {
         boolean failed = (actual != expected);
@@ -69,10 +66,10 @@ class TestFunction {
 
     /**
      * Detects if the given doubles are not within 1.0e-6 of one another.
-     * 
-     * @param actual
-     * @param expected
-     * @throws TestFailedException
+     *
+     * @param actual   The actual value
+     * @param expected The expected value
+     * @throws TestFailedException if the test fails
      */
     public static void assertEqual(double actual, double expected) throws TestFailedException {
         final double ALLOWABLE_ERROR = 0.000001;
@@ -86,10 +83,10 @@ class TestFunction {
 
     /**
      * Detects if the given booleans do not have equal values.
-     * 
-     * @param actual
-     * @param expected
-     * @throws TestFailedException
+     *
+     * @param actual   The actual value
+     * @param expected The expected value
+     * @throws TestFailedException if the test fails
      */
     public static void assertEqual(boolean actual, boolean expected) throws TestFailedException {
         boolean failed = (actual != expected);
@@ -103,12 +100,12 @@ class TestFunction {
      * Detects if the given Exceptions are the same TYPE, not if they are caused by
      * the same thing. Any two
      * NullPointerExceptions will, when passed into this function, return true, even
-     * if they are cuased by
+     * if they are caused by
      * two unrelated issues.
-     * 
-     * @param actual
-     * @param expected
-     * @throws TestFailedException
+     *
+     * @param actual   The actual value
+     * @param expected The expected value
+     * @throws TestFailedException If the test fails
      */
     public static void assertEqual(Exception actual, Exception expected) throws TestFailedException {
         boolean failed = (actual.getCause().getClass() != expected.getCause().getClass());
