@@ -18,13 +18,15 @@ with open(filename, "wb") as outfile:
                 line = str(line, 'UTF-8')
                 line = line.replace("public class", "class")
 
-                if line.startswith("import") and not (line in import_lines):
-                    import_lines.append(line);
-                    outfile.write(line.encode())
+                if not line in import_lines:
 
-                    continue
-                else:
-                    code_lines.append(line.encode())
+                    if line.startswith("import"):
+                        import_lines.append(line);
+                        outfile.write(line.encode())
+
+                        continue
+                    else:
+                        code_lines.append(line.encode())
                 
             code_lines.append("\n".encode())
 
