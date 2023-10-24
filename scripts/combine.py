@@ -1,7 +1,7 @@
 import glob
 import os
 
-filename = "../Driver.java"
+filename = "../TestManager.java"
 
 os.makedirs(os.path.dirname(filename), exist_ok=True)
 
