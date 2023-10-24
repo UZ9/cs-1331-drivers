@@ -277,7 +277,7 @@ class HalloweenNightTests {
         ghoulGang[4] = new Ghost("ghoul5", 0, 10);
 
         HalloweenNight night = new HalloweenNight(cryptKickerFive, ghoulGang);
-        night.battle(65);
+        night.battle(75);
 
         String output = hijacker.stopRecording();
 
