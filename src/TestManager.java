@@ -9,9 +9,15 @@ class TestManager {
      */
     private static final List<Class<?>> testClazzes = new ArrayList<>();
 
-    public static void main(String[] args) {
+    /**
+     * When this method is called, the TestManager will run all tests in the given classes.
+     * @param classes The classes to test.
+     */
+    public static void runTestsOn(Class<?> ... classes) {
 
-        // REGISTER CLASSES HERE
+        for (Class<?> currentClass : classes) {
+            registerClass(currentClass);
+        }
         
         executeTests();
     }

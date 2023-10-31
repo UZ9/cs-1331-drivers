@@ -1,11 +1,20 @@
 public class GenreTests {
-    @TestCase(name = "Constructor: Valid inputs passed in.")
-    @Tip(description = "\nMake sure there isn't any field shadowing in your constructor!\nWhat should numberOfRobberies default to?")
-    public void constructorThreeArgs() throws TestFailedException {
+    @TestCase(name = "Testing that all 7 genres exist in the correct order...")
+    @Tip(description = "\nHow many genres should there be? What order should they be in?")
+    public void genresExistInCorrectOrder() throws TestFailedException {
 
-        Ghost ghost = new Ghost("Yoon", 6, 7);
-        String string = ghost.toString();
+        String[] correctGenres = new String[] {
+            "ACTION",
+            "COMEDY",
+            "FANTASY",
+            "HORROR",
+            "MYSTERY",
+            "ROMANCE",
+            "SCI_FI"};
+        Genre[] genres = Genre.values();
 
-        TestFunction.assertEqual(string, "Yoon/6/7/0");
+        for (int i = 0; i < 7; i++) {
+            TestFunction.assertEqual(genres[i].toString(), correctGenres[i]);
+        }
     }
 }
