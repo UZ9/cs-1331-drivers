@@ -12,6 +12,10 @@ class TestManager {
     public static void main(String[] args) {
 
         // REGISTER CLASSES HERE
+        registerClass(TrickOrTreaterTests.class);
+        registerClass(GhostTests.class);
+        registerClass(WitchTests.class);
+        registerClass(HalloweenNightTests.class);
         
         executeTests();
     }
