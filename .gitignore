@@ -1,10 +1,22 @@
 # Compiled class file
 *.class
+
+# HW04 source files
 TrickOrTreater.java
 Robbable.java
 Ghost.java
 Witch.java
 HalloweenNight.java
+
+# HW05 source files
+Blockbuster.java
+Genre.java
+Media.java
+Movie.java
+Olivia.java
+VideoGame.java
+
+
 
 Driver.java
 
