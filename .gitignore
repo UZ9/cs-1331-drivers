@@ -16,8 +16,7 @@ Movie.java
 Olivia.java
 VideoGame.java
 
-
-
+# Ignores the assembled Driver file
 Driver.java
 
 # Log file
