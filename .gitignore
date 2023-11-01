@@ -19,6 +19,11 @@ VideoGame.java
 # Ignores the assembled Driver file
 Driver.java
 
+src/out
+src/.idea
+.idea
+*.iml
+
 # Log file
 *.log
 

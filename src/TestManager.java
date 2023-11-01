@@ -2,8 +2,18 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+import java.util.concurrent.atomic.AtomicInteger;
 
 class TestManager {
+    protected volatile static AtomicInteger classTests = new AtomicInteger();
+    protected volatile static AtomicInteger classTestsFailed = new AtomicInteger();
+
     /**
      * A list of the currently registered classes to test
      */
@@ -35,74 +45,43 @@ class TestManager {
      * Executes all registered tests.
      */
     public static void executeTests() {
-        int totalTests = 0;
-        int totalTestsFailed = 0;
+        ExecutorService executor = Executors.newFixedThreadPool(1);
 
-        for (Class<?> testClass : testClazzes) {
-            try {
-                printTestCategory(testClass.getName());
+        List<Runnable> runnables = new ArrayList<>();
 
-                Object instance = testClass.getDeclaredConstructor().newInstance();
-
-                int classTests = 0;
-                int classTestsFailed = 0;
-
-                for (Method m : testClass.getMethods()) {
-                    TestCase testCase = m.getAnnotation(TestCase.class);
-                    Tip tip = m.getAnnotation(Tip.class);
-
-                    if (testCase != null) {
-                        try {
-
-                            m.invoke(instance);
-
-                            System.out.println(ColorUtils.formatColorString(AsciiColorCode.BRIGHT_GREEN_BACKGROUND,
-                                    AsciiColorCode.BRIGHT_WHITE_FOREGROUND, " PASSED: \u00BB ") + " "
-                                    + testCase.name());
-                        } catch (InvocationTargetException e) {
-                            if (e.getCause() instanceof TestFailedException) {
-                                TestFailedException tfe = (TestFailedException) e.getCause();
-
-                                System.out.println(ColorUtils.formatColorString(AsciiColorCode.BRIGHT_RED_BACKGROUND,
-                                        AsciiColorCode.BRIGHT_WHITE_FOREGROUND, " FAILED: \u00BB ") + " "
-                                        + testCase.name());
-
-                                System.out.println("\t" + tfe.getMessage());
-
-                                classTestsFailed++;
-                                if (tip != null)
-                                    System.out.printf("\tHINT: %s\n", tip.description());
-                            } else {
-                                e.getCause().printStackTrace();
-                            }
-                        } catch (IllegalAccessException e) {
-                            e.printStackTrace();
-                        } catch (IllegalArgumentException e) {
-                            e.printStackTrace();
-                        }
-
-                        classTests++;
-                    }
-                }
-
-                totalTests += classTests;
-                totalTestsFailed += classTestsFailed;
-
-                System.out.println();
-                StringUtils.printTextCentered(
-                        String.format("TESTS PASSED: %d/%d", classTests - classTestsFailed, classTests));
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        for (Class<?> testClass: testClazzes) {
+            runnables.add(new TestContainer(testClass));
         }
+
+        
+        for (Runnable r : runnables) {
+            Future<?> future = executor.submit(r);
+
+            try {
+                future.get(4, TimeUnit.SECONDS);
+            } catch (InterruptedException e) {
+                
+            } catch (ExecutionException e) {                
+                e.getCause().printStackTrace();
+            } catch (TimeoutException e) {
+                future.cancel(true);
+
+                System.out.println(ColorUtils.formatColorString(AsciiColorCode.BRIGHT_RED_BACKGROUND,
+                AsciiColorCode.BRIGHT_WHITE_FOREGROUND, " FAILED: \u00BB ") + " A test failed by exceeding the time limit. You likely have an infinite loop somewhere.");
+
+                System.exit(-1);
+            }
+
+        }
+
+        executor.shutdown();
 
         StringUtils.printHorizontalLine();
 
         StringUtils.printTextCentered("Test Results");
         System.out.println();
         StringUtils.printTextCentered(
-                String.format("TOTAL TESTS PASSED: %d/%d", totalTests - totalTestsFailed, totalTests));
+                String.format("TOTAL TESTS PASSED: %d/%d", classTests.get() - classTestsFailed.get(), classTests.get()));
         StringUtils.printHorizontalLine();
 
     }
@@ -112,9 +91,14 @@ class TestManager {
      * 
      * @param category The name of the section (most likely the class name)
      */
-    private static void printTestCategory(String category) {
+    protected static void printTestCategory(String category) {
         StringUtils.printHorizontalLine();
         StringUtils.printTextCentered(category);
         System.out.println();
+    }
+
+    protected static void submitTest(int result) {
+        // classTests++;
+        // classTestsFailed += result;
     }
 }
