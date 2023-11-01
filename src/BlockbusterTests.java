@@ -231,7 +231,7 @@ public class BlockbusterTests {
     }
 
     @TestCase(name = ".findMedia(): Media should be found, but rentalPrice and runtime differ")
-    @Tip(description = "What fields should be compared? What fields SHOULDN'T be compared?\nNOTE: This test only works if .sort() works correctly!")
+    @Tip(description = "What fields should be compared? What fields SHOULDN'T be compared?\nFor more rationale on why this test is included, see https://edstem.org/us/courses/42939/discussion/3721454?comment=8697564\nNOTE: This test only works if .sort() works correctly!")
     public void findMediaMediaCompareToIsZero() throws TestFailedException {
         Blockbuster store = fakeConstructorBlockbuster(MOVIE_LIST);
         Movie movie = new Movie(Genre.ACTION, "Fast and Furious 1", 54, 6.79, 130);
