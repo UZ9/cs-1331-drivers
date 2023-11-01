@@ -60,7 +60,6 @@ public class BlockbusterTests {
     @TestCase(name = ".removeMedia(): Media not found")
     @Tip(description = "If the Media isn't found, what should removeMedia() return?")
     public void removeMediaMediaNotFound() throws TestFailedException {
-
         Blockbuster store = fakeConstructorBlockbuster(GAME_LIST);
         VideoGame game = new VideoGame(Genre.FANTASY, "Harry Potter", 0);
 
@@ -76,7 +75,6 @@ public class BlockbusterTests {
     @TestCase(name = ".removeMedia(): Does NOT return the original media")
     @Tip(description = "Even though the two are .equals(), make sure you return the one that is removed, not the original!")
     public void removeMediaMediaFoundDifferentReturn() throws TestFailedException {
-
         Blockbuster store = fakeConstructorBlockbuster(GAME_LIST);
         Movie game = new Movie(Genre.ACTION, "Fast and Furious 1", 54, 6.70, 120);
 
@@ -88,7 +86,6 @@ public class BlockbusterTests {
     @TestCase(name = ".removeMedia(): Returns the found Media")
     @Tip(description = "Which fields should be compared? (all of them should be!)")
     public void removeMediaMediaFound() throws TestFailedException {
-
         Blockbuster store = fakeConstructorBlockbuster(MOVIE_LIST);
         Movie movie = new Movie(Genre.ACTION, "Fast and Furious 1", 54, 6.70, 120);
 
@@ -104,7 +101,6 @@ public class BlockbusterTests {
     @TestCase(name = ".removeMedia(): Runtime differs, should return null")
     @Tip(description = "Which fields should be compared? (all of them should be!)")
     public void removeMediaNotFound() throws TestFailedException {
-
         Blockbuster store = fakeConstructorBlockbuster(MOVIE_LIST);
         Movie movie = new Movie(Genre.ACTION, "Fast and Furious 1", 54, 6.70, 130);
 
@@ -137,7 +133,6 @@ public class BlockbusterTests {
         Blockbuster store = fakeConstructorBlockbuster(GAME_LIST);
         store.sortMedia();
         ArrayList<Media> inventory = getInventory(store);
-
         String expectedString = ""
             + "Genre: ACTION, Name: Uncharted 1, Rating: 10, Rental Price: $6.70, Players: 2, does not need console\n"
             + "Genre: ACTION, Name: Uncharted 2, Rating: 10, Rental Price: $6.70, Players: 2, does not need console\n"
@@ -170,7 +165,6 @@ public class BlockbusterTests {
         Blockbuster store = fakeConstructorBlockbuster(GAME_LIST);
         store.sortMedia();
         ArrayList<Media> inventory = getInventory(store);
-
         String expectedString = ""
             + "Genre: ACTION, Name: Uncharted 7, Rating: 10, Rental Price: $6.70, Players: 2, does not need console\n"
             + "Genre: COMEDY, Name: Uncharted 6, Rating: 10, Rental Price: $6.70, Players: 2, does not need console\n"
@@ -201,7 +195,6 @@ public class BlockbusterTests {
         Blockbuster store = fakeConstructorBlockbuster(GAME_LIST);
         store.sortMedia();
         ArrayList<Media> inventory = getInventory(store);
-
         String expectedString = ""
             + "Genre: ACTION, Name: Uncharted, Rating: 1, Rental Price: $6.70, Players: 2, does not need console\n"
             + "Genre: ACTION, Name: Uncharted, Rating: 2, Rental Price: $6.70, Players: 2, does not need console\n"
@@ -219,15 +212,10 @@ public class BlockbusterTests {
     public void findMediaMediaEqual() throws TestFailedException {
         Blockbuster store = fakeConstructorBlockbuster(MOVIE_LIST);
         Movie movie = new Movie(Genre.ACTION, "Fast and Furious 1", 54, 6.70, 120);
-
         store.sortMedia();
         Media found = store.findMedia(movie);
 
-        if (found == null) {
-            TestFunction.assertEqual(null, "Genre: ACTION, Name: Fast and Furious 1, Rating: 54, Rental Price: $6.70, Runtime: 120");
-        } else {
-            TestFunction.assertEqual(found.toString(), "Genre: ACTION, Name: Fast and Furious 1, Rating: 54, Rental Price: $6.70, Runtime: 120");
-        }
+        TestFunction.assertEqual(found == null ? null : found.toString(), "Genre: ACTION, Name: Fast and Furious 1, Rating: 54, Rental Price: $6.70, Runtime: 120");
     }
 
     @TestCase(name = ".findMedia(): Media should be found, but rentalPrice and runtime differ")
@@ -239,11 +227,7 @@ public class BlockbusterTests {
         store.sortMedia();
         Media found = store.findMedia(movie);
 
-        if (found == null) {
-            TestFunction.assertEqual(null, "Genre: ACTION, Name: Fast and Furious 1, Rating: 54, Rental Price: $6.70, Runtime: 120");
-        } else {
-            TestFunction.assertEqual(found.toString(), "Genre: ACTION, Name: Fast and Furious 1, Rating: 54, Rental Price: $6.70, Runtime: 120");
-        }
+        TestFunction.assertEqual(found == null ? null : found.toString(), "Genre: ACTION, Name: Fast and Furious 1, Rating: 54, Rental Price: $6.70, Runtime: 120");
     }
 
     @TestCase(name = ".findMedia(): Media should not be found")
@@ -251,24 +235,16 @@ public class BlockbusterTests {
     public void findMediaNotFound() throws TestFailedException {
         Blockbuster store = fakeConstructorBlockbuster(MOVIE_LIST);
         Movie movie = new Movie(Genre.ACTION, "Fast and Furious 11", 54, 6.79, 130);
-
         store.sortMedia();
         Media found = store.findMedia(movie);
-
-        if (found == null) {
-            TestFunction.assertEqual((String) null, (String) null);
-        } else {
-            TestFunction.assertEqual(found.toString(), null);
-        }
+        TestFunction.assertEqual(found == null ? null : found.toString(), null);
     }
 
     @TestCase(name = ".getMostPopularMovie(): No movie exists in the inventory")
     @Tip(description = "What should getMostPopularMovie() return when there are no movies?")
     public void getMostPopularMovieNotFound() throws TestFailedException {
         Blockbuster store = fakeConstructorBlockbuster(GAME_LIST);
-
         Media found = store.getMostPopularMovie();
-
         TestFunction.assertEqual(found == null ? (String) null : found.toString(), (String) null);
     }
 
@@ -276,9 +252,7 @@ public class BlockbusterTests {
     @Tip(description = "What criteria should getMostPopularMovie() use?")
     public void getMostPopularMovieRatingDiffers() throws TestFailedException {
         Blockbuster store = fakeConstructorBlockbuster(MOVIE_LIST);
-
         Media found = store.getMostPopularMovie();
-
         String highestMovie = "Genre: ACTION, Name: Fast and Furious 7, Rating: 81, Rental Price: $6.70, Runtime: 120";
 
         TestFunction.assertEqual(found == null ? (String) null : found.toString(), highestMovie);
@@ -301,13 +275,9 @@ public class BlockbusterTests {
                 add(new Movie(Genre.ACTION, "Fast and Furious 10", 56, 6.70, 120));
             }
         };
-
         Blockbuster store = fakeConstructorBlockbuster(modifiedMovieList);
-
         Media found = store.getMostPopularMovie();
-
         String highestMovie = "Genre: ACTION, Name: Fast and Furious 4, Rating: 81, Rental Price: $6.70, Runtime: 120";
-
         TestFunction.assertEqual(found == null ? (String) null : found.toString(), highestMovie);
     }
 
@@ -324,14 +294,12 @@ public class BlockbusterTests {
                 break;
             }
         }
-
         try {
             inventory.setAccessible(true);
             inventory.set(store, copyArray(media));
         } catch (Exception e) {
             TestFunction.failTest("An error occurred. " + e.getMessage());
         }
-
         return store;
     }
 

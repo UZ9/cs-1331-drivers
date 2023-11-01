@@ -162,7 +162,7 @@ public class MediaTests {
     /**
      * Media subclass, just for testing.
      */
-    class MediaSubclass extends Media {
+    static class MediaSubclass extends Media {
         public MediaSubclass(Genre genre, String name, int rating, double rentalPrice) {
             super(genre, name, rating, rentalPrice);
         }
