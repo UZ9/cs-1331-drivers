@@ -97,8 +97,8 @@ public class MediaTests {
             int comparison = media1.compareTo(media2);
             if (comparison != correctAnswers[i]) {
                 System.out.println(ColorUtils.formatColorString(AsciiColorCode.BRIGHT_RED_BACKGROUND,
-                        AsciiColorCode.BRIGHT_WHITE_FOREGROUND, " COMPARETO() TEST FAILED: \u00BB ") + "\nWhen the implicit Media is \""
-                        + media1.toString() + "\" and the other Media is \""
+                        AsciiColorCode.BRIGHT_WHITE_FOREGROUND, " COMPARETO() TEST FAILED: \u00BB ") + "\nWhen the implicit Media is\n\""
+                        + media1.toString() + "\" and the other Media is\n\""
                         + media2.toString() + "\"");
 
                 TestFunction.assertEqual(TestUtils.signOf(media1.compareTo(media2)), correctAnswers[i]);

@@ -3,7 +3,7 @@ public class VideoGameTests {
     private static final String[] NAMES = new String[] {"Lord of the Rings 1", "Lord of the Rings 2", "Lord of the Rings 3"};
     private static final int[] RATINGS = new int[] {7, 8, 9};
     private static final double[] PRICES = new double[] {9.71, 9.72, 9.73};
-    private static final int[] RUNTIMES = new int[] {119, 120, 121};
+    private static final int[] PLAYERS = new int[] {1, 2, 3};
 
 
     @TestCase(name = "Testing the default 6-arg constructor with a game that DOES NOT need a console.")
@@ -93,11 +93,11 @@ public class VideoGameTests {
         TestFunction.assertEqual(game1.equals(game2), false);
     }
 
-    @TestCase(name = ".compareTo(): Tests many different possible Movies")
+    @TestCase(name = ".compareTo(): Tests many different possible VideoGames")
     @Tip(description = "What fields should compareTo() compare? Which fields should compareTo() NOT compare?")
     public void compareToTest() throws TestFailedException {
 
-        Movie[] moviePossibilities = getPossibleMoviesForEquals();
+        VideoGame[] gamePossibilities = getPossibleGamesForCompareTo();
         int[] correctAnswers = new int[] {
             1, 1, 1, 1, 1, 1, 1, 1, 1,
             1, 1, 1, 1, 1, 1, 1, 1, 1,
@@ -110,14 +110,14 @@ public class VideoGameTests {
             -1, -1, -1, -1, -1, -1, -1, -1, -1,
         };
 
-        Movie media1 = new Movie(Genre.COMEDY, "Lord of the Rings 2", 8, 9.72, 120);
-        for (int i = 0; i < moviePossibilities.length; i++) {
-            Movie media2 = moviePossibilities[i];
+        VideoGame media1 = new VideoGame(Genre.COMEDY, "Lord of the Rings 2", 8, 9.72, 2, true);
+        for (int i = 0; i < gamePossibilities.length; i++) {
+            VideoGame media2 = gamePossibilities[i];
             int comparison = media1.compareTo(media2);
             if (comparison != correctAnswers[i]) {
                 System.out.println(ColorUtils.formatColorString(AsciiColorCode.BRIGHT_RED_BACKGROUND,
-                        AsciiColorCode.BRIGHT_WHITE_FOREGROUND, " COMPARETO() TEST FAILED: \u00BB ") + "\nWhen the implicit Media is \""
-                        + media1.toString() + "\" and the other Media is \""
+                        AsciiColorCode.BRIGHT_WHITE_FOREGROUND, " COMPARETO() TEST FAILED: \u00BB ") + "\nWhen the implicit VideoGame is \n\""
+                        + media1.toString() + "\", and the other VideoGame is \n\""
                         + media2.toString() + "\"");
 
                 TestFunction.assertEqual(TestUtils.signOf(media1.compareTo(media2)), correctAnswers[i]);
@@ -130,15 +130,15 @@ public class VideoGameTests {
      * in exchange for improved readability.
      * @return
      */
-    private Movie[] getPossibleMoviesForEquals() {
+    private VideoGame[] getPossibleGamesForCompareTo() {
 
-        Movie[] possibilities = new Movie[81];
+        VideoGame[] possibilities = new VideoGame[81];
         
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 for (int k = 0; k < 3; k++) {
                     for (int l = 0; l < 3; l++) {
-                        possibilities[i * 27 + j * 9 + k * 3 + l] = new Movie(Genre.COMEDY, NAMES[i], RATINGS[j], PRICES[k], RUNTIMES[l]);
+                        possibilities[i * 27 + j * 9 + k * 3 + l] = new VideoGame(Genre.COMEDY, NAMES[i], RATINGS[j], PRICES[k], PLAYERS[l], i % 2 == 0);
                     }
                 }
             }
