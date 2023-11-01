@@ -15,6 +15,8 @@ public class OliviaTests {
         TestFunction.assertEqual(BlockbusterTests.arrayToString(getCart(olivia)), "Genre: ACTION, Name: Fast and Furious 1, Rating: 54, Rental Price: $6.70, Runtime: 120");
     }
 
+
+
     @TestCase(name = ".addToCart(): Correct movie is removed from the store")
     @Tip(description = "Make sure that the correct Media is removed from the store!")
     public void addToCartRemovedFromStore() throws TestFailedException {
@@ -35,6 +37,8 @@ public class OliviaTests {
 
         TestFunction.assertEqual(BlockbusterTests.arrayToString(BlockbusterTests.getInventory(store)), "Genre: ACTION, Name: Fast and Furious 2, Rating: 37, Rental Price: $6.70, Runtime: 120\nGenre: ACTION, Name: Fast and Furious 3, Rating: 38, Rental Price: $6.70, Runtime: 120\nGenre: ACTION, Name: Fast and Furious 4, Rating: 28, Rental Price: $6.70, Runtime: 120");
     }
+
+
 
     @TestCase(name = ".addToCart(): Correct movie is added to the cart")
     @Tip(description = "If the test \".addToCart(): Correct movie is removed from the store\" is passing, make sure that you're adding the object from the store, not the one passed into addToCart()!")
@@ -57,6 +61,8 @@ public class OliviaTests {
         TestFunction.assertEqual(movie == getCart(olivia).get(0) && getCart(olivia).get(0) != null, false);
     }
 
+
+
     @TestCase(name = ".addToCart(): Returns true when movie is added to the cart")
     @Tip(description = "What should addToCart() return?")
     public void addToCartReturnsTrue() throws TestFailedException {
@@ -77,6 +83,8 @@ public class OliviaTests {
 
         TestFunction.assertEqual(returned, true);
     }
+
+
 
     @TestCase(name = ".addToCart(): Updates budget when movie is added to the cart")
     @Tip(description = "What should get deducted from Olivia's budget?")
@@ -100,6 +108,8 @@ public class OliviaTests {
         TestFunction.assertEqual(budget, 13.30);
     }
 
+
+
     @TestCase(name = ".addToCart(): Returns false when Media is not found")
     @Tip(description = "What should addToCart() return?")
     public void addToCartReturnsFalse() throws TestFailedException {
@@ -112,6 +122,8 @@ public class OliviaTests {
 
         TestFunction.assertEqual(returned, false);
     }
+
+
 
     @TestCase(name = ".addToCart(): Returns false when Olivia has an insufficient budget")
     @Tip(description = "What should addToCart() return when Olivia has insufficient budget?")
@@ -132,6 +144,8 @@ public class OliviaTests {
 
         TestFunction.assertEqual(returned, false);
     }
+
+
 
     @TestCase(name = ".addToCart(): Cart is still empty if budget is insufficient")
     @Tip(description = "What should addToCart() return when Olivia has insufficient budget?")
@@ -155,6 +169,8 @@ public class OliviaTests {
         TestFunction.assertEqual(BlockbusterTests.arrayToString(cart), "");
     }
 
+
+
     @TestCase(name = ".addToCart(): Cart is still empty if game requires console and Olivia cannot use console")
     @Tip(description = "What should Olivia's cart contain if she couldn't add the Media?")
     public void addToCartCartEmptyWhenConsoleRequired() throws TestFailedException {
@@ -176,6 +192,8 @@ public class OliviaTests {
 
         TestFunction.assertEqual(BlockbusterTests.arrayToString(cart), "");
     }
+
+
 
     @TestCase(name = ".addToCart(): Returns false when Olivia cannot use console and the VideoGame requires one")
     @Tip(description = "What should addToCart() return when Olivia requires a console?")
@@ -237,6 +255,8 @@ public class OliviaTests {
         TestFunction.assertEqual(BlockbusterTests.arrayToString(cart), "");
     }
 
+
+
     @TestCase(name = ".changeMind(): Adds the removed media to the store")
     @Tip(description = "Make sure that you're adding the media back from the cart to the store!")
     public void changeMindAddsToStore() throws TestFailedException {
@@ -255,8 +275,17 @@ public class OliviaTests {
         store.sortMedia();
         ArrayList<Media> inventory = BlockbusterTests.getInventory(store);
 
-        TestFunction.assertEqual(BlockbusterTests.arrayToString(inventory), "Genre: ACTION, Name: Uncharted 1, Rating: 54, Rental Price: $6.70, Players: 2, does not need console\nGenre: ACTION, Name: Uncharted 2, Rating: 37, Rental Price: $6.70, Players: 2, does not need console\nGenre: ACTION, Name: Uncharted 3, Rating: 38, Rental Price: $6.70, Players: 2, does not need console\nGenre: ACTION, Name: Uncharted 4, Rating: 28, Rental Price: $6.70, Players: 2, does not need console");
+        TestFunction.assertEqual(BlockbusterTests.arrayToString(inventory), "Genre: ACTION, Name: Uncharted 1, Rating: 54, "
+                                 + "Rental Price: $6.70, Players: 2, does not need console\n"
+                                 + "Genre: ACTION, Name: Uncharted 2, Rating: 37, Rental Price: "
+                                 + "$6.70, Players: 2, does not need console\n"
+                                 + "Genre: ACTION, Name: Uncharted 3, Rating: 38, "
+                                 + "Rental Price: $6.70, Players: 2, does not need console\n"
+                                 + "Genre: ACTION, Name: Uncharted 4, Rating: 28, "
+                                 + "Rental Price: $6.70, Players: 2, does not need console");
     }
+
+
 
     @TestCase(name = ".changeMind(): Updates budget accordingly")
     @Tip(description = "Make sure that the budget is updated properly!")
@@ -284,20 +313,27 @@ public class OliviaTests {
         return fakeConstructorOlivia(20.0, new ArrayList<Media>(), false);
     }
 
+
+
     private static Olivia fakeConstructorOlivia(double budget, ArrayList<Media> cart, boolean canUseConsole) throws TestFailedException {
+
         Olivia olivia = new Olivia();
 
         Field[] fields = Olivia.class.getDeclaredFields();
         Field budgetField = null;
         Field cartField = null;
         Field canUseConsoleField = null;
+
         for (int i = 0; i < fields.length; i++) {
+
             if (fields[i].getName() == "budget") {
                 budgetField = fields[i];
             }
+
             if (fields[i].getName() == "cart") {
                 cartField = fields[i];
             }
+
             if (fields[i].getName() == "canUseConsole") {
                 canUseConsoleField = fields[i];
             }
@@ -317,39 +353,52 @@ public class OliviaTests {
         return olivia;
     }
 
+
+
     private static ArrayList<Media> getCart(Olivia olivia) {
         Field[] fields = Olivia.class.getDeclaredFields();
         Field cart = null;
+
         for (int i = 0; i < fields.length; i++) {
             if (fields[i].getName() == "cart") {
                 cart = fields[i];
                 break;
             }
         }
+
         if (cart != null) {
             try {
+
                 cart.setAccessible(true);
                 return (ArrayList<Media>) cart.get(olivia);
+
             } catch (IllegalArgumentException e) {
+
                 System.out.println("Test could not be run.");
                 e.printStackTrace();
+
             } catch (IllegalAccessException e) {
+
                 System.out.println("Test could not be run.");
                 e.printStackTrace();
+
             }
         }
         return null;
     }
 
     private static double getBudget(Olivia olivia) {
+
         Field[] fields = Olivia.class.getDeclaredFields();
         Field budget = null;
+
         for (int i = 0; i < fields.length; i++) {
             if (fields[i].getName() == "budget") {
                 budget = fields[i];
                 break;
             }
         }
+
         if (budget != null) {
             try {
                 budget.setAccessible(true);
@@ -362,6 +411,7 @@ public class OliviaTests {
                 e.printStackTrace();
             }
         }
+
         return -1.0;
     }
 }
