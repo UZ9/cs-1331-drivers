@@ -45,12 +45,8 @@ class TestContainer implements Runnable {
 
                             classTestsFailed++;
 
-
-
                             if (e.getCause() instanceof TestFailedException) {
                                 TestFailedException tfe = (TestFailedException) e.getCause();
-
-
 
                                 System.out.println("\t" + tfe.getMessage());
 
@@ -72,8 +68,6 @@ class TestContainer implements Runnable {
 
                     }
                 }
-
-
 
                 TestManager.classTests.set(TestManager.classTests.get() + classTests);
                 TestManager.classTestsFailed.set(TestManager.classTestsFailed.get() + classTestsFailed);
