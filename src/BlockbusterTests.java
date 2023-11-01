@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class BlockbusterTests {
 
-    private static final ArrayList<Media> MOVIE_LIST = new ArrayList<Media>() {
+    static final ArrayList<Media> MOVIE_LIST = new ArrayList<Media>() {
         {
             add(new Movie(Genre.ACTION, "Fast and Furious 1", 54, 6.70, 120));
             add(new Movie(Genre.ACTION, "Fast and Furious 2", 37, 6.70, 120));
@@ -18,7 +18,7 @@ public class BlockbusterTests {
         }
     };
 
-    private static final ArrayList<Media> GAME_LIST = new ArrayList<Media>() {
+    static final ArrayList<Media> GAME_LIST = new ArrayList<Media>() {
         {
             add(new VideoGame(Genre.ACTION, "Uncharted 1", 54, 6.70, 2, false));
             add(new VideoGame(Genre.ACTION, "Uncharted 2", 37, 6.70, 2, false));
@@ -313,7 +313,7 @@ public class BlockbusterTests {
 
 
 
-    private static Blockbuster fakeConstructorBlockbuster(ArrayList<Media> media) throws TestFailedException {
+    static Blockbuster fakeConstructorBlockbuster(ArrayList<Media> media) throws TestFailedException {
         Blockbuster store = new Blockbuster();
 
         Field[] fields = Blockbuster.class.getDeclaredFields();
@@ -343,7 +343,7 @@ public class BlockbusterTests {
         return newArray;
     }
 
-    private static String arrayToString(ArrayList<Media> inputs) {
+    static String arrayToString(ArrayList<Media> inputs) {
         StringBuilder builder = new StringBuilder();
         if (inputs.size() == 0) {
             return "";
@@ -356,7 +356,7 @@ public class BlockbusterTests {
         return builder.toString();
     }
 
-    private static ArrayList<Media> getInventory(Blockbuster store) {
+    static ArrayList<Media> getInventory(Blockbuster store) {
         Field[] fields = Blockbuster.class.getDeclaredFields();
         Field inventory = null;
         for (int i = 0; i < fields.length; i++) {
