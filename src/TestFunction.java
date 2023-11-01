@@ -12,7 +12,13 @@ class TestFunction {
         boolean failed = false;
 
         if (actual == null) {
-            failed = expected == null;
+            if (expected != null) {
+                throw new TestFailedException("Test failed! Received null, but expected \"" + expected + "\"");
+            }
+        } else if (expected == null) {
+            if (actual != null) {
+                throw new TestFailedException("Test failed! Received \"" + actual + "\", but expected null");
+            }
         } else {
 
             if (!actual.replaceAll("\n", System.lineSeparator()).equals(expected.replaceAll("\n", System.lineSeparator()))) {
@@ -22,8 +28,8 @@ class TestFunction {
 
         if (failed) {
             
-            String actualString = "\"" + actual + "\" ";
-            String expectedString = "\"" + expected + "\"";
+            String actualString = "\"" + actual + "\"";
+            String expectedString = (expected == null) ? "null" : "\"" + expected + "\"";
             
             if (actual.trim().contains("\n")) {
                 actualString = "\n\"" + actual + "\"\n";
@@ -33,7 +39,7 @@ class TestFunction {
             }
 
             throw new TestFailedException(
-                    "Strings different! Received " + actualString + "but expected " + expectedString);
+                    "Strings different! Received " + actualString + " but expected " + expectedString);
         }
     }
 
@@ -125,5 +131,16 @@ class TestFunction {
             throw new TestFailedException("Exception class difference: Received " + actual.getCause().getClass()
                     + ", but expected " + expected.getCause().getClass());
         }
+    }
+
+    /**
+     * Prints an error message
+     *
+     * @param actual   The actual value
+     * @param expected The expected value
+     * @throws TestFailedException If the test fails
+     */
+    public static void failTest(String errorMessage) throws TestFailedException {
+        throw new TestFailedException("An error occurred: " + errorMessage);
     }
 }
