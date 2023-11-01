@@ -4,6 +4,12 @@ import java.lang.reflect.Method;
 class TestContainer implements Runnable {
         private Class<?> clazz;
 
+        /**
+         * Initializes a new TestContainer. A TestContainer is used to prevent certain edge cases such as infinite loops.
+         * 
+         * If an infinite loop occurs, the test will timeout and notify the user accordingly.
+         * @param clazz The class containing the tests
+         */
         public TestContainer(Class<?> clazz) {
             this.clazz = clazz;
         }
