@@ -8,7 +8,7 @@ public class MovieTests {
 
     @TestCase(name = "Testing the default 5-arg constructor")
     @Tip(description = "What args should the constructor receive?")
-    public void fourArgConstructor() throws TestFailedException {
+    public void fiveArgConstructor() throws TestFailedException {
 
         Movie movie = new Movie(Genre.ACTION, "MyMovie", 18, 6.70, 120);
 
@@ -78,7 +78,7 @@ public class MovieTests {
     @Tip(description = "What fields must be equal for Movies to be equal?")
     public void equalsRuntimesNotEqual() throws TestFailedException {
 
-        Movie movie1 = new Movie(Genre.ACTION, "My Movie 2", 18, 6.71, 121);
+        Movie movie1 = new Movie(Genre.ACTION, "My Movie 2", 18, 6.70, 121);
         Movie movie2 = new Movie(Genre.ACTION, "My Movie 2", 18, 6.70, 120);
 
         TestFunction.assertEqual(movie1.equals(movie2), false);
