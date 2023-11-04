@@ -1,4 +1,7 @@
+import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 class TestFunction {
     /**
@@ -114,23 +117,96 @@ class TestFunction {
     }
 
     /**
-     * Detects if the given Exceptions are the same TYPE, not if they are caused by
-     * the same thing. Any two
-     * NullPointerExceptions will, when passed into this function, return true, even
-     * if they are caused by
-     * two unrelated issues.
-     *
-     * @param actual   The actual value
-     * @param expected The expected value
-     * @throws TestFailedException If the test fails
+     * Tests the given code for a particular type of Exception.
+     * @param exceptionType The class of the expected Exception.
+     * @param codeThatThrowsException Runnable code that is intended to throw an exceptino of type exceptionType. Must NOT throw a TestFailedException
+     * @throws TestFailedException
      */
-    public static void assertEqual(Exception actual, Exception expected) throws TestFailedException {
-        boolean failed = (actual.getCause().getClass() != expected.getCause().getClass());
+    public static void testForException(Class<? extends Exception> exceptionType, Runnable codeThatThrowsException) throws TestFailedException {
+        try {
+            codeThatThrowsException.run();
+            throw new TestFailedException(exceptionType.getSimpleName() + " did NOT occur when it was supposed to!");
+        } catch (Exception e) {
+            if (e.getClass() == exceptionType) {
+                // Test passed! Finish running method and return to the invoker
+            } else if (e.getClass() == TestFailedException.class && e.getMessage().contains("did NOT occur")) {
 
-        if (failed) {
-            throw new TestFailedException("Exception class difference: Received " + actual.getCause().getClass()
-                    + ", but expected " + expected.getCause().getClass());
+                throw new TestFailedException("No exception occurred! The code should have thrown a " + exceptionType.getSimpleName());
+
+            } else {
+
+                throw new TestFailedException("Exception class difference! Received " + e.getClass().getSimpleName() + " but expected " + exceptionType.getSimpleName() + "."
+                    + "\nFull stack trace:\n" + StringUtils.stackTraceToString(e));
+
+            }
         }
+    }
+
+    /**
+     * Interface to allow a lambda function-like functionality.
+     */
+    public interface StringFunction {
+        String run(String str);
+    }
+
+    /**
+     * Tester for String inputs. Takes in a String -> String function, and compares the output with the desired output.
+     * @param actual The expected String output of the runnable function.
+     * @param codeToRun A runnable function that takes in a String and outputs a String.
+     * @param inputs The StringInput values to test.
+     * @throws TestFailedException
+     */
+    public static void testStringInputs(String actual, StringFunction codeToRun, TestUtils.StringInput[] inputs) throws TestFailedException {
+
+        for (TestUtils.StringInput stringInput : inputs) {
+            try {
+                assertEqual(actual, codeToRun.run(stringInput.getStringValue()));
+            } catch (TestFailedException tfe) {
+                throw new TestFailedException("When inputted string is " + stringInput.toString() + ": " + tfe.getMessage());
+            }
+        }
+
+    }
+
+    /**
+     * Convenience method that calls testStringInputs(String, StringFunction, StringInput[]) for ALL
+     * values of the StringFunction enum.
+     * @param actual The expected String output of the runnable function.
+     * @param codeToRun A runnable function that takes in a String and outputs a String.
+     * @throws TestFailedException
+     */
+    public static void testStringInputs(String actual, StringFunction codeToRun) throws TestFailedException {
+        testStringInputs(actual, codeToRun, TestUtils.StringInput.values());
+    }
+
+    /**
+     * Tester for String inputs. Takes in a String -> String function, and compares the output with the desired output.
+     * @param actual The expected String output of the runnable function.
+     * @param codeToRun A runnable function that takes in a String and outputs a String.
+     * @param inputs The StringInput values to test.
+     * @throws TestFailedException
+     */
+    public static void testStringInputsForException(Class<? extends Exception> exceptionType, Consumer<String> codeToRun, TestUtils.StringInput[] inputs) throws TestFailedException {
+
+        for (TestUtils.StringInput stringInput : inputs) {
+            try {
+                testForException(exceptionType, () -> codeToRun.accept(stringInput.getStringValue()));
+            } catch (TestFailedException tfe) {
+                throw new TestFailedException("When inputted string is " + stringInput.toString() + ": " + tfe.getMessage());
+            }
+        }
+
+    }
+
+    /**
+     * Convenience method that calls testStringInputs(String, StringFunction, StringInput[]) for ALL
+     * values of the StringFunction enum.
+     * @param actual The expected String output of the runnable function.
+     * @param codeToRun A runnable function that takes in a String and outputs a String.
+     * @throws TestFailedException
+     */
+    public static void testStringInputsForException(Class<? extends Exception> exceptionType, Consumer<String> codeToRun) throws TestFailedException {
+        testStringInputsForException(exceptionType, codeToRun, TestUtils.StringInput.values());
     }
 
     /**
@@ -143,4 +219,5 @@ class TestFunction {
     public static void failTest(String errorMessage) throws TestFailedException {
         throw new TestFailedException("An error occurred: " + errorMessage);
     }
+
 }

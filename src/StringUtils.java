@@ -34,4 +34,24 @@ class StringUtils {
 
         System.out.printf("%" + (HORIZONTAL_LINE_LENGTH / 2 + text.length() / 2) + "s%n", text);
     }
+
+    /**
+     * Util that a stack trace into a printable string.
+     * @param e Exception to print the stacktrace of
+     * @return
+     */
+    public static String stackTraceToString(Throwable e) {
+        StackTraceElement[] stackTrace = e.getStackTrace();
+        
+        if (stackTrace.length == 0) {
+            return "No stack trace.";
+        }
+
+        StringBuilder sb = new StringBuilder(stackTrace[0].toString());
+        for (int i = 1; i < stackTrace.length; i++) {
+            sb.append("\n    ");
+            sb.append(stackTrace[i].toString());
+        }
+        return sb.toString();
+    }
 }

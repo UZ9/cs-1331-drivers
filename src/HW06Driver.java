@@ -1,5 +1,5 @@
 public class HW06Driver {
     public static void main(String[] args) {        // Add classes to test here
-        TestManager.runTestsOn();
+        TestManager.runTestsOn(SportsGameTests.class);
     }
 }

@@ -1,6 +1,7 @@
 import java.util.List;
 
 class TestUtils {
+
     /**
      * Returns either 1, 0, or -1 depending on the sign of the input.
      * 
@@ -26,5 +27,24 @@ class TestUtils {
             builder.append(printedMessages.get(i));
         }
         return builder.toString();
+    }
+
+    /**
+     * Enum that contains "invalid" Strings.
+     */
+    public enum StringInput {
+        NULL(null),
+        EMPTY(""),
+        BLANK("   ");
+
+        private final String stringValue;
+
+        private StringInput(String stringValue) {
+            this.stringValue = stringValue;
+        }
+
+        public String getStringValue() {
+            return this.stringValue;
+        }
     }
 }

@@ -51,7 +51,7 @@ class TestContainer implements Runnable {
                                 System.out.println("\t" + tfe.getMessage());
 
                                 if (tip != null)
-                                    System.out.printf("\tHINT: %s\n", tip.description());
+                                    System.out.printf("\t%s\n", ColorUtils.formatColorString(AsciiColorCode.BRIGHT_WHITE_BACKGROUND, AsciiColorCode.BLACK_FOREGROUND, "HINT: "+ tip.description()));
                             } else {
                                 System.out.println(ColorUtils.formatColorString(AsciiColorCode.WHITE_BACKGROUND, AsciiColorCode.RED_FOREGROUND, "\tThe executed code caused the following exception. This is NOT the fault of the driver."));
 
