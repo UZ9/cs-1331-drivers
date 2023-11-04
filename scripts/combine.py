@@ -17,7 +17,7 @@ with open(filename, "wb") as outfile:
             for line in infile:
                 line = str(line, 'UTF-8')
                 line = line.replace("public class", "class")
-                line = line.replace("HW05Driver", "Driver")
+                line = line.replace("HW06Driver", "Driver")
 
                 if not line in import_lines:
 

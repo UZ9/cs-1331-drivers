@@ -16,6 +16,13 @@ Movie.java
 Olivia.java
 VideoGame.java
 
+# HW06 source files
+BasketballGame.java
+FootballGame.java
+InvalidTicketException.java
+SportsGame.java
+Tickets.java
+
 # Ignores the assembled Driver file
 Driver.java
 
