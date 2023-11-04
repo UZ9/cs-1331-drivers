@@ -117,6 +117,26 @@ class TestFunction {
     }
 
     /**
+     * Detects if the given objects are equal by their .equals() methods. By default, this method will also test
+     * for symmetry.
+     *
+     * @param expected Whether or not these two objects should be equal by their .equals() methods
+     * @param obj1 The first object to compare.
+     * @param obj2 The second object to compare.
+     * @throws TestFailedException if the test fails
+     */
+    public static void assertEqual(boolean expected, Object obj1, Object obj2) throws TestFailedException {
+        boolean actual = obj1.equals(obj2);
+        if (actual != expected) {
+            throw new TestFailedException("Boolean value difference with .equals() method. When comparing\n\"" + obj1.toString() + "\" with \"" + obj2.toString() + "\", Received " + actual + ", expected " + expected);
+        }
+
+        if (actual != obj2.equals(obj1)) {
+            throw new TestFailedException("Asymmetry detected! When comparing \"" + obj1.toString() + "\" with \"" + obj2.toString() + "\", Received " + actual + ". But when calling .equals() the other way, received " + !actual);
+        }
+    }
+
+    /**
      * Tests the given code for a particular type of Exception.
      * @param exceptionType The class of the expected Exception.
      * @param codeThatThrowsException Runnable code that is intended to throw an exceptino of type exceptionType. Must NOT throw a TestFailedException
@@ -143,20 +163,13 @@ class TestFunction {
     }
 
     /**
-     * Interface to allow a lambda function-like functionality.
-     */
-    public interface StringFunction {
-        String run(String str);
-    }
-
-    /**
      * Tester for String inputs. Takes in a String -> String function, and compares the output with the desired output.
      * @param actual The expected String output of the runnable function.
      * @param codeToRun A runnable function that takes in a String and outputs a String.
      * @param inputs The StringInput values to test.
      * @throws TestFailedException
      */
-    public static void testStringInputs(String actual, StringFunction codeToRun, TestUtils.StringInput[] inputs) throws TestFailedException {
+    public static void testStringInputs(String actual, TestUtils.StringFunction codeToRun, TestUtils.StringInput[] inputs) throws TestFailedException {
 
         for (TestUtils.StringInput stringInput : inputs) {
             try {
@@ -175,7 +188,7 @@ class TestFunction {
      * @param codeToRun A runnable function that takes in a String and outputs a String.
      * @throws TestFailedException
      */
-    public static void testStringInputs(String actual, StringFunction codeToRun) throws TestFailedException {
+    public static void testStringInputs(String actual, TestUtils.StringFunction codeToRun) throws TestFailedException {
         testStringInputs(actual, codeToRun, TestUtils.StringInput.values());
     }
 

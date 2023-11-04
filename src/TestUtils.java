@@ -47,4 +47,12 @@ class TestUtils {
             return this.stringValue;
         }
     }
+
+    /**
+     * Interface to allow lambda function-like functionality with Strings
+     */
+    public interface StringFunction {
+        String run(String str);
+    }
+    
 }

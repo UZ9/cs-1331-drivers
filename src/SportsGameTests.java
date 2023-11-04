@@ -4,8 +4,8 @@ public class SportsGameTests {
     @Tip(description = "What order should the constructor arguments be?")
     public void constructorValidInputs() throws TestFailedException {
         
-        SportsGame game = new SportsGameSubclass("Mercedes-Benz", "17:00", "08-21-2023", 6, 70, 0);
-        TestFunction.assertEqual(game.toString(), "Mercedes-Benz,17:00,08-21-2023,6,70,0");
+        SportsGame game = new SportsGameSubclass("Mercedes-Benz", "17:00", "08-21-2023", 6, 70, 1);
+        TestFunction.assertEqual(game.toString(), "Mercedes-Benz,17:00,08-21-2023,6,70,1");
 
     }
 
@@ -14,7 +14,169 @@ public class SportsGameTests {
     public void constructorInvalidVenue() throws TestFailedException {
 
         TestFunction.testStringInputsForException(IllegalArgumentException.class,
-            (s) -> new SportsGameSubclass(s, "0:00", "01-01-2000", 1, 1, 0));
+            (s) -> new SportsGameSubclass(s, "00:00", "01-01-2000", 1, 1, 1));
+
+    }
+
+    @TestCase(name = "Constructor: Invalid start time")
+    @Tip(description = "What is a 'valid' start time? What should happen when an invalid input is passed in?")
+    public void constructorInvalidStartTime() throws TestFailedException {
+
+        TestFunction.testStringInputsForException(IllegalArgumentException.class,
+            (s) -> new SportsGameSubclass("Bobby Dodd Stadium", s, "01-01-2000", 1, 1, 1));
+
+    }
+
+    @TestCase(name = "Constructor: Invalid start date")
+    @Tip(description = "What is a 'valid' start date? What should happen when an invalid input is passed in?")
+    public void constructorInvalidStartDate() throws TestFailedException {
+
+        TestFunction.testStringInputsForException(IllegalArgumentException.class,
+            (s) -> new SportsGameSubclass("Bobby Dodd Stadium", "00:00", s, 1, 1, 1));
+
+    }
+
+    @TestCase(name = "Constructor: Negative score1")
+    @Tip(description = "What is a 'valid' score1? What should happen when an invalid input is passed in?")
+    public void constructorInvalidScore1() throws TestFailedException {
+
+        TestFunction.testForException(IllegalArgumentException.class,
+            () -> new SportsGameSubclass("Bobby Dodd Stadium", "00:00", "01-01-2000", -1, 1, 1));
+
+    }
+
+    @TestCase(name = "Constructor: Negative score2")
+    @Tip(description = "What is a 'valid' score2? What should happen when an invalid input is passed in?")
+    public void constructorInvalidScore2() throws TestFailedException {
+
+        TestFunction.testForException(IllegalArgumentException.class,
+            () -> new SportsGameSubclass("Bobby Dodd Stadium", "00:00", "01-01-2000", 1, -1, 1));
+
+    }
+
+    @TestCase(name = "Constructor: Negative seatsLeft")
+    @Tip(description = "What is a 'valid' value for seatsLeft? What should happen when an invalid input is passed in?")
+    public void constructorInvalidSeatsLeft() throws TestFailedException {
+
+        TestFunction.testForException(IllegalArgumentException.class,
+            () -> new SportsGameSubclass("Bobby Dodd Stadium", "00:00", "01-01-2000", 1, 1, -1));
+
+    }
+
+    @TestCase(name = "Constructor: Zero score1")
+    @Tip(description = "Is 0 a valid input to the constructor?")
+    public void constructorZeroScore1() throws TestFailedException {
+
+        SportsGame game = new SportsGameSubclass("Bobby Dodd Stadium", "00:00", "01-01-2000", 0, 1, 1);
+        TestFunction.assertEqual(game.toString(), "Bobby Dodd Stadium,00:00,01-01-2000,0,1,1");
+
+    }
+
+    @TestCase(name = "Constructor: Zero score2")
+    @Tip(description = "Is 0 a valid input to the constructor?")
+    public void constructorZeroScore2() throws TestFailedException {
+        SportsGame game = new SportsGameSubclass("Bobby Dodd Stadium", "00:00", "01-01-2000", 1, 0, 1);
+        TestFunction.assertEqual(game.toString(), "Bobby Dodd Stadium,00:00,01-01-2000,1,0,1");
+
+    }
+
+    @TestCase(name = "Constructor: Zero seatsLeft")
+    @Tip(description = "Is 0 a valid input to the constructor?")
+    public void constructorZeroSeatsLeft() throws TestFailedException {
+        SportsGame game = new SportsGameSubclass("Bobby Dodd Stadium", "00:00", "01-01-2000", 1, 1, 0);
+        TestFunction.assertEqual(game.toString(), "Bobby Dodd Stadium,00:00,01-01-2000,1,1,0");
+
+    }
+
+    @TestCase(name = "Constructor: Leading/Trailing spaces around venue name")
+    @Tip(description = "What method in the String class removes leading & trailing whitespace?")
+    public void constructorSpacesVenue() throws TestFailedException {
+        
+        SportsGame game = new SportsGameSubclass(" Mercedes-Benz ", "17:00", "08-21-2023", 6, 70, 1);
+        TestFunction.assertEqual(game.toString(), "Mercedes-Benz,17:00,08-21-2023,6,70,1");
+
+    }
+
+    @TestCase(name = "Constructor: Leading/Trailing newline characters around start time")
+    @Tip(description = "What method in the String class removes leading & trailing whitespace?")
+    public void constructorNewlinesVenue() throws TestFailedException {
+        
+        SportsGame game = new SportsGameSubclass("\nMercedes-Benz\n", "17:00", "08-21-2023", 6, 70, 1);
+        TestFunction.assertEqual(game.toString(), "Mercedes-Benz,17:00,08-21-2023,6,70,1");
+
+    }
+
+    @TestCase(name = "Constructor: Leading/Trailing tab characters around start time")
+    @Tip(description = "What method in the String class removes leading & trailing whitespace?")
+    public void constructorTabsVenue() throws TestFailedException {
+        
+        SportsGame game = new SportsGameSubclass("\tMercedes-Benz\t", "17:00", "08-21-2023", 6, 70, 1);
+        TestFunction.assertEqual(game.toString(), "Mercedes-Benz,17:00,08-21-2023,6,70,1");
+
+    }
+
+    @TestCase(name = "Constructor: Leading/Trailing spaces around start time")
+    @Tip(description = "What method in the String class removes leading & trailing whitespace?")
+    public void constructorSpacesTime() throws TestFailedException {
+        
+        SportsGame game = new SportsGameSubclass("Mercedes-Benz", " 17:00 ", "08-21-2023", 6, 70, 1);
+        TestFunction.assertEqual(game.toString(), "Mercedes-Benz,17:00,08-21-2023,6,70,1");
+
+    }
+
+    @TestCase(name = "Constructor: Leading/Trailing newline characters around start time")
+    @Tip(description = "What method in the String class removes leading & trailing whitespace?")
+    public void constructorNewlinesTime() throws TestFailedException {
+        
+        SportsGame game = new SportsGameSubclass("Mercedes-Benz", "\n17:00\n", "08-21-2023", 6, 70, 1);
+        TestFunction.assertEqual(game.toString(), "Mercedes-Benz,17:00,08-21-2023,6,70,1");
+
+    }
+
+    @TestCase(name = "Constructor: Leading/Trailing tab characters around start time")
+    @Tip(description = "What method in the String class removes leading & trailing whitespace?")
+    public void constructorTabsTime() throws TestFailedException {
+        
+        SportsGame game = new SportsGameSubclass("Mercedes-Benz", "\t17:00\t", "08-21-2023", 6, 70, 1);
+        TestFunction.assertEqual(game.toString(), "Mercedes-Benz,17:00,08-21-2023,6,70,1");
+
+    }
+
+    @TestCase(name = "Constructor: Leading/Trailing spaces around start date")
+    @Tip(description = "What method in the String class removes leading & trailing whitespace?")
+    public void constructorSpacesDate() throws TestFailedException {
+        
+        SportsGame game = new SportsGameSubclass("Mercedes-Benz", "17:00", " 08-21-2023 ", 6, 70, 1);
+        TestFunction.assertEqual(game.toString(), "Mercedes-Benz,17:00,08-21-2023,6,70,1");
+
+    }
+
+    @TestCase(name = "Constructor: Leading/Trailing newline characters around start date")
+    @Tip(description = "What method in the String class removes leading & trailing whitespace?")
+    public void constructorNewlinesDate() throws TestFailedException {
+        
+        SportsGame game = new SportsGameSubclass("Mercedes-Benz", "17:00", "\n08-21-2023\n", 6, 70, 1);
+        TestFunction.assertEqual(game.toString(), "Mercedes-Benz,17:00,08-21-2023,6,70,1");
+
+    }
+
+    @TestCase(name = "Constructor: Leading/Trailing tab characters around start date")
+    @Tip(description = "What method in the String class removes leading & trailing whitespace?")
+    public void constructorTabsDate() throws TestFailedException {
+        
+        SportsGame game = new SportsGameSubclass("Mercedes-Benz", "17:00", "\t08-21-2023\t", 6, 70, 1);
+        TestFunction.assertEqual(game.toString(), "Mercedes-Benz,17:00,08-21-2023,6,70,1");
+
+    }
+
+    @TestCase(name = "equals(): All values are equal")
+    @Tip(description =  "What values must be equal for two SportsGames to be considered equal?")
+    public void equalsEquals() throws TestFailedException {
+
+        SportsGame game1 = new SportsGameSubclass("Mercedes-Benz", "17:00", "08-21-2023", 6, 70, 1);
+        SportsGame game2 = new SportsGameSubclass("Mercedes-Benz", "17:00", "08-21-2023", 6, 70, 1);
+
+        TestFunction.assertEqual(false, game1, game2);
 
     }
 

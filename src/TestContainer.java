@@ -35,23 +35,23 @@ class TestContainer implements Runnable {
 
                             System.out.println(ColorUtils.formatColorString(AsciiColorCode.BRIGHT_GREEN_BACKGROUND,
                                     AsciiColorCode.BRIGHT_WHITE_FOREGROUND, " PASSED: \u00BB ") + " "
-                                    + testCase.name());
+                                    + testCase.name().replaceAll("\n", "\n\t"));
 
                             TestManager.submitTest(0);
                         } catch (InvocationTargetException e) {
                             System.out.println(ColorUtils.formatColorString(AsciiColorCode.BRIGHT_RED_BACKGROUND,
                                     AsciiColorCode.BRIGHT_WHITE_FOREGROUND, " FAILED: \u00BB ") + " "
-                                    + testCase.name());
+                                    + testCase.name().replaceAll("\n", "\n\t"));
 
                             classTestsFailed++;
 
                             if (e.getCause() instanceof TestFailedException) {
                                 TestFailedException tfe = (TestFailedException) e.getCause();
 
-                                System.out.println("\t" + tfe.getMessage());
+                                System.out.println("\t" + tfe.getMessage().replaceAll("\n", "\n\t"));
 
                                 if (tip != null)
-                                    System.out.printf("\t%s\n", ColorUtils.formatColorString(AsciiColorCode.BRIGHT_WHITE_BACKGROUND, AsciiColorCode.BLACK_FOREGROUND, "HINT: "+ tip.description()));
+                                    System.out.printf("\t%s\n", ColorUtils.formatColorString(AsciiColorCode.BRIGHT_WHITE_BACKGROUND, AsciiColorCode.BLACK_FOREGROUND, "HINT: "+ tip.description().replaceAll("\n", "\n\t")));
                             } else {
                                 System.out.println(ColorUtils.formatColorString(AsciiColorCode.WHITE_BACKGROUND, AsciiColorCode.RED_FOREGROUND, "\tThe executed code caused the following exception. This is NOT the fault of the driver."));
 
