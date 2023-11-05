@@ -1,6 +1,7 @@
 import java.util.List;
 
 class TestUtils {
+
     /**
      * Returns either 1, 0, or -1 depending on the sign of the input.
      * 
@@ -27,4 +28,31 @@ class TestUtils {
         }
         return builder.toString();
     }
+
+    /**
+     * Enum that contains "invalid" Strings.
+     */
+    public enum StringInput {
+        NULL(null),
+        EMPTY(""),
+        BLANK("   ");
+
+        private final String stringValue;
+
+        private StringInput(String stringValue) {
+            this.stringValue = stringValue;
+        }
+
+        public String getStringValue() {
+            return this.stringValue;
+        }
+    }
+
+    /**
+     * Interface to allow lambda function-like functionality with Strings
+     */
+    public interface StringFunction {
+        String run(String str);
+    }
+    
 }

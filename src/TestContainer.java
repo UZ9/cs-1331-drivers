@@ -54,16 +54,51 @@ class TestContainer implements Runnable {
             if (e.getCause() instanceof TestFailedException) {
                 TestFailedException tfe = (TestFailedException) e.getCause();
 
-                System.out.println("\t" + tfe.getMessage());
+                            System.out.println(ColorUtils.formatColorString(AsciiColorCode.BRIGHT_GREEN_BACKGROUND,
+                                    AsciiColorCode.BRIGHT_WHITE_FOREGROUND, " PASSED: \u00BB ") + " "
+                                    + testCase.name().replaceAll("\n", "\n\t"));
 
-                if (tip != null)
-                    System.out.printf("\tHINT: %s\n", tip.description());
-            } else {
-                System.out.println(ColorUtils.formatColorString(AsciiColorCode.WHITE_BACKGROUND,
-                        AsciiColorCode.RED_FOREGROUND,
-                        "\tThe executed code caused the following exception. This is NOT the fault of the driver."));
+                            TestManager.submitTest(0);
+                        } catch (InvocationTargetException e) {
+                            System.out.println(ColorUtils.formatColorString(AsciiColorCode.BRIGHT_RED_BACKGROUND,
+                                    AsciiColorCode.BRIGHT_WHITE_FOREGROUND, " FAILED: \u00BB ") + " "
+                                    + testCase.name().replaceAll("\n", "\n\t"));
 
-                e.getCause().printStackTrace();
+                            classTestsFailed++;
+
+                            if (e.getCause() instanceof TestFailedException) {
+                                TestFailedException tfe = (TestFailedException) e.getCause();
+
+                                System.out.println("\t" + tfe.getMessage().replaceAll("\n", "\n\t"));
+
+                                if (tip != null)
+                                    System.out.printf("\t%s\n", ColorUtils.formatColorString(AsciiColorCode.BRIGHT_WHITE_BACKGROUND, AsciiColorCode.BLACK_FOREGROUND, "HINT: "+ tip.description().replaceAll("\n", "\n\t")));
+                            } else {
+                                System.out.println(ColorUtils.formatColorString(AsciiColorCode.WHITE_BACKGROUND, AsciiColorCode.RED_FOREGROUND, "\tThe executed code caused the following exception. This is NOT the fault of the driver."));
+
+                                e.getCause().printStackTrace();
+                            }
+                        } catch (IllegalAccessException e) {
+                            e.printStackTrace();
+                        } catch (IllegalArgumentException e) {
+                            e.printStackTrace();
+                        }
+
+                        classTests++;
+
+
+                    }
+                }
+
+                TestManager.classTests.set(TestManager.classTests.get() + classTests);
+                TestManager.classTestsFailed.set(TestManager.classTestsFailed.get() + classTestsFailed);
+
+                System.out.println();
+                StringUtils.printTextCentered(
+                        String.format("TESTS PASSED: %d/%d", classTests - classTestsFailed, classTests));
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
 
             return false;
