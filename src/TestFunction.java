@@ -199,7 +199,7 @@ class TestFunction {
      * @param inputs The StringInput values to test.
      * @throws TestFailedException
      */
-    public static void testStringInputsForException(Class<? extends Exception> exceptionType, Consumer<String> codeToRun, TestUtils.StringInput[] inputs) throws TestFailedException {
+    public static void testStringInputsForException(Class<? extends Exception> exceptionType, Consumer<String> codeToRun, TestUtils.StringInput... inputs) throws TestFailedException {
 
         for (TestUtils.StringInput stringInput : inputs) {
             try {

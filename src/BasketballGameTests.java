@@ -27,6 +27,21 @@ public class BasketballGameTests {
 
     }
 
+    @TestCase(name = "Constructor: Non-default message in IllegalArgumentException (league)")
+    @Tip(description = "Remember to provide a \"descriptive and specific\" message with ALL Exceptions thrown. What alternate constructor does IllegalArgumentException have that sets an error message?")
+    public void constructorDescriptiveMessage6() throws TestFailedException {
+        
+        try {
+            new BasketballGame("Bobby Dodd", "17:00", "01-01-2020", 6, 70, 1, "   ");
+            throw new TestFailedException("Did not receive an IllegalArgumentException when giving an illegal value for performer");
+        } catch (IllegalArgumentException iae) {
+            if (iae.getMessage() == null) {
+                throw new TestFailedException("Received error message \"" + iae.getMessage() + "\". Check Note 5 on Page 1 of the directions.");
+            }
+        }
+        
+    }
+
     @TestCase(name = "equals(): All values are equal")
     @Tip(description =  "What values must be equal for two SportsGames to be considered equal?")
     public void equalsEquals() throws TestFailedException {

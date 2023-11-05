@@ -169,6 +169,96 @@ public class SportsGameTests {
 
     }
 
+    @TestCase(name = "Constructor: Non-default message in IllegalArgumentException (venue)")
+    @Tip(description = "Remember to provide a \"descriptive and specific\" message with ALL Exceptions thrown. What alternate constructor does IllegalArgumentException have that sets an error message?")
+    public void constructorDescriptiveMessage1() throws TestFailedException {
+        
+        try {
+            SportsGame game = new SportsGameSubclass(null, "17:00", "08-21-2023", 6, 70, 1);
+            throw new TestFailedException("Did not receive an IllegalArgumentException when giving an illegal argument");
+        } catch (IllegalArgumentException iae) {
+            if (iae.getMessage() == null) {
+                throw new TestFailedException("Received error message \"" + iae.getMessage() + "\". Check Note 5 on Page 1 of the directions.");
+            }
+        }
+        
+    }
+
+    @TestCase(name = "Constructor: Non-default message in IllegalArgumentException (start time)")
+    @Tip(description = "Remember to provide a \"descriptive and specific\" message with ALL Exceptions thrown. What alternate constructor does IllegalArgumentException have that sets an error message?")
+    public void constructorDescriptiveMessage2() throws TestFailedException {
+        
+        try {
+            SportsGame game = new SportsGameSubclass("Bobby Dodd", null, "08-21-2023", 6, 70, 1);
+            throw new TestFailedException("Did not receive an IllegalArgumentException when giving an illegal argument");
+        } catch (IllegalArgumentException iae) {
+            if (iae.getMessage() == null) {
+                throw new TestFailedException("Received error message \"" + iae.getMessage() + "\". Check Note 5 on Page 1 of the directions.");
+            }
+        }
+        
+    }
+
+    @TestCase(name = "Constructor: Non-default message in IllegalArgumentException (start date)")
+    @Tip(description = "Remember to provide a \"descriptive and specific\" message with ALL Exceptions thrown. What alternate constructor does IllegalArgumentException have that sets an error message?")
+    public void constructorDescriptiveMessage3() throws TestFailedException {
+        
+        try {
+            SportsGame game = new SportsGameSubclass("Bobby Dodd", "17:00", null, 6, 70, 1);
+            throw new TestFailedException("Did not receive an IllegalArgumentException when giving an illegal argument");
+        } catch (IllegalArgumentException iae) {
+            if (iae.getMessage() == null) {
+                throw new TestFailedException("Received error message \"" + iae.getMessage() + "\". Check Note 5 on Page 1 of the directions.");
+            }
+        }
+        
+    }
+
+    @TestCase(name = "Constructor: Non-default message in IllegalArgumentException (score1)")
+    @Tip(description = "Remember to provide a \"descriptive and specific\" message with ALL Exceptions thrown. What alternate constructor does IllegalArgumentException have that sets an error message?")
+    public void constructorDescriptiveMessage4() throws TestFailedException {
+        
+        try {
+            SportsGame game = new SportsGameSubclass("Bobby Dodd", "17:00", "01-01-2020", -1, 70, 1);
+            throw new TestFailedException("Did not receive an IllegalArgumentException when giving an illegal argument");
+        } catch (IllegalArgumentException iae) {
+            if (iae.getMessage() == null) {
+                throw new TestFailedException("Received error message \"" + iae.getMessage() + "\". Check Note 5 on Page 1 of the directions.");
+            }
+        }
+        
+    }
+
+    @TestCase(name = "Constructor: Non-default message in IllegalArgumentException (score2)")
+    @Tip(description = "Remember to provide a \"descriptive and specific\" message with ALL Exceptions thrown. What alternate constructor does IllegalArgumentException have that sets an error message?")
+    public void constructorDescriptiveMessage5() throws TestFailedException {
+        
+        try {
+            SportsGame game = new SportsGameSubclass("Bobby Dodd", "17:00", "01-01-2020", 6, -1, 1);
+            throw new TestFailedException("Did not receive an IllegalArgumentException when giving an illegal argument");
+        } catch (IllegalArgumentException iae) {
+            if (iae.getMessage() == null) {
+                throw new TestFailedException("Received error message \"" + iae.getMessage() + "\". Check Note 5 on Page 1 of the directions.");
+            }
+        }
+        
+    }
+
+    @TestCase(name = "Constructor: Non-default message in IllegalArgumentException (seatsLeft)")
+    @Tip(description = "Remember to provide a \"descriptive and specific\" message with ALL Exceptions thrown. What alternate constructor does IllegalArgumentException have that sets an error message?")
+    public void constructorDescriptiveMessage6() throws TestFailedException {
+        
+        try {
+            SportsGame game = new SportsGameSubclass("Bobby Dodd", "17:00", "01-01-2020", 6, 70, -1);
+            throw new TestFailedException("Did not receive an IllegalArgumentException when giving an illegal argument");
+        } catch (IllegalArgumentException iae) {
+            if (iae.getMessage() == null) {
+                throw new TestFailedException("Received error message \"" + iae.getMessage() + "\". Check Note 5 on Page 1 of the directions.");
+            }
+        }
+        
+    }
+
     @TestCase(name = "equals(): All values are equal")
     @Tip(description =  "What values must be equal for two SportsGames to be considered equal?")
     public void equalsEquals() throws TestFailedException {
