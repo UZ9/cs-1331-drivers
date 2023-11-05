@@ -176,6 +176,72 @@ public class SportsGameTests {
         SportsGame game1 = new SportsGameSubclass("Mercedes-Benz", "17:00", "08-21-2023", 6, 70, 1);
         SportsGame game2 = new SportsGameSubclass("Mercedes-Benz", "17:00", "08-21-2023", 6, 70, 1);
 
+        TestFunction.assertEqual(true, game1, game2);
+
+    }
+
+    @TestCase(name = "equals(): Venue is different")
+    @Tip(description =  "What values must be equal for two SportsGames to be considered equal?")
+    public void equalsDifferentVenue() throws TestFailedException {
+
+        SportsGame game1 = new SportsGameSubclass("Mercedes-Bench", "17:00", "08-21-2023", 6, 70, 1);
+        SportsGame game2 = new SportsGameSubclass("Mercedes-Benz", "17:00", "08-21-2023", 6, 70, 1);
+
+        TestFunction.assertEqual(false, game1, game2);
+
+    }
+
+    @TestCase(name = "equals(): Start time is different")
+    @Tip(description =  "What values must be equal for two SportsGames to be considered equal?")
+    public void equalsDifferentTime() throws TestFailedException {
+
+        SportsGame game1 = new SportsGameSubclass("Mercedes-Benz", "17:00", "08-21-2023", 6, 70, 1);
+        SportsGame game2 = new SportsGameSubclass("Mercedes-Benz", "17:01", "08-21-2023", 6, 70, 1);
+
+        TestFunction.assertEqual(false, game1, game2);
+
+    }
+
+    @TestCase(name = "equals(): Start date is different")
+    @Tip(description =  "What values must be equal for two SportsGames to be considered equal?")
+    public void equalsDifferentDate() throws TestFailedException {
+
+        SportsGame game1 = new SportsGameSubclass("Mercedes-Benz", "17:00", "08-21-2023", 6, 70, 1);
+        SportsGame game2 = new SportsGameSubclass("Mercedes-Benz", "17:00", "08-21-1996", 6, 70, 1);
+
+        TestFunction.assertEqual(false, game1, game2);
+
+    }
+
+    @TestCase(name = "equals(): Score1 is different")
+    @Tip(description =  "What values must be equal for two SportsGames to be considered equal?")
+    public void equalsDifferentScore1() throws TestFailedException {
+
+        SportsGame game1 = new SportsGameSubclass("Mercedes-Benz", "17:00", "08-21-2023", 6, 70, 1);
+        SportsGame game2 = new SportsGameSubclass("Mercedes-Benz", "17:00", "08-21-1996", 7, 70, 1);
+
+        TestFunction.assertEqual(false, game1, game2);
+
+    }
+
+    @TestCase(name = "equals(): Score2 is different")
+    @Tip(description =  "What values must be equal for two SportsGames to be considered equal?")
+    public void equalsDifferentScore2() throws TestFailedException {
+
+        SportsGame game1 = new SportsGameSubclass("Mercedes-Benz", "17:00", "08-21-2023", 6, 70, 1);
+        SportsGame game2 = new SportsGameSubclass("Mercedes-Benz", "17:00", "08-21-1996", 6, 77, 1);
+
+        TestFunction.assertEqual(false, game1, game2);
+
+    }
+
+    @TestCase(name = "equals(): seatsLeft is different")
+    @Tip(description =  "What values must be equal for two SportsGames to be considered equal?")
+    public void equalsDifferentSeats() throws TestFailedException {
+
+        SportsGame game1 = new SportsGameSubclass("Mercedes-Benz", "17:00", "08-21-2023", 6, 70, 1);
+        SportsGame game2 = new SportsGameSubclass("Mercedes-Benz", "17:00", "08-21-1996", 6, 70, 3);
+
         TestFunction.assertEqual(false, game1, game2);
 
     }
