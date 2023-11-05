@@ -11,7 +11,7 @@ public class BasketballGameTests {
 
     @TestCase(name = "Constructor: Invalid league")
     @Tip(description = "What is a 'valid' league? What should happen when an invalid input is passed in?")
-    public void constructorInvalidVenue() throws TestFailedException {
+    public void constructorInvalidPerformer() throws TestFailedException {
 
         TestFunction.testStringInputsForException(IllegalArgumentException.class,
             (s) -> new BasketballGame(s, "00:00", "01-01-2000", 1, 1, 1, s));
@@ -60,7 +60,7 @@ public class BasketballGameTests {
 
     }
 
-    @TestCase(name = "equals(): Different start time")
+    @TestCase(name = "equals(): Different start date")
     @Tip(description =  "What values must be equal for two BasketballGames to be considered equal?")
     public void equalsDate() throws TestFailedException {
 

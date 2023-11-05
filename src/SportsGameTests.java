@@ -249,7 +249,7 @@ public class SportsGameTests {
     /**
      * Subclass of SportsGame, ONLY for testing purposes.
      */
-    class SportsGameSubclass extends SportsGame {
+    public static class SportsGameSubclass extends SportsGame {
 
         public SportsGameSubclass(String venue, String startTime, String startDate, int score1, int score2,
                 int seatsLeft) {
