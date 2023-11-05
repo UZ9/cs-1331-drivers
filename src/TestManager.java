@@ -19,6 +19,8 @@ class TestManager {
     protected volatile static AtomicInteger classTests = new AtomicInteger();
     protected volatile static AtomicInteger classTestsFailed = new AtomicInteger();
 
+    private static List<String> filter;
+
     /**
      * A list of the currently registered classes to test
      */
@@ -36,7 +38,6 @@ class TestManager {
      * @param classes The classes to test.
      */
     public static void runTestsOn(Class<?>... classes) {
-
         for (Class<?> currentClass : classes) {
             registerClass(currentClass);
         }
@@ -56,7 +57,9 @@ class TestManager {
      * @param clazz The input class
      */
     public static void registerClass(Class<?> clazz) {
-        testClazzes.add(clazz);
+        if (filter.size() == 0 || filter.stream().anyMatch(s -> s.equals(clazz.getName()))) {
+            testClazzes.add(clazz);
+        }
     }
 
     public static void registerDataClass(Class<?> clazz) {
@@ -175,5 +178,9 @@ class TestManager {
     protected static void submitTest(int result) {
         // classTests++;
         // classTestsFailed += result;
+    }
+
+    public static void setTestFilter(List<String> filter) {
+        TestManager.filter = filter;
     }
 }
