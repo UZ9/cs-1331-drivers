@@ -6,16 +6,16 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Launch Current File",
+            "name": "Current File",
             "request": "launch",
-            "mainClass": "${file}"
+            "mainClass": "${file}",
         },
         {
             "type": "java",
-            "name": "Launch HW06Driver",
+            "name": "HW06Driver",
             "request": "launch",
             "mainClass": "HW06Driver",
-            "projectName": "src_24760871"
+            "projectName": "src_f04cc434",
         }
     ]
 }

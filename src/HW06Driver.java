@@ -2,7 +2,6 @@ import java.util.List;
 
 public class HW06Driver {
     public static void main(String[] args) {
-
         System.out.println("██████╗ ██████╗ ██╗██╗   ██╗███████╗██████╗ \r\n" + //
                 "██╔══██╗██╔══██╗██║██║   ██║██╔════╝██╔══██╗\r\n" + //
                 "██║  ██║██████╔╝██║██║   ██║█████╗  ██████╔╝\r\n" + //
