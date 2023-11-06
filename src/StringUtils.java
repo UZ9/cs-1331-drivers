@@ -107,4 +107,35 @@ class StringUtils {
         writer.close();
 
     }
+
+    /**
+     * Returns a modified version of 'actual', where the first character that differs from
+     * 'expected' is highlighted RED.
+     * @param actual The 'actual' String
+     * @param expected The 'expected' String to compare against
+     * @return
+     */
+    public static String getColorCodedDifference(String actual, String expected) {
+        StringBuilder colored = new StringBuilder();
+        for (int i = 0; i < actual.length(); i++) {
+            char actualChar = actual.charAt(i);
+
+            if (expected.length() <= i) {
+                colored.append(actual.substring(i));
+                break;
+            }
+
+            if (actualChar == expected.charAt(i)) {
+                colored.append(actual.charAt(i));
+            } else {
+                colored.append(ColorUtils.formatColorString(AsciiColorCode.RED_BACKGROUND, AsciiColorCode.WHITE_FOREGROUND, actualChar + ""));
+                colored.append(actual.substring(i + 1));
+                break;
+            }
+
+        }
+
+        return colored.toString();
+        
+    }
 }

@@ -1,5 +1,4 @@
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -200,7 +199,7 @@ public class TicketsTests {
     }
 
     @TestCase(name = "purchaseTickets: Inputs are valid, file does not yet exist")
-    @Tip(description = "Make sure that you create the file if it does not yet exist!")
+    @Tip(description = "Make sure that you create the file if it does not yet exist. Is there a particular constructor for an object that prints to a file that you can use to automatically create a file?")
     public void purchaseTicketsWritingToEmptyFile() throws IOException, TestFailedException {
         ArrayList<SportsGame> gamesToAdd = new ArrayList<>();
         gamesToAdd.add(new FootballGame("Bobby Dodd", "17:00", "03-01-2020", 9, 9, 2, "Drake"));
@@ -215,7 +214,7 @@ public class TicketsTests {
     }
 
     @TestCase(name = "purchaseTickets: Inputs are valid, file already exists")
-    @Tip(description = "Make sure that you're just appending the new SportsGames to the end of the file!")
+    @Tip(description = "Make sure that you're just appending the new SportsGames to the end of the file!\nYou must read the values at that file before creating your writer, if your writer deletes the existing contents.\nRemember to follow read/modify/write protocol!")
     public void purchaseTicketsWritingToExistingFile() throws IOException, TestFailedException {
         ArrayList<SportsGame> gamesToAdd = new ArrayList<>();
         gamesToAdd.add(new FootballGame("Bobby Dodd", "17:00", "03-01-2020", 9, 9, 2, "Drake"));
