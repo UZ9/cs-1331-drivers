@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 class StringUtils {
@@ -66,10 +67,10 @@ class StringUtils {
             return "";
         }
 
-        StringBuilder builder = new StringBuilder(inputs.get(0).toString());
+        StringBuilder builder = new StringBuilder();
 
-        for (int i = 1; i < inputs.size(); i++) {
-            builder.append("\n" + inputs.get(i).toString());
+        for (int i = 0; i < inputs.size(); i++) {
+            builder.append(inputs.get(i).toString() + "\n");
         }
 
         return builder.toString();
@@ -81,10 +82,10 @@ class StringUtils {
         String output = "";
 
         while (scanner.hasNextLine()) {
-            output += scanner.nextLine() + "\n";
-        }
+            String next = scanner.nextLine();
 
-        output = output.substring(0, output.length() - 1); //Removes the trailing newline that did not exist in the original file
+            output += next + "\n";
+        }
 
         scanner.close();
 
