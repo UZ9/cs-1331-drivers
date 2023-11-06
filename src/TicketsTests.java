@@ -13,7 +13,7 @@ public class TicketsTests {
                 BeforeTest beforeAnnotation = field.getAnnotation(BeforeTest.class);
 
                 if (beforeAnnotation != null) {
-                    StringUtils.stringToFile(field.getName() + ".txt", field.get(null).toString());
+                    StringUtils.stringToFile("TEMP_" + field.getName() + ".txt", field.get(null).toString());
                 }
 
             }
@@ -29,7 +29,7 @@ public class TicketsTests {
                 DeleteFileBefore deleteAnnotation = field.getAnnotation(DeleteFileBefore.class);
 
                 if (deleteAnnotation != null) {
-                    TestUtils.deleteFile(field.getName() + ".txt");
+                    TestUtils.deleteFile("TEMP_" + field.getName() + ".txt");
                 }
 
             }
@@ -45,7 +45,7 @@ public class TicketsTests {
                 DeleteFileAfter deleteAnnotation = field.getAnnotation(DeleteFileAfter.class);
 
                 if (deleteAnnotation != null) {
-                    TestUtils.deleteFile(field.getName() + ".txt");
+                    TestUtils.deleteFile("TEMP_" + field.getName() + ".txt");
                 }
 
             }
@@ -206,9 +206,9 @@ public class TicketsTests {
         gamesToAdd.add(new BasketballGame("McCamish", "17:00", "03-01-2020", 9, 9, 2, "NCAA"));
         gamesToAdd.add(new FootballGame("Levi's Stadium", "17:00", "03-01-2020", 9, 9, 2, "Drake"));
 
-        Tickets.purchaseTickets("purchaseTicketsWritingToEmptyFile.txt", gamesToAdd);
+        Tickets.purchaseTickets("TEMP_" + "purchaseTicketsWritingToEmptyFile.txt", gamesToAdd);
 
-        String output = StringUtils.fileToString("purchaseTicketsWritingToEmptyFile.txt");
+        String output = StringUtils.fileToString("TEMP_" + "purchaseTicketsWritingToEmptyFile.txt");
 
         TestFunction.assertEqual(output, TxtTestData.purchaseTicketsWritingToEmptyFile);
     }
@@ -221,9 +221,9 @@ public class TicketsTests {
         gamesToAdd.add(new BasketballGame("McCamish", "17:00", "03-01-2020", 9, 9, 2, "NCAA"));
         gamesToAdd.add(new FootballGame("Levi's Stadium", "17:00", "03-01-2020", 9, 9, 2, "Drake"));
 
-        Tickets.purchaseTickets("purchaseTicketsAppend.txt", gamesToAdd);
+        Tickets.purchaseTickets("TEMP_" + "purchaseTicketsAppend.txt", gamesToAdd);
 
-        String output = StringUtils.fileToString("purchaseTicketsAppend.txt");
+        String output = StringUtils.fileToString("TEMP_" + "purchaseTicketsAppend.txt");
 
         TestFunction.assertEqual(output, TxtTestData.purchaseTicketsAppendOutput);
     }
@@ -236,9 +236,9 @@ public class TicketsTests {
         gamesToAdd.add(new BasketballGame("McCamish", "17:00", "03-01-2020", 9, 9, 0, "NCAA"));
         gamesToAdd.add(new FootballGame("Levi's Stadium", "17:00", "03-01-2020", 9, 9, 2, "Drake"));
 
-        Tickets.purchaseTickets("purchaseTicketsZeroSeats.txt", gamesToAdd);
+        Tickets.purchaseTickets("TEMP_" + "purchaseTicketsZeroSeats.txt", gamesToAdd);
 
-        String output = StringUtils.fileToString("purchaseTicketsZeroSeats.txt");
+        String output = StringUtils.fileToString("TEMP_" + "purchaseTicketsZeroSeats.txt");
 
         TestFunction.assertEqual(output, TxtTestData.purchaseTicketsZeroSeatsOutput);
     }
@@ -529,8 +529,8 @@ public class TicketsTests {
     @Tip(description = "Make sure you remove ALL occurrences of the given SportsGame!")
     public void attendGameSeveralOccurrences() throws IOException, TestFailedException, InvalidTicketException {
 
-        Tickets.attendGame("attendGameSeveralOccurrences.txt", new BasketballGame("McCamish", "0:00", "01-01-2020", 1, 1, 1, "NCAA"));
-        String output = StringUtils.fileToString("attendGameSeveralOccurrences.txt");
+        Tickets.attendGame("TEMP_" + "attendGameSeveralOccurrences.txt", new BasketballGame("McCamish", "0:00", "01-01-2020", 1, 1, 1, "NCAA"));
+        String output = StringUtils.fileToString("TEMP_" + "attendGameSeveralOccurrences.txt");
 
         TestFunction.assertEqual(output.toString(), TxtTestData.attendGameSeveralOccurrencesOutput);
 
@@ -540,8 +540,8 @@ public class TicketsTests {
     @Tip(description = "Make sure you don't skip over the second of two adjacent SportsGames. What happens if you remove an item at an index, shift all subsequent items leftward, then increment your current index?")
     public void attendGameAdjacentOccurrences() throws IOException, TestFailedException, InvalidTicketException {
 
-        Tickets.attendGame("attendGameAdjacentOccurrences.txt", new BasketballGame("McCamish", "0:00", "01-01-2020", 1, 1, 1, "NCAA"));
-        String output = StringUtils.fileToString("attendGameAdjacentOccurrences.txt");
+        Tickets.attendGame("TEMP_" + "attendGameAdjacentOccurrences.txt", new BasketballGame("McCamish", "0:00", "01-01-2020", 1, 1, 1, "NCAA"));
+        String output = StringUtils.fileToString("TEMP_" + "attendGameAdjacentOccurrences.txt");
 
         TestFunction.assertEqual(output.toString(), TxtTestData.attendGameAdjacentOccurrencesOutput);
 

@@ -32,7 +32,7 @@ with open(filename, "wb") as outfile:
                         inject_lines = "".join(inject_file.readlines())
                         inject_lines = inject_lines.replace('\n', '\\n')
 
-                        new_line = match + " \"" + inject_lines + "\";"
+                        new_line = match + " \"" + inject_lines + "\\n\";"
 
                         print("New:")
                         print(new_line)
