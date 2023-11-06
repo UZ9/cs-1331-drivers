@@ -4,5 +4,5 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.METHOD, ElementType.FIELD })
-public @interface BeforeTest { }
+@Target({ ElementType.FIELD })
+public @interface DeleteFileBefore { }

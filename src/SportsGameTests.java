@@ -174,7 +174,7 @@ public class SportsGameTests {
     public void constructorDescriptiveMessage1() throws TestFailedException {
         
         try {
-            SportsGame game = new SportsGameSubclass(null, "17:00", "08-21-2023", 6, 70, 1);
+            new SportsGameSubclass(null, "17:00", "08-21-2023", 6, 70, 1);
             throw new TestFailedException("Did not receive an IllegalArgumentException when giving an illegal argument");
         } catch (IllegalArgumentException iae) {
             if (iae.getMessage() == null) {
@@ -189,7 +189,7 @@ public class SportsGameTests {
     public void constructorDescriptiveMessage2() throws TestFailedException {
         
         try {
-            SportsGame game = new SportsGameSubclass("Bobby Dodd", null, "08-21-2023", 6, 70, 1);
+            new SportsGameSubclass("Bobby Dodd", null, "08-21-2023", 6, 70, 1);
             throw new TestFailedException("Did not receive an IllegalArgumentException when giving an illegal argument");
         } catch (IllegalArgumentException iae) {
             if (iae.getMessage() == null) {
@@ -204,7 +204,7 @@ public class SportsGameTests {
     public void constructorDescriptiveMessage3() throws TestFailedException {
         
         try {
-            SportsGame game = new SportsGameSubclass("Bobby Dodd", "17:00", null, 6, 70, 1);
+            new SportsGameSubclass("Bobby Dodd", "17:00", null, 6, 70, 1);
             throw new TestFailedException("Did not receive an IllegalArgumentException when giving an illegal argument");
         } catch (IllegalArgumentException iae) {
             if (iae.getMessage() == null) {
@@ -219,7 +219,7 @@ public class SportsGameTests {
     public void constructorDescriptiveMessage4() throws TestFailedException {
         
         try {
-            SportsGame game = new SportsGameSubclass("Bobby Dodd", "17:00", "01-01-2020", -1, 70, 1);
+            new SportsGameSubclass("Bobby Dodd", "17:00", "01-01-2020", -1, 70, 1);
             throw new TestFailedException("Did not receive an IllegalArgumentException when giving an illegal argument");
         } catch (IllegalArgumentException iae) {
             if (iae.getMessage() == null) {
@@ -234,7 +234,7 @@ public class SportsGameTests {
     public void constructorDescriptiveMessage5() throws TestFailedException {
         
         try {
-            SportsGame game = new SportsGameSubclass("Bobby Dodd", "17:00", "01-01-2020", 6, -1, 1);
+            new SportsGameSubclass("Bobby Dodd", "17:00", "01-01-2020", 6, -1, 1);
             throw new TestFailedException("Did not receive an IllegalArgumentException when giving an illegal argument");
         } catch (IllegalArgumentException iae) {
             if (iae.getMessage() == null) {
@@ -249,7 +249,7 @@ public class SportsGameTests {
     public void constructorDescriptiveMessage6() throws TestFailedException {
         
         try {
-            SportsGame game = new SportsGameSubclass("Bobby Dodd", "17:00", "01-01-2020", 6, 70, -1);
+            new SportsGameSubclass("Bobby Dodd", "17:00", "01-01-2020", 6, 70, -1);
             throw new TestFailedException("Did not receive an IllegalArgumentException when giving an illegal argument");
         } catch (IllegalArgumentException iae) {
             if (iae.getMessage() == null) {

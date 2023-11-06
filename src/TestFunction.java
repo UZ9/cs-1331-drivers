@@ -29,18 +29,20 @@ class TestFunction {
 
         if (failed) {
             
-            String actualString = "\"" + actual + "\"";
-            String expectedString = (expected == null) ? "null" : "\"" + expected + "\"";
             
-            if (actual.trim().contains("\n")) {
-                actualString = "\n\"" + actual + "\"\n";
+            String expectedString = (expected == null) ? "null" : "\"" + expected + "\"";
+            String coloredActual = StringUtils.getColorCodedDifference("\"" + actual + "\"", expectedString);
+
+            
+            if (coloredActual.trim().contains("\n")) {
+                coloredActual = "\n" + coloredActual + "\n";
             }
             if (expected.trim().contains("\n")) {
                 expectedString = "\n\"" + expected + "\"\n";
             }
 
             throw new TestFailedException(
-                    "Strings different! Received " + actualString + " but expected " + expectedString);
+                    "Strings different! Received " + coloredActual + " but expected " + expectedString);
         }
     }
 

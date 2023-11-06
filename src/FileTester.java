@@ -1,8 +1,5 @@
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
 
 class FileTester {
     @TestCase(name = "Does some thing")
@@ -16,22 +13,8 @@ class FileTester {
 
         writer.close();
 
-        String output = fileToString("data.txt");
+        String output = StringUtils.fileToString("data.txt");
 
         TestFunction.assertEqual(output, TxtTestData.DATA);
-    }
-
-    private static String fileToString(String path) throws FileNotFoundException {
-        Scanner scanner = new Scanner(new File("data.txt"));
-
-        String output = "";
-
-        while (scanner.hasNextLine()) {
-            output += scanner.nextLine() + "\n";
-        }
-
-        scanner.close();
-
-        return output;
     }
 }

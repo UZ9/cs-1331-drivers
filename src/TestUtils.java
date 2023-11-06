@@ -1,3 +1,4 @@
+import java.io.File;
 import java.util.List;
 
 class TestUtils {
@@ -54,5 +55,9 @@ class TestUtils {
     public interface StringFunction {
         String run(String str);
     }
-    
+
+    public static void deleteFile(String path) {
+        File file = new File(path);
+        file.delete();
+    }
 }
