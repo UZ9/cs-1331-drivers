@@ -9,10 +9,6 @@
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}",
-            "args": 
-            [
-                "-h",
-            ],  
         },
         {
             "type": "java",
@@ -20,10 +16,6 @@
             "request": "launch",
             "mainClass": "HW06Driver",
             "projectName": "src_f04cc434",
-            "args": 
-            [
-                "-h",
-            ],  
-        }
+5        }
     ]
 }
