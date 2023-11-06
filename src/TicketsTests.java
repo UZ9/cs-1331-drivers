@@ -179,7 +179,7 @@ public class TicketsTests {
         Class<? extends Exception> exceptionType = InvalidTicketException.class;
         
         try {
-            Tickets.retrieveGames("retrieveGamesInvalidInputs.txt");
+            Tickets.retrieveGames("TEMP_" + "retrieveGamesInvalidInputs.txt");
             throw new TestFailedException(exceptionType.getSimpleName() + " did NOT occur when it was supposed to!");
         } catch (Exception e) {
             if (e.getClass() == exceptionType) {
@@ -350,7 +350,7 @@ public class TicketsTests {
     @TestCase(name = "findTickets: One occurrence")
     @Tip(description = "What format of Integers should be returned? What index is the first line of the file?\nNOTE: The directions do not specify that you must list the indices in ascending order, but this Driver assumes you do.")
     public void findTicketsOneOccurrence() throws IOException, TestFailedException, InvalidTicketException {
-        ArrayList<Integer> output = Tickets.findTickets("findTicketsOneOccurrence.txt", new BasketballGame("McCamish", "17:00", "03-01-2020", 9, 9, 2, "NCAA"));
+        ArrayList<Integer> output = Tickets.findTickets("TEMP_" + "findTicketsOneOccurrence.txt", new BasketballGame("McCamish", "17:00", "03-01-2020", 9, 9, 2, "NCAA"));
 
         TestFunction.assertEqual(output.toString(), "[1]");
     }
@@ -358,7 +358,7 @@ public class TicketsTests {
     @TestCase(name = "findTickets: Multiple occurrences")
     @Tip(description = "What format of Integers should be returned? What index is the first line of the file?\nNOTE: The directions do not specify that you must list the indices in ascending order, but this Driver assumes you do.")
     public void findTicketsSeveralOccurrences() throws IOException, TestFailedException, InvalidTicketException {
-        ArrayList<Integer> output = Tickets.findTickets("findTicketsSeveralOccurrences.txt", new BasketballGame("McCamish", "17:00", "03-01-2020", 9, 9, 2, "NCAA"));
+        ArrayList<Integer> output = Tickets.findTickets("TEMP_" + "findTicketsSeveralOccurrences.txt", new BasketballGame("McCamish", "17:00", "03-01-2020", 9, 9, 2, "NCAA"));
 
         TestFunction.assertEqual(output.toString(), "[1, 3, 5]");
     }
@@ -366,7 +366,7 @@ public class TicketsTests {
     @TestCase(name = "findTickets: Adjacent occurrences")
     @Tip(description = "Make sure that you're reading every single occurrence!\nNOTE: The directions do not specify that you must list the indices in ascending order, but this Driver assumes you do.")
     public void findTicketsAdjacentOccurrences() throws IOException, TestFailedException, InvalidTicketException {
-        ArrayList<Integer> output = Tickets.findTickets("findTicketsAdjacentOccurrences.txt", new BasketballGame("McCamish", "17:00", "03-01-2020", 9, 9, 2, "NCAA"));
+        ArrayList<Integer> output = Tickets.findTickets("TEMP_" + "findTicketsAdjacentOccurrences.txt", new BasketballGame("McCamish", "17:00", "03-01-2020", 9, 9, 2, "NCAA"));
 
         TestFunction.assertEqual(output.toString(), "[1, 3, 4, 6]");
     }
@@ -378,7 +378,7 @@ public class TicketsTests {
         Class<? extends Exception> exceptionType = InvalidTicketException.class;
         
         try {
-            Tickets.findTickets("findTicketsSeveralOccurrences.txt", new BasketballGame("Mercedes-Benz", "17:00", "03-01-2020", 9, 9, 2, "NCAA"));
+            Tickets.findTickets("TEMP_" + "findTicketsSeveralOccurrences.txt", new BasketballGame("Mercedes-Benz", "17:00", "03-01-2020", 9, 9, 2, "NCAA"));
             throw new TestFailedException(exceptionType.getSimpleName() + " did NOT occur when it was supposed to!");
         } catch (Exception e) {
             if (e.getClass() == exceptionType) {
@@ -507,7 +507,7 @@ public class TicketsTests {
         Class<? extends Exception> exceptionType = InvalidTicketException.class;
         
         try {
-            Tickets.findTickets("attendGameNoOccurrences.txt", new BasketballGame("Mercedes-Benz", "17:00", "03-01-2020", 9, 9, 2, "NCAA"));
+            Tickets.findTickets("TEMP_" + "attendGameNoOccurrences.txt", new BasketballGame("Mercedes-Benz", "17:00", "03-01-2020", 9, 9, 2, "NCAA"));
             throw new TestFailedException(exceptionType.getSimpleName() + " did NOT occur when it was supposed to!");
         } catch (Exception e) {
             if (e.getClass() == exceptionType) {
