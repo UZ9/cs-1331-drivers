@@ -37,6 +37,22 @@ public class TicketsTests {
         }
 
     }
+
+    @AfterTest
+    public void deleteTextFiles() throws FileNotFoundException, IllegalArgumentException, IllegalAccessException {
+
+        for (Field field : TxtTestData.class.getFields()) {
+            if (field.getType() == String.class) {
+                DeleteFileAfter deleteAnnotation = field.getAnnotation(DeleteFileAfter.class);
+
+                if (deleteAnnotation != null) {
+                    TestUtils.deleteFile(field.getName() + ".txt");
+                }
+
+            }
+        }
+
+    }
  
     @TestCase(name = "RetrieveGames: File contains valid FootballGames and BasketballGames")
     @Tip(description = "No tip. I think you can figure this one out.")
@@ -198,7 +214,7 @@ public class TicketsTests {
         TestFunction.assertEqual(output, TxtTestData.purchaseTicketsWritingToEmptyFile);
     }
 
-    @TestCase(name = "purchaseTickets: Inputs are valid, file does not yet exist")
+    @TestCase(name = "purchaseTickets: Inputs are valid, file already exists")
     @Tip(description = "Make sure that you're just appending the new SportsGames to the end of the file!")
     public void purchaseTicketsWritingToExistingFile() throws IOException, TestFailedException {
         ArrayList<SportsGame> gamesToAdd = new ArrayList<>();
@@ -211,6 +227,21 @@ public class TicketsTests {
         String output = StringUtils.fileToString("purchaseTicketsAppend.txt");
 
         TestFunction.assertEqual(output, TxtTestData.purchaseTicketsAppendOutput);
+    }
+
+    @TestCase(name = "purchaseTickets: Do not add if seatsLeft are 0")
+    @Tip(description = "What should you do if there are 0 seats left?")
+    public void purchaseTicketsZeroSeatsLeft() throws IOException, TestFailedException {
+        ArrayList<SportsGame> gamesToAdd = new ArrayList<>();
+        gamesToAdd.add(new FootballGame("Bobby Dodd", "17:00", "03-01-2020", 9, 9, 2, "Drake"));
+        gamesToAdd.add(new BasketballGame("McCamish", "17:00", "03-01-2020", 9, 9, 0, "NCAA"));
+        gamesToAdd.add(new FootballGame("Levi's Stadium", "17:00", "03-01-2020", 9, 9, 2, "Drake"));
+
+        Tickets.purchaseTickets("purchaseTicketsZeroSeats.txt", gamesToAdd);
+
+        String output = StringUtils.fileToString("purchaseTicketsZeroSeats.txt");
+
+        TestFunction.assertEqual(output, TxtTestData.purchaseTicketsZeroSeatsOutput);
     }
 
     @TestCase(name = "findTickets: File is null")
@@ -290,9 +321,35 @@ public class TicketsTests {
         }
 
     }
+ 
+    @TestCase(name = "findTickets: No file at the inputted path")
+    @Tip(description = "What error should be thrown when the given path does not lead to a file?")
+    public void findTicketsNotFoundInput() throws TestFailedException {
+
+        Class<? extends Exception> exceptionType = FileNotFoundException.class;
+        
+        try {
+            Tickets.findTickets("willthisfileeverexist.txt", new BasketballGame("McCamish", "17:00", "03-01-2020", 9, 9, 2, "NCAA"));
+            throw new TestFailedException(exceptionType.getSimpleName() + " did NOT occur when it was supposed to!");
+        } catch (Exception e) {
+            if (e.getClass() == exceptionType) {
+                // Test passed! Finish running method and return to the invoker
+            } else if (e.getClass() == TestFailedException.class && e.getMessage().contains("did NOT occur")) {
+
+                throw new TestFailedException("No exception occurred! The code should have thrown a " + exceptionType.getSimpleName());
+
+            } else {
+
+                throw new TestFailedException("Exception class difference! Received " + e.getClass().getSimpleName() + " but expected " + exceptionType.getSimpleName() + "."
+                    + "\nFull stack trace:\n" + StringUtils.stackTraceToString(e));
+
+            }
+        }
+
+    }
 
     @TestCase(name = "findTickets: One occurrence")
-    @Tip(description = "What format of Integers should be returned?")
+    @Tip(description = "What format of Integers should be returned? What index is the first line of the file?\nNOTE: The directions do not specify that you must list the indices in ascending order, but this Driver assumes you do.")
     public void findTicketsOneOccurrence() throws IOException, TestFailedException, InvalidTicketException {
         ArrayList<Integer> output = Tickets.findTickets("findTicketsOneOccurrence.txt", new BasketballGame("McCamish", "17:00", "03-01-2020", 9, 9, 2, "NCAA"));
 
@@ -300,7 +357,7 @@ public class TicketsTests {
     }
 
     @TestCase(name = "findTickets: Multiple occurrences")
-    @Tip(description = "What format of Integers should be returned?")
+    @Tip(description = "What format of Integers should be returned? What index is the first line of the file?\nNOTE: The directions do not specify that you must list the indices in ascending order, but this Driver assumes you do.")
     public void findTicketsSeveralOccurrences() throws IOException, TestFailedException, InvalidTicketException {
         ArrayList<Integer> output = Tickets.findTickets("findTicketsSeveralOccurrences.txt", new BasketballGame("McCamish", "17:00", "03-01-2020", 9, 9, 2, "NCAA"));
 
@@ -308,15 +365,15 @@ public class TicketsTests {
     }
 
     @TestCase(name = "findTickets: Adjacent occurrences")
-    @Tip(description = "Make sure that you're reading every single occurrence!")
+    @Tip(description = "Make sure that you're reading every single occurrence!\nNOTE: The directions do not specify that you must list the indices in ascending order, but this Driver assumes you do.")
     public void findTicketsAdjacentOccurrences() throws IOException, TestFailedException, InvalidTicketException {
         ArrayList<Integer> output = Tickets.findTickets("findTicketsAdjacentOccurrences.txt", new BasketballGame("McCamish", "17:00", "03-01-2020", 9, 9, 2, "NCAA"));
 
         TestFunction.assertEqual(output.toString(), "[1, 3, 4, 6]");
     }
 
-    @TestCase(name = "findTickets: No occurrences")
-    @Tip(description = "What exception should be thrown if there are no occurrences?")
+    @TestCase(name = "findTickets: No occurrences of the given SportsGame")
+    @Tip(description = "What exception should be thrown if there are no occurrences of the gievn SportsGame?")
     public void findTicketsNoOccurrences() throws IOException, TestFailedException, InvalidTicketException {
 
         Class<? extends Exception> exceptionType = InvalidTicketException.class;
@@ -338,6 +395,157 @@ public class TicketsTests {
 
             }
         }
+    }
+
+    @TestCase(name = "attendGame: File is null")
+    @Tip(description = "What exception should findTickets() throw if the given file is null?")
+    public void attendGameNull() throws TestFailedException {
+
+        Class<? extends Exception> exceptionType = FileNotFoundException.class;
+        
+        try {
+            Tickets.findTickets(null, new BasketballGame("McCamish", "17:00", "03-01-2020", 9, 9, 2, "NCAA"));
+            throw new TestFailedException(exceptionType.getSimpleName() + " did NOT occur when it was supposed to!");
+        } catch (Exception e) {
+            if (e.getClass() == exceptionType) {
+                // Test passed! Finish running method and return to the invoker
+            } else if (e.getClass() == TestFailedException.class && e.getMessage().contains("did NOT occur")) {
+
+                throw new TestFailedException("No exception occurred! The code should have thrown a " + exceptionType.getSimpleName());
+
+            } else {
+
+                throw new TestFailedException("Exception class difference! Received " + e.getClass().getSimpleName() + " but expected " + exceptionType.getSimpleName() + "."
+                    + "\nFull stack trace:\n" + StringUtils.stackTraceToString(e));
+
+            }
+        }
+
+    }
+    
+    @TestCase(name = "attendGame: Inputted path name is blank")
+    @Tip(description = "What error should be thrown when the given path is blank?")
+    public void attendGameBlankInput() throws TestFailedException {
+
+        Class<? extends Exception> exceptionType = FileNotFoundException.class;
+        
+        try {
+            Tickets.findTickets("   ", new BasketballGame("McCamish", "17:00", "03-01-2020", 9, 9, 2, "NCAA"));
+            throw new TestFailedException(exceptionType.getSimpleName() + " did NOT occur when it was supposed to!");
+        } catch (Exception e) {
+            if (e.getClass() == exceptionType) {
+                // Test passed! Finish running method and return to the invoker
+            } else if (e.getClass() == TestFailedException.class && e.getMessage().contains("did NOT occur")) {
+
+                throw new TestFailedException("No exception occurred! The code should have thrown a " + exceptionType.getSimpleName());
+
+            } else {
+
+                throw new TestFailedException("Exception class difference! Received " + e.getClass().getSimpleName() + " but expected " + exceptionType.getSimpleName() + "."
+                    + "\nFull stack trace:\n" + StringUtils.stackTraceToString(e));
+
+            }
+        }
+
+    }
+ 
+    @TestCase(name = "attendGame: Inputted path name is empty")
+    @Tip(description = "What error should be thrown when the given path is empty?")
+    public void attendGameEmptyInput() throws TestFailedException {
+
+        Class<? extends Exception> exceptionType = FileNotFoundException.class;
+        
+        try {
+            Tickets.findTickets("", new BasketballGame("McCamish", "17:00", "03-01-2020", 9, 9, 2, "NCAA"));
+            throw new TestFailedException(exceptionType.getSimpleName() + " did NOT occur when it was supposed to!");
+        } catch (Exception e) {
+            if (e.getClass() == exceptionType) {
+                // Test passed! Finish running method and return to the invoker
+            } else if (e.getClass() == TestFailedException.class && e.getMessage().contains("did NOT occur")) {
+
+                throw new TestFailedException("No exception occurred! The code should have thrown a " + exceptionType.getSimpleName());
+
+            } else {
+
+                throw new TestFailedException("Exception class difference! Received " + e.getClass().getSimpleName() + " but expected " + exceptionType.getSimpleName() + "."
+                    + "\nFull stack trace:\n" + StringUtils.stackTraceToString(e));
+
+            }
+        }
+
+    }
+ 
+    @TestCase(name = "attendGame: Inputted path name is not found")
+    @Tip(description = "What error should be thrown when the given path does not exist?")
+    public void attendGameNotFoundInput() throws TestFailedException {
+
+        Class<? extends Exception> exceptionType = FileNotFoundException.class;
+        
+        try {
+            Tickets.findTickets("thisfileshouldneverexist.txt", new BasketballGame("McCamish", "17:00", "03-01-2020", 9, 9, 2, "NCAA"));
+            throw new TestFailedException(exceptionType.getSimpleName() + " did NOT occur when it was supposed to!");
+        } catch (Exception e) {
+            if (e.getClass() == exceptionType) {
+                // Test passed! Finish running method and return to the invoker
+            } else if (e.getClass() == TestFailedException.class && e.getMessage().contains("did NOT occur")) {
+
+                throw new TestFailedException("No exception occurred! The code should have thrown a " + exceptionType.getSimpleName());
+
+            } else {
+
+                throw new TestFailedException("Exception class difference! Received " + e.getClass().getSimpleName() + " but expected " + exceptionType.getSimpleName() + "."
+                    + "\nFull stack trace:\n" + StringUtils.stackTraceToString(e));
+
+            }
+        }
+
+    }
+
+    @TestCase(name = "attendGame: No occurrences of the given SportsGame")
+    @Tip(description = "What exception should be thrown if there are no occurrences of the gievn SportsGame?")
+    public void attendGameNoOccurrences() throws IOException, TestFailedException, InvalidTicketException {
+
+        Class<? extends Exception> exceptionType = InvalidTicketException.class;
+        
+        try {
+            Tickets.findTickets("attendGameNoOccurrences.txt", new BasketballGame("Mercedes-Benz", "17:00", "03-01-2020", 9, 9, 2, "NCAA"));
+            throw new TestFailedException(exceptionType.getSimpleName() + " did NOT occur when it was supposed to!");
+        } catch (Exception e) {
+            if (e.getClass() == exceptionType) {
+                // Test passed! Finish running method and return to the invoker
+            } else if (e.getClass() == TestFailedException.class && e.getMessage().contains("did NOT occur")) {
+
+                throw new TestFailedException("No exception occurred! The code should have thrown a " + exceptionType.getSimpleName());
+
+            } else {
+
+                throw new TestFailedException("Exception class difference! Received " + e.getClass().getSimpleName() + " but expected " + exceptionType.getSimpleName() + "."
+                    + "\nFull stack trace:\n" + StringUtils.stackTraceToString(e));
+
+            }
+        }
+    }
+
+    @TestCase(name = "attendGame: Several non-adjacent occurrences of the given SportsGame")
+    @Tip(description = "Make sure you remove ALL occurrences of the given SportsGame!")
+    public void attendGameSeveralOccurrences() throws IOException, TestFailedException, InvalidTicketException {
+
+        Tickets.attendGame("attendGameSeveralOccurrences.txt", new BasketballGame("McCamish", "0:00", "01-01-2020", 1, 1, 1, "NCAA"));
+        String output = StringUtils.fileToString("attendGameSeveralOccurrences.txt");
+
+        TestFunction.assertEqual(output.toString(), TxtTestData.attendGameSeveralOccurrencesOutput);
+
+    }
+
+    @TestCase(name = "attendGame: Several non-adjacent occurrences of the given SportsGame")
+    @Tip(description = "Make sure you don't skip over the second of two adjacent SportsGames. What happens if you remove an item at an index, shift all subsequent items leftward, then increment your current index?")
+    public void attendGameAdjacentOccurrences() throws IOException, TestFailedException, InvalidTicketException {
+
+        Tickets.attendGame("attendGameAdjacentOccurrences.txt", new BasketballGame("McCamish", "0:00", "01-01-2020", 1, 1, 1, "NCAA"));
+        String output = StringUtils.fileToString("attendGameAdjacentOccurrences.txt");
+
+        TestFunction.assertEqual(output.toString(), TxtTestData.attendGameAdjacentOccurrencesOutput);
+
     }
 
 }
