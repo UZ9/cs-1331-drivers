@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class HW06Driver {
@@ -48,13 +46,11 @@ public class HW06Driver {
                 System.out.println("\tUsage: " + o.getUsage());
             }
         } else {
-            
-
-            // Add classes to test here
+ // Add classes to test here
             TestManager.registerDataClasses(TxtTestData.class);
             TestManager.setTestFilter(filter);
             TestManager.runTestsOn(SportsGameTests.class, BasketballGameTests.class, FootballGameTests.class,
-                    InvalidTicketExceptionTests.class, EqualsTests.class);
+                    InvalidTicketExceptionTests.class, EqualsTests.class, TicketsTests.class);
 
         }
 

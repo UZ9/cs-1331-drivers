@@ -1,5 +1,3 @@
-import java.lang.reflect.Method;
-
 class Tuple<X, Y> {
     public final X first;
     public final Y second;
