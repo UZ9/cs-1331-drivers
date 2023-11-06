@@ -58,7 +58,7 @@ public class TicketsTests {
     public void retrieveGamesValidInputs() throws TestFailedException {
         
         try {
-            ArrayList<SportsGame> games = Tickets.retrieveGames("retrieveGamesValidInputs.txt");
+            ArrayList<SportsGame> games = Tickets.retrieveGames("TEMP_" + "retrieveGamesValidInputs.txt");
             TestFunction.assertEqual(StringUtils.arrayListToString(games), TxtTestData.retrieveGamesValidInputs);
         } catch (FileNotFoundException fnfe) {
             throw new TestFailedException("Generated FileNotFoundException when no exception should occur!");
