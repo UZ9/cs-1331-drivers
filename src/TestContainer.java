@@ -3,8 +3,22 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * Represents a Runnable that can be thrown into a ThreadPoolExecutor. The
+ * TestContainer will latch onto a Class<?> and attempt to run any methods
+ * labeled as test functions, e.g. @TestCase or @BeforeTest
+ */
 class TestContainer implements Runnable {
+    /**
+     * The class belonging to the TestContainer
+     */
     private Class<?> clazz;
+
+    /**
+     * As the methods are non-static, there must be an instance all share when
+     * executing the methods. At the start of the test a single instance is
+     * initialized for all tests to use.
+     */
     private Object instance = null;
 
     /**
@@ -20,6 +34,13 @@ class TestContainer implements Runnable {
         this.clazz = clazz;
     }
 
+    /**
+     * Executes a method belonging to this instance.
+     * This is used when cycling over the methods marked with @BeforeTest
+     * and @AfterTest, as both require the same invocation logic.
+     * 
+     * @param method The method to execute
+     */
     private void executeFunction(Method method) {
         try {
             method.invoke(instance);
@@ -32,6 +53,14 @@ class TestContainer implements Runnable {
         }
     }
 
+    /**
+     * Attempts to execute a TestCase found within the TestContainer.
+     * 
+     * @param tuple A Tuple<Method, TestCase> containing the method to run, and the
+     *              TestCase associated with it. These are wrapped into a Tuple to
+     *              avoid having to call getAnnotation twice.
+     * @return true if the test case was successful
+     */
     private boolean executeTestCase(Tuple<Method, TestCase> tuple) {
         Method m = tuple.first;
         TestCase testCase = tuple.second;
