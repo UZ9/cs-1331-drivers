@@ -14,4 +14,24 @@ class TxtTestData {
     @DeleteFileBefore
     @InjectData(name = "purchaseTicketsWritingToEmptyFile.txt")
     public static String purchaseTicketsWritingToEmptyFile = "";
+
+    @BeforeTest
+    @InjectData(name = "purchaseTicketsAppend.txt")
+    public static String purchaseTicketsAppend = "";
+
+    @BeforeTest
+    @InjectData(name = "purchaseTicketsAppendOutput.txt")
+    public static String purchaseTicketsAppendOutput = "";
+
+    @BeforeTest
+    @InjectData(name = "findTicketsOneOccurrence.txt")
+    public static String findTicketsOneOccurrence = "";
+
+    @BeforeTest
+    @InjectData(name = "findTicketsSeveralOccurrences.txt")
+    public static String findTicketsSeveralOccurrences = "";
+
+    @BeforeTest
+    @InjectData(name = "findTicketsAdjacentOccurrences.txt")
+    public static String findTicketsAdjacentOccurrences = "";
 }
