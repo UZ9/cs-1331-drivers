@@ -1,5 +1,5 @@
-FootballGame,Bobby Dodd,17:00,01:01:2020,6,70,3,Eminem
-FootballGame,Bobby Dodd,17:00,01:01:2020,6,70,4,Eminem
-SoccerGame,Levi's Stadium,19:00,01:01:2023,9.71,4,Messi
-BasketballGame,McCamish,17:00,01:01:2020,6,70,5,NCAA
-BasketballGame,McCamish,17:00,01:01:2020,6,70,6,NBA
+FootballGame,Bobby Dodd,17:00,01-01-2020,6,70,3,Eminem
+FootballGame,Bobby Dodd,17:00,01-01-2020,6,70,4,Eminem
+SoccerGame,Levi's Stadium,19:00,01-01-2023,9,71,4,Messi
+BasketballGame,McCamish,17:00,01-01-2020,6,70,5,NCAA
+BasketballGame,McCamish,17:00,01-01-2020,6,70,6,NBA
