@@ -206,7 +206,11 @@ public class TicketsTests {
         gamesToAdd.add(new BasketballGame("McCamish", "17:00", "03-01-2020", 9, 9, 2, "NCAA"));
         gamesToAdd.add(new FootballGame("Levi's Stadium", "17:00", "03-01-2020", 9, 9, 2, "Drake"));
 
-        Tickets.purchaseTickets("TEMP_" + "purchaseTicketsWritingToEmptyFile.txt", gamesToAdd);
+        try {
+            Tickets.purchaseTickets("TEMP_" + "purchaseTicketsWritingToEmptyFile.txt", gamesToAdd);
+        } catch (InvalidTicketException ite) {
+            throw new TestFailedException("Your code threw an InvalidTicketException when it should not have!");
+        }
 
         String output = StringUtils.fileToString("TEMP_" + "purchaseTicketsWritingToEmptyFile.txt");
 
@@ -221,7 +225,11 @@ public class TicketsTests {
         gamesToAdd.add(new BasketballGame("McCamish", "17:00", "03-01-2020", 9, 9, 2, "NCAA"));
         gamesToAdd.add(new FootballGame("Levi's Stadium", "17:00", "03-01-2020", 9, 9, 2, "Drake"));
 
-        Tickets.purchaseTickets("TEMP_" + "purchaseTicketsAppend.txt", gamesToAdd);
+        try {
+            Tickets.purchaseTickets("TEMP_" + "purchaseTicketsAppend.txt", gamesToAdd);
+        } catch (InvalidTicketException ite) {
+            throw new TestFailedException("Your code threw an InvalidTicketException when it should not have!");
+        }
 
         String output = StringUtils.fileToString("TEMP_" + "purchaseTicketsAppend.txt");
 
@@ -236,11 +244,43 @@ public class TicketsTests {
         gamesToAdd.add(new BasketballGame("McCamish", "17:00", "03-01-2020", 9, 9, 0, "NCAA"));
         gamesToAdd.add(new FootballGame("Levi's Stadium", "17:00", "03-01-2020", 9, 9, 2, "Drake"));
 
-        Tickets.purchaseTickets("TEMP_" + "purchaseTicketsZeroSeats.txt", gamesToAdd);
+        try {
+            Tickets.purchaseTickets("TEMP_" + "purchaseTicketsZeroSeats.txt", gamesToAdd);
+        } catch (InvalidTicketException ite) {
+            throw new TestFailedException("Your code threw an InvalidTicketException when it should not have!");
+        }
 
         String output = StringUtils.fileToString("TEMP_" + "purchaseTicketsZeroSeats.txt");
 
         TestFunction.assertEqual(output, TxtTestData.purchaseTicketsZeroSeatsOutput);
+    }
+
+    @TestCase(name = "purchaseTickets: Throws an InvalidTicketException if an existing game is invalid.")
+    @Tip(description = "From HW06 Clarification Thread: https://edstem.org/us/courses/42939/discussion/3775943?comment=8757839\nMake sure you propagate this exception upwards!")
+    public void purchaseTicketsInvalidGameExists() throws TestFailedException {
+        ArrayList<SportsGame> gamesToAdd = new ArrayList<>();
+        gamesToAdd.add(new FootballGame("Bobby Dodd", "17:00", "03-01-2020", 9, 9, 2, "Drake"));
+        
+        Class<? extends Exception> exceptionType = InvalidTicketException.class;
+
+        try {
+            Tickets.purchaseTickets("TEMP_" + "purchaseTicketsInvalidGame.txt", gamesToAdd);
+            throw new TestFailedException(exceptionType.getSimpleName() + " did NOT occur when it was supposed to!");
+        } catch (Exception e) {
+            if (e.getClass() == exceptionType) {
+                // Test passed! Finish running method and return to the invoker
+            } else if (e.getClass() == TestFailedException.class && e.getMessage().contains("did NOT occur")) {
+
+                throw new TestFailedException("No exception occurred! The code should have thrown a " + exceptionType.getSimpleName());
+
+            } else {
+
+                throw new TestFailedException("Exception class difference! Received " + e.getClass().getSimpleName() + " but expected " + exceptionType.getSimpleName() + "."
+                    + "\nFull stack trace:\n" + StringUtils.stackTraceToString(e));
+
+            }
+        }
+        
     }
 
     @TestCase(name = "findTickets: File is null")

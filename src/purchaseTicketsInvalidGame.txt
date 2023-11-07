@@ -1,0 +1,4 @@
+FootballGame,Bobby Dodd,17:00,03-01-2020,9,9,2,Drake
+SoccerGame,McCamish,17:00,03-01-2020,9,9,2,NCAA
+FootballGame,Levi's Stadium,17:00,03-01-2020,9,9,2,Drake
+BasketballGame,McCamish,17:00,03-01-2020,9,9,2,NCAA

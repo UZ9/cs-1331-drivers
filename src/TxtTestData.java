@@ -1,9 +1,5 @@
 class TxtTestData {
-
-    @DeleteFileAfter
-    @InjectData(name = "TestData.txt")
-    public static String DATA = "";
-
+    
     @DeleteFileAfter
     @BeforeTest
     @InjectData(name = "retrieveGamesValidInputs.txt")
@@ -38,6 +34,11 @@ class TxtTestData {
     @BeforeTest
     @InjectData(name = "purchaseTicketsZeroSeatsOutput.txt")
     public static String purchaseTicketsZeroSeatsOutput = "";
+
+    @DeleteFileAfter
+    @BeforeTest
+    @InjectData(name = "purchaseTicketsInvalidGame.txt")
+    public static String purchaseTicketsInvalidGame = "";
 
     @DeleteFileAfter
     @BeforeTest
@@ -78,4 +79,5 @@ class TxtTestData {
     @BeforeTest
     @InjectData(name = "attendGameAdjacentOccurrencesOutput.txt")
     public static String attendGameAdjacentOccurrencesOutput = "";
+
 }
