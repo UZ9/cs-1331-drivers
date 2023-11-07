@@ -1,4 +1,7 @@
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.FileSystemException;
+import java.nio.file.Files;
 import java.util.List;
 
 class TestUtils {
@@ -58,6 +61,18 @@ class TestUtils {
 
     public static void deleteFile(String path) {
         File file = new File(path);
-        file.delete();
+
+        try {
+            Files.delete(file.toPath());
+        } catch (FileSystemException e) {
+
+            if (e.getMessage().contains("used by another process")) {
+                System.out.println(ColorUtils.formatColorString(AsciiColorCode.BRIGHT_YELLOW_BACKGROUND,
+                        AsciiColorCode.BRIGHT_WHITE_FOREGROUND, " DELETE FILE ERROR: \u00BB ")
+                        + " The program failed to delete " + file.getName() + ". Although this will not change the outcome of the tests, to solve this issue you must ensure ALL of your scanners have been properly closed, INCLUDING during an exception. This has only been recorded on Windows machines, but feel free to reach out if you encounter the issue!");
+
+            }
+        } catch (IOException e) {
+        }
     }
 }
