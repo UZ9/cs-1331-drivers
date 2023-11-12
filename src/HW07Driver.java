@@ -39,7 +39,7 @@ public class HW07Driver {
 
             TestManager.registerDataClasses(TxtTestData.class);
             TestManager.setTestFilter(filter);
-            TestManager.runTestsOn();
+            TestManager.runTestsOn(RestaurantTests.class);
 
         }
 

@@ -62,14 +62,18 @@ class StringUtils {
     }
 
     public static String arrayListToString(ArrayList<? extends Object> inputs) {
-        if (inputs.size() == 0) {
+        return arrayToString(inputs.toArray());
+    }
+
+    public static String arrayToString(Object[] inputs) {
+        if (inputs.length == 0) {
             return "";
         }
 
         StringBuilder builder = new StringBuilder();
 
-        for (int i = 0; i < inputs.size(); i++) {
-            builder.append(inputs.get(i).toString() + "\n");
+        for (int i = 0; i < inputs.length; i++) {
+            builder.append(inputs[i].toString() + "\n");
         }
 
         return builder.toString();
