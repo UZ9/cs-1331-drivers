@@ -22,7 +22,7 @@ with open(filename, "wb") as outfile:
                 line = str(line, 'UTF-8')
                 line = line.replace("public class", "class")
                 line = line.replace("public @interface", "@interface")
-                line = line.replace("HW06Driver", "Driver")
+                line = line.replace("HW07Driver", "Driver")
 
                 if inject_path != None:
                     regex = r"^(.*?)\""

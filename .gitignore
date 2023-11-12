@@ -23,6 +23,12 @@ InvalidTicketException.java
 SportsGame.java
 Tickets.java
 
+# HW07 source files
+Restaurant.java
+RecursionUtils.java
+SushiRoll.java
+Color.java
+
 # Ignores the assembled Driver file
 Driver.java
 
