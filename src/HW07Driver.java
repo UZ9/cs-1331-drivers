@@ -1,6 +1,6 @@
 import java.util.List;
 
-public class HW06Driver {
+public class HW07Driver {
     public static void main(String[] args) {
         StringUtils.printHorizontalLine();
 
@@ -27,11 +27,6 @@ public class HW06Driver {
             }
         }
 
-        // Reserved for later
-        // for (TerminalOption o : options) {
-        // o.process();
-        // }
-
         List<String> filter = runClassesOption.getInput();
 
         if (helpOption.received()) {
@@ -41,11 +36,10 @@ public class HW06Driver {
                 System.out.println("\tUsage: " + o.getUsage());
             }
         } else {
- // Add classes to test here
+
             TestManager.registerDataClasses(TxtTestData.class);
             TestManager.setTestFilter(filter);
-            TestManager.runTestsOn(SportsGameTests.class, BasketballGameTests.class, FootballGameTests.class,
-                    InvalidTicketExceptionTests.class, EqualsTests.class, TicketsTests.class);
+            TestManager.runTestsOn();
 
         }
 
