@@ -72,8 +72,8 @@ class StringUtils {
 
         StringBuilder builder = new StringBuilder();
 
-        for (int i = 0; i < inputs.length; i++) {
-            builder.append(inputs[i].toString() + "\n");
+        for (Object input : inputs) {
+            builder.append(input.toString()).append("\n");
         }
 
         return builder.toString();
@@ -82,17 +82,17 @@ class StringUtils {
     public static String fileToString(String path) throws FileNotFoundException {
         Scanner scanner = new Scanner(new File(path));
 
-        String output = "";
+        StringBuilder output = new StringBuilder();
 
         while (scanner.hasNextLine()) {
             String next = scanner.nextLine();
 
-            output += next + "\n";
+            output.append(next).append("\n");
         }
 
         scanner.close();
 
-        return output;
+        return output.toString();
     }
 
     /**

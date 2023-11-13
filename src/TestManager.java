@@ -82,7 +82,7 @@ class TestManager {
 
             try {
                 future.get(10, TimeUnit.SECONDS);
-            } catch (InterruptedException e) {
+            } catch (InterruptedException ignored) {
 
             } catch (ExecutionException e) {
                 e.getCause().printStackTrace();
@@ -120,13 +120,13 @@ class TestManager {
                 if (injectAnnotation != null) {
                     Scanner scanner = null;
 
-                    String output = "";
+                    StringBuilder output = new StringBuilder();
 
                     try {
                         scanner = new Scanner(new File(injectAnnotation.name()));
 
                         while (scanner.hasNextLine()) {
-                            output += scanner.nextLine() + "\n";
+                            output.append(scanner.nextLine()).append("\n");
                         }
                     } catch (FileNotFoundException e) {
                         System.out.println("COULDN'T FIND INJECT DATA FILE " + injectAnnotation.name());
@@ -142,7 +142,7 @@ class TestManager {
 
                     try {
                         // Set private static final
-                        f.set(null, output);
+                        f.set(null, output.toString());
                     } catch (Exception e) {
                         e.printStackTrace();
                         System.exit(-1);

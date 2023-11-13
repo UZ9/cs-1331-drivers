@@ -17,9 +17,7 @@ class TestFunction {
                 throw new TestFailedException("Test failed! Received null, but expected \"" + expected + "\"");
             }
         } else if (expected == null) {
-            if (actual != null) {
-                throw new TestFailedException("Test failed! Received \"" + actual + "\", but expected null");
-            }
+            throw new TestFailedException("Test failed! Received \"" + actual + "\", but expected null");
         } else {
 
             if (!actual.replaceAll("\n", System.lineSeparator()).equals(expected.replaceAll("\n", System.lineSeparator()))) {
@@ -30,7 +28,7 @@ class TestFunction {
         if (failed) {
             
             
-            String expectedString = (expected == null) ? "null" : "\"" + expected + "\"";
+            String expectedString = "\"" + expected + "\"";
             String coloredActual = StringUtils.getColorCodedDifference("\"" + actual + "\"", expectedString);
 
             

@@ -72,7 +72,7 @@ class TestUtils {
                         + " The program failed to delete " + file.getName() + ". Although this will not change the outcome of the tests, to solve this issue you must ensure ALL of your scanners have been properly closed, INCLUDING during an exception. This has only been recorded on Windows machines, but feel free to reach out if you encounter the issue!");
 
             }
-        } catch (IOException e) {
+        } catch (IOException ignored) {
         }
     }
 }
