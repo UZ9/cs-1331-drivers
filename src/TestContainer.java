@@ -93,7 +93,7 @@ class TestContainer implements Runnable {
                 
                 System.out.println(ColorUtils.formatColorString(AsciiColorCode.WHITE_BACKGROUND,
                         AsciiColorCode.RED_FOREGROUND,
-                        "\tYour code resulted in a StackOverflowException. This is almost certainly because of a recursive method stuck in an infinite loop."));
+                        "\tYour code resulted in a StackOverflowError. This is almost certainly because of a recursive method stuck in an infinite loop."));
 
             } else {
                 System.out.println(ColorUtils.formatColorString(AsciiColorCode.WHITE_BACKGROUND,
