@@ -133,6 +133,7 @@ public class RestaurantTests {
             new SushiRoll("Jimothy", Color.BLUE),
             new SushiRoll("Kangaroo", Color.GREEN),
             new SushiRoll("Loser", Color.GREEN),
+            new SushiRoll("Minneapolis", Color.GREEN)
         };
 
         TestFunction.assertEqual(StringUtils.arrayToString(Restaurant.mergeOrders(orders)), StringUtils.arrayToString(sortedRolls));
@@ -164,6 +165,7 @@ public class RestaurantTests {
             new SushiRoll("Jimothy", Color.BLUE),
             new SushiRoll("Kangaroo", Color.GREEN),
             new SushiRoll("Loser", Color.GREEN),
+            new SushiRoll("Minneapolis", Color.GREEN)
         };
 
         TestFunction.assertEqual(StringUtils.arrayToString(Restaurant.mergeOrders(orders)), StringUtils.arrayToString(sortedRolls));
@@ -195,6 +197,7 @@ public class RestaurantTests {
             new SushiRoll("Jimothy", Color.BLUE),
             new SushiRoll("Kangaroo", Color.GREEN),
             new SushiRoll("Loser", Color.GREEN),
+            new SushiRoll("Minneapolis", Color.GREEN)
         };
 
         TestFunction.assertEqual(StringUtils.arrayToString(Restaurant.mergeOrders(orders)), StringUtils.arrayToString(sortedRolls));
@@ -285,7 +288,7 @@ public class RestaurantTests {
             new SushiRoll("Jimothy", Color.BLUE),
         };
 
-        TestFunction.assertEqual(StringUtils.arrayToString(Restaurant.platesOfColor(rolls, Color.RED)), StringUtils.arrayToString(sortedRolls));
+        TestFunction.assertEqual(StringUtils.arrayToString(Restaurant.platesOfColor(rolls, Color.BLUE)), StringUtils.arrayToString(sortedRolls));
 
     }
 
@@ -323,6 +326,192 @@ public class RestaurantTests {
 
     }
 
+    @TestCase(name = "mergeSortRolls: duplicates")
+    @Tip(description = "The dupicate elements in the original array should be in the same order in the sorted array. This is called a stable attribute of a sort")
+    public void mergeSortDuplicates() throws TestFailedException {
+        //stability is not specified in the HW pdf but if you implement mergeSort right, it should be stable
+        SushiRoll[] orders = new SushiRoll[] {
+                new SushiRoll("Zebra", Color.RED),
+                new SushiRoll("Cantaloupe", Color.BLUE),
+                new SushiRoll("Cantaloupe", Color.RED),
+                new SushiRoll("Banana", Color.BLUE),
+                new SushiRoll("Cantaloupe", Color.GREEN),
+                new SushiRoll("Fan", Color.BLUE),};
 
+        SushiRoll[] sortedRolls = new SushiRoll[] {
+                new SushiRoll("Banana", Color.BLUE),
+                new SushiRoll("Cantaloupe", Color.BLUE),
+                new SushiRoll("Cantaloupe", Color.RED),
+                new SushiRoll("Cantaloupe", Color.GREEN),
+                new SushiRoll("Fan", Color.BLUE),
+                new SushiRoll("Zebra", Color.RED),};
+
+        TestFunction.assertEqual(StringUtils.arrayToString(Restaurant.mergeSortRolls(orders)), StringUtils.arrayToString(sortedRolls));
+
+    }
+
+
+
+    @TestCase(name = "totalPrice: Generic Test 1")
+    @Tip(description = "Check Color.java for each color's price value!")
+    public void totalPriceGeneric() throws TestFailedException {
+
+
+        SushiRoll[] rolls = new SushiRoll[] {
+                new SushiRoll("Apple", Color.RED),
+                new SushiRoll("Banana", Color.RED),
+                new SushiRoll("Door", Color.BLUE),
+                new SushiRoll("Cantaloupe", Color.BLUE),
+                new SushiRoll("Elephant", Color.GREEN),
+        };
+
+        TestFunction.assertEqual(Restaurant.totalPrice(rolls), 15.0);
+
+    }
+
+    @TestCase(name = "totalPrice: One item (on RED plate)")
+    @Tip(description = "Is your price for RED correct?")
+    public void totalPriceRed() throws TestFailedException {
+
+
+        SushiRoll[] rolls = new SushiRoll[] {
+                new SushiRoll("Red", Color.RED)
+        };
+
+        TestFunction.assertEqual(Restaurant.totalPrice(rolls), 2.5);
+
+    }
+
+    @TestCase(name = "totalPrice: One item (on GREEN plate)")
+    @Tip(description = "Is your price for GREEN correct?")
+    public void totalPriceGreen() throws TestFailedException {
+
+
+        SushiRoll[] rolls = new SushiRoll[] {
+                new SushiRoll("Green", Color.GREEN)
+        };
+
+        TestFunction.assertEqual(Restaurant.totalPrice(rolls), 3.0);
+
+    }
+
+    @TestCase(name = "totalPrice: One item (on BLUE plate)")
+    @Tip(description = "Is your price for BLUE correct?")
+    public void totalPriceBlue() throws TestFailedException {
+
+
+        SushiRoll[] rolls = new SushiRoll[] {
+                new SushiRoll("BLUE", Color.BLUE)
+        };
+
+        TestFunction.assertEqual(Restaurant.totalPrice(rolls), 3.5);
+
+    }
+
+    @TestCase(name = "totalPrice: Empty SushiRoll[]")
+    @Tip(description = "How much do 0 SushiRolls cost?")
+    public void totalPriceEmpty() throws TestFailedException {
+        SushiRoll[] rolls = new SushiRoll[] {};
+        TestFunction.assertEqual(Restaurant.totalPrice(rolls), 0.0);
+
+    }
+
+    @TestCase(name = "totalPrice: Test single element")
+    @Tip(description = "How should your recursive function work when there is only one element?")
+    public void totalPriceSingle() throws TestFailedException {
+        SushiRoll[] rolls = new SushiRoll[] {new SushiRoll("Meh", Color.RED)};
+        TestFunction.assertEqual(Restaurant.totalPrice(rolls), 2.5);
+    }
+
+    @TestCase(name = "flip: Even number of inputs (6)")
+    @Tip(description = "Make sure that all six inputs are reversed!")
+    public void flipGeneric() throws TestFailedException {
+
+
+        SushiRoll[] rolls = new SushiRoll[] {
+                new SushiRoll("Avocado", Color.RED),
+                new SushiRoll("Banana", Color.RED),
+                new SushiRoll("Dragon", Color.BLUE),
+                new SushiRoll("Maki", Color.BLUE),
+                new SushiRoll("Tobiko", Color.GREEN),
+                new SushiRoll("Unagi", Color.GREEN),
+        };
+
+        SushiRoll[] flipped = new SushiRoll[] {
+                new SushiRoll("Unagi", Color.GREEN),
+                new SushiRoll("Tobiko", Color.GREEN),
+                new SushiRoll("Maki", Color.BLUE),
+                new SushiRoll("Dragon", Color.BLUE),
+                new SushiRoll("Banana", Color.RED),
+                new SushiRoll("Avocado", Color.RED),
+        };
+
+        Restaurant.flip(rolls);
+
+        TestFunction.assertEqual(StringUtils.arrayToString(rolls), StringUtils.arrayToString(flipped));
+    }
+
+    @TestCase(name = "flip: Odd number of inputs (7)")
+    @Tip(description = "Make sure that all six inputs are reversed!")
+    public void flipOdd() throws TestFailedException {
+
+
+        SushiRoll[] rolls = new SushiRoll[] {
+                new SushiRoll("Avocado", Color.RED),
+                new SushiRoll("Banana", Color.RED),
+                new SushiRoll("Dragon", Color.BLUE),
+                new SushiRoll("Hokigai", Color.BLUE),
+                new SushiRoll("Maki", Color.BLUE),
+                new SushiRoll("Tobiko", Color.GREEN),
+                new SushiRoll("Unagi", Color.GREEN),
+        };
+
+        SushiRoll[] flipped = new SushiRoll[] {
+                new SushiRoll("Unagi", Color.GREEN),
+                new SushiRoll("Tobiko", Color.GREEN),
+                new SushiRoll("Maki", Color.BLUE),
+                new SushiRoll("Hokigai", Color.BLUE),
+                new SushiRoll("Dragon", Color.BLUE),
+                new SushiRoll("Banana", Color.RED),
+                new SushiRoll("Avocado", Color.RED),
+        };
+
+        Restaurant.flip(rolls);
+
+        TestFunction.assertEqual(StringUtils.arrayToString(rolls), StringUtils.arrayToString(flipped));
+    }
+
+    @TestCase(name = "flip: Empty List")
+    @Tip(description = "What should flip() do when given an empty array?")
+    public void flipEmpty() throws TestFailedException {
+
+
+        SushiRoll[] rolls = new SushiRoll[] {};
+
+        SushiRoll[] flipped = new SushiRoll[] {};
+
+        Restaurant.flip(rolls);
+
+        TestFunction.assertEqual(StringUtils.arrayToString(rolls), StringUtils.arrayToString(flipped));
+
+    }
+
+    @TestCase(name = "flip: 1 Element List")
+    @Tip(description = "Should be the same as the original")
+    public void flipTwo() throws TestFailedException {
+
+
+        SushiRoll[] rolls = new SushiRoll[] {new SushiRoll("Maki", Color.BLUE)
+        };
+
+        SushiRoll[] flipped = new SushiRoll[] {new SushiRoll("Maki", Color.BLUE),
+        };
+
+        Restaurant.flip(rolls);
+
+        TestFunction.assertEqual(StringUtils.arrayToString(rolls), StringUtils.arrayToString(flipped));
+
+    }
+    
 
 }
