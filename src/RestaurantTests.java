@@ -307,17 +307,17 @@ public class RestaurantTests {
         SushiRoll[] rolls = new SushiRoll[] {
             new SushiRoll("Apple", Color.RED),
             new SushiRoll("Banana", Color.RED),
-            new SushiRoll("Door", Color.BLUE),
             new SushiRoll("Cantaloupe", Color.BLUE),
+            new SushiRoll("Door", Color.BLUE),
             new SushiRoll("Elephant", Color.GREEN),
-            new SushiRoll("Help", Color.GREEN),
-            new SushiRoll("Green", Color.RED),
-            new SushiRoll("Indiana", Color.RED),
-            new SushiRoll("Minneapolis", Color.GREEN),
             new SushiRoll("Fan", Color.BLUE),
+            new SushiRoll("Green", Color.RED),
+            new SushiRoll("Help", Color.GREEN),
+            new SushiRoll("Indiana", Color.RED),
             new SushiRoll("Jimothy", Color.BLUE),
             new SushiRoll("Loser", Color.GREEN),
             new SushiRoll("Kangaroo", Color.GREEN),
+            new SushiRoll("Minneapolis", Color.GREEN),
         };
 
         SushiRoll[] sortedRolls = new SushiRoll[] {
