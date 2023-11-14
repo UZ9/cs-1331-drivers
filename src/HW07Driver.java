@@ -1,5 +1,11 @@
 import java.util.List;
 
+import com.cs1331.drivers.terminal.TerminalOption;
+import com.cs1331.drivers.testing.TestManager;
+import com.cs1331.drivers.utils.AsciiColorCode;
+import com.cs1331.drivers.utils.ColorUtils;
+import com.cs1331.drivers.utils.StringUtils;
+
 public class HW07Driver {
     public static void main(String[] args) {
         StringUtils.printHorizontalLine();
@@ -37,7 +43,6 @@ public class HW07Driver {
             }
         } else {
 
-            TestManager.registerDataClasses(TxtTestData.class);
             TestManager.setTestFilter(filter);
             TestManager.runTestsOn(RestaurantTests.class);
 

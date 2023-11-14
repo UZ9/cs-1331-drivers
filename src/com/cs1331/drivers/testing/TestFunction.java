@@ -1,7 +1,12 @@
+package com.cs1331.drivers.testing;
 import java.util.List;
 import java.util.function.Consumer;
 
-class TestFunction {
+import com.cs1331.drivers.exception.TestFailedException;
+import com.cs1331.drivers.utils.StringUtils;
+import com.cs1331.drivers.utils.TestUtils;
+
+public class TestFunction {
     /**
      * Detects if the given Strings do not have the same content (case-sensitive)
      *

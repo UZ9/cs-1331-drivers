@@ -1,7 +1,8 @@
+package com.cs1331.drivers.utils;
 /**
  * A generic class used for holding two values that might be related
  */
-class Tuple<X, Y> {
+public class Tuple<X, Y> {
     /**
      * The first element
      */

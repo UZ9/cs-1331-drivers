@@ -1,10 +1,12 @@
+package com.cs1331.drivers.utils;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileSystemException;
 import java.nio.file.Files;
 import java.util.List;
 
-class TestUtils {
+public class TestUtils {
 
     /**
      * Returns either 1, 0, or -1 depending on the sign of the input.

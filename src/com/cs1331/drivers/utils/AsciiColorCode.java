@@ -1,4 +1,6 @@
-final class AsciiColorCode {
+package com.cs1331.drivers.utils;
+
+public final class AsciiColorCode {
 
     public static final String RESET_COLOR = "\033[0m";
 

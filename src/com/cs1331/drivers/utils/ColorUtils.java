@@ -1,4 +1,6 @@
-class ColorUtils {
+package com.cs1331.drivers.utils;
+
+public class ColorUtils {
     /**
      * Formats a string to have an ASCII background in terminal.
      * 

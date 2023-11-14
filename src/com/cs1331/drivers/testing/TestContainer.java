@@ -1,6 +1,19 @@
+package com.cs1331.drivers.testing;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
+
+import com.cs1331.drivers.annotations.AfterTest;
+import com.cs1331.drivers.annotations.BeforeTest;
+import com.cs1331.drivers.annotations.TestCase;
+import com.cs1331.drivers.annotations.Tip;
+import com.cs1331.drivers.exception.TestFailedException;
+import com.cs1331.drivers.utils.AsciiColorCode;
+import com.cs1331.drivers.utils.ColorUtils;
+import com.cs1331.drivers.utils.StringUtils;
+import com.cs1331.drivers.utils.Tuple;
+
 import java.util.ArrayList;
 
 /**
@@ -8,7 +21,7 @@ import java.util.ArrayList;
  * TestContainer will latch onto a Class<?> and attempt to run any methods
  * labeled as test functions, e.g. @TestCase or @BeforeTest
  */
-class TestContainer implements Runnable {
+public class TestContainer implements Runnable {
     /**
      * The class belonging to the TestContainer
      */

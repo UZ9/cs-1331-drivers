@@ -1,10 +1,12 @@
+package com.cs1331.drivers.utils;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-class StringUtils {
+public class StringUtils {
     /**
      * The ASCII character to use for horizontal lines
      */

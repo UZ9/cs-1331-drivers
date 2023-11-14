@@ -1,12 +1,17 @@
-import glob
 import os
 import re
+from pathlib import Path
 
 filename = "../Driver.java"
 
+JAVA_PACKAGE_NAME = "com.cs1331.drivers" 
+
 os.makedirs(os.path.dirname(filename), exist_ok=True)
 
-read_files = glob.glob("../src/*.java")
+read_files = list(Path("../src/").rglob("*.java"))
+
+for fi in read_files:
+    print("Found " + str(fi))
 
 with open(filename, "wb") as outfile:
     code_lines = []
@@ -21,7 +26,9 @@ with open(filename, "wb") as outfile:
             for line in infile:
                 line = str(line, 'UTF-8')
                 line = line.replace("public class", "class")
+                line = line.replace("public enum", "enum")
                 line = line.replace("public @interface", "@interface")
+                line = line.replace("public final", "final")
                 line = line.replace("HW07Driver", "Driver")
 
                 if inject_path != None:
@@ -51,10 +58,16 @@ with open(filename, "wb") as outfile:
                     code_lines.append(("\t//AUTOMATICALLY EXTRACTED FROM " + match + "\n").encode())
                     continue
 
-                if not line in import_lines:
+                if not line.strip() in import_lines:
+                    if JAVA_PACKAGE_NAME in line:
+                        continue
+
 
                     if line.startswith("import"):
-                        import_lines.append(line);
+
+                        print(line)
+                        print(str(import_lines))
+                        import_lines.append(line.strip());
                         outfile.write(line.encode())
 
                         continue

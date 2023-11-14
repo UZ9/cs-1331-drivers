@@ -1,10 +1,11 @@
+package com.cs1331.drivers.terminal;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Represents a potential option the terminal can accept as an input
  */
-class TerminalOption {
+public class TerminalOption {
     /**
      * The flag, denoted by '-<some sort of character>' the terminal will look for
      */

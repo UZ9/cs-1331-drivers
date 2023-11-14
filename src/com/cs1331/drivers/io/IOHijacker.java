@@ -1,9 +1,10 @@
+package com.cs1331.drivers.io;
 import java.io.PrintStream;
 
 /**
  * A helper class used for redirecting System.out to check against
  */
-class IOHijacker {
+public class IOHijacker {
     private static IOHijacker INSTANCE;
 
     private String log = "";

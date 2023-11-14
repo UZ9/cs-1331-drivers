@@ -1,3 +1,4 @@
+package com.cs1331.drivers.testing;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Field;
@@ -12,7 +13,12 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 
-class TestManager {
+import com.cs1331.drivers.annotations.InjectData;
+import com.cs1331.drivers.utils.AsciiColorCode;
+import com.cs1331.drivers.utils.ColorUtils;
+import com.cs1331.drivers.utils.StringUtils;
+
+public class TestManager {
     protected volatile static AtomicInteger classTests = new AtomicInteger();
     protected volatile static AtomicInteger classTestsFailed = new AtomicInteger();
 
