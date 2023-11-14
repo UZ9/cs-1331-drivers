@@ -315,8 +315,8 @@ public class RestaurantTests {
             new SushiRoll("Help", Color.GREEN),
             new SushiRoll("Indiana", Color.RED),
             new SushiRoll("Jimothy", Color.BLUE),
-            new SushiRoll("Loser", Color.GREEN),
             new SushiRoll("Kangaroo", Color.GREEN),
+            new SushiRoll("Loser", Color.GREEN),
             new SushiRoll("Minneapolis", Color.GREEN),
         };
 
