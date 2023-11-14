@@ -10,6 +10,25 @@ os.makedirs(os.path.dirname(filename), exist_ok=True)
 
 read_files = list(Path("../src/").rglob("*.java"))
 
+header = """
+/*                  
+                                                                   ▄▄                             
+  ▄▄█▀▀▀█▄█▄█▀▀▀█▄█                           ▀███▀▀▀██▄           ██                             
+▄██▀     ▀███    ▀█▄▄▄                    ▄▄▄   ██    ▀██▄                                        
+██▀       ▀███▄   ▀███   ██▀▀█▄   ██▀▀█▄ ▀███   ██     ▀█████▄███▀███ ▀██▀   ▀██▀  ▄▄█▀██▀███▄███ 
+██          ▀█████▄ ██  ███  ▀██ ███  ▀██  ██   ██      ██ ██▀ ▀▀  ██   ██   ▄█   ▄█▀   ██ ██▀ ▀▀ 
+██▄       ▄     ▀██ ██       ▄██      ▄██  ██   ██     ▄██ ██      ██    ██ ▄█    ██▀▀▀▀▀▀ ██     
+▀██▄     ▄▀█     ██ ██     ▀▀██▄    ▀▀██▄  ██   ██    ▄██▀ ██      ██     ███     ██▄    ▄ ██     
+  ▀▀█████▀█▀█████▀▄████▄      ██       ██▄████▄████████▀ ▄████▄  ▄████▄    █       ▀█████▀████▄   
+                       ███  ▄█▀ ███  ▄█▀                                                          
+                        █████▀   █████▀                                                           
+
+    Cheers,
+    - Ryder Johnson
+    - Justin Hwang
+ */
+"""
+
 for fi in read_files:
     print("Found " + str(fi))
 
@@ -18,6 +37,8 @@ with open(filename, "wb") as outfile:
     import_lines = []
 
     inject_path = None
+
+    outfile.write(header.encode())
 
     for f in read_files:
         with open(f, "rb") as infile:
