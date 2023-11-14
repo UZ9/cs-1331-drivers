@@ -83,11 +83,11 @@ class TestContainer implements Runnable {
             if (e.getCause() instanceof TestFailedException) {
                 TestFailedException tfe = (TestFailedException) e.getCause();
 
-                System.out.println("\t" + tfe.getMessage());
+                System.out.println(StringUtils.formatIndented(tfe.getMessage()));
 
                 if (tip != null)
-                    System.out.printf("\t%s\n", ColorUtils.formatColorString(AsciiColorCode.BRIGHT_WHITE_BACKGROUND,
-                            AsciiColorCode.BLACK_FOREGROUND, "HINT: " + tip.description()));
+                    System.out.print(ColorUtils.formatColorString(AsciiColorCode.BRIGHT_WHITE_BACKGROUND,
+                            AsciiColorCode.BLACK_FOREGROUND, StringUtils.formatIndented(String.format("%s\n", "HINT: " + tip.description()))));
             } else if (e.getCause() instanceof StackOverflowError) {
                 e.printStackTrace();
                 

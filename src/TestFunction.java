@@ -95,7 +95,7 @@ class TestFunction {
         boolean failed = (Math.abs(actual - expected) > ALLOWABLE_ERROR);
 
         if (failed) {
-            throw new TestFailedException("Double value difference: Received " + actual + ", expected " + expected);
+            throw new TestFailedException("Double value difference: \n\tReceived " + actual + ", expected " + expected);
         }
     }
 

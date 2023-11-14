@@ -43,12 +43,13 @@ class StringUtils {
 
     /**
      * Util that a stack trace into a printable string.
+     * 
      * @param e Exception to print the stacktrace of
      * @return
      */
     public static String stackTraceToString(Throwable e) {
         StackTraceElement[] stackTrace = e.getStackTrace();
-        
+
         if (stackTrace.length == 0) {
             return "No stack trace.";
         }
@@ -98,6 +99,7 @@ class StringUtils {
     /**
      * Prints the given String to the file at the path.
      * THIS METHOD WILL OVERWRITE ANY DATA.
+     * 
      * @param path Path to write at.
      * @param data Data to write to the file.
      * @throws FileNotFoundException
@@ -113,9 +115,11 @@ class StringUtils {
     }
 
     /**
-     * Returns a modified version of 'actual', where the first character that differs from
+     * Returns a modified version of 'actual', where the first character that
+     * differs from
      * 'expected' is highlighted RED.
-     * @param actual The 'actual' String
+     * 
+     * @param actual   The 'actual' String
      * @param expected The 'expected' String to compare against
      * @return
      */
@@ -132,7 +136,8 @@ class StringUtils {
             if (actualChar == expected.charAt(i)) {
                 colored.append(actual.charAt(i));
             } else {
-                colored.append(ColorUtils.formatColorString(AsciiColorCode.RED_BACKGROUND, AsciiColorCode.WHITE_FOREGROUND, actualChar + ""));
+                colored.append(ColorUtils.formatColorString(AsciiColorCode.RED_BACKGROUND,
+                        AsciiColorCode.WHITE_FOREGROUND, actualChar + ""));
                 colored.append(actual.substring(i + 1));
                 break;
             }
@@ -140,6 +145,34 @@ class StringUtils {
         }
 
         return colored.toString();
-        
+
+    }
+
+    public static String formatIndented(String s) {
+        String[] split = s.split("\n");
+
+        StringBuilder output = new StringBuilder();
+
+        for (int i = 0; i < split.length - 1; i++) {
+            output.append(formatSingleLine(split[i]) + "\n");
+        }
+
+        output.append(formatSingleLine(split[split.length - 1]));
+
+        return output.toString() + "\n";
+    }
+
+    private static String formatSingleLine(String s) {
+        int currentLength = 0;
+
+        StringBuilder builder = new StringBuilder("\t" + s);
+
+        while (currentLength + HORIZONTAL_LINE_LENGTH < builder.length()
+                && (currentLength = builder.lastIndexOf(" ", currentLength + HORIZONTAL_LINE_LENGTH)) != -1) {
+            
+            builder.replace(currentLength, currentLength + 1, "\n\t");
+        }
+
+        return builder.toString();
     }
 }

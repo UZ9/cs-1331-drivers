@@ -35,6 +35,6 @@ class ColorUtils {
      * @return The colored string
      */
     public static String formatColorString(String background, String foreground, String s) {
-        return foreground + background + s + AsciiColorCode.RESET_COLOR;
+        return foreground + background + s.replace("\n", AsciiColorCode.RESET_COLOR + "\n" + foreground + background) + AsciiColorCode.RESET_COLOR;
     }
 }
