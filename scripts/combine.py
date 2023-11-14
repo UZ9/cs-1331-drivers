@@ -41,9 +41,6 @@ with open(filename, "wb") as outfile:
 
                         new_line = match + " \"" + inject_lines + "\\n\";"
 
-                        print("New:")
-                        print(new_line)
-
                         code_lines.append(new_line.encode())
 
                     inject_path = None
@@ -65,8 +62,6 @@ with open(filename, "wb") as outfile:
 
                     if line.startswith("import"):
 
-                        print(line)
-                        print(str(import_lines))
                         import_lines.append(line.strip());
                         outfile.write(line.encode())
 
