@@ -71,13 +71,13 @@ class TestContainer implements Runnable {
             m.invoke(instance);
 
             System.out.println(ColorUtils.formatColorString(AsciiColorCode.BRIGHT_GREEN_BACKGROUND,
-                    AsciiColorCode.BRIGHT_WHITE_FOREGROUND, " PASSED: \u00BB ") + " "
+                    AsciiColorCode.BRIGHT_WHITE_FOREGROUND, " PASSED \u00BB ") + " "
                     + testCase.name());
 
             TestManager.submitTest(0);
         } catch (InvocationTargetException e) {
             System.out.println(ColorUtils.formatColorString(AsciiColorCode.BRIGHT_RED_BACKGROUND,
-                    AsciiColorCode.BRIGHT_WHITE_FOREGROUND, " FAILED: \u00BB ") + " "
+                    AsciiColorCode.BRIGHT_WHITE_FOREGROUND, " FAILED \u00BB ") + " "
                     + testCase.name());
 
             if (e.getCause() instanceof TestFailedException) {

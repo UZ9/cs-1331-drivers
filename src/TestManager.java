@@ -90,7 +90,7 @@ class TestManager {
                 future.cancel(true);
 
                 System.out.println(ColorUtils.formatColorString(AsciiColorCode.BRIGHT_RED_BACKGROUND,
-                        AsciiColorCode.BRIGHT_WHITE_FOREGROUND, " FAILED: \u00BB ")
+                        AsciiColorCode.BRIGHT_WHITE_FOREGROUND, " FAILED \u00BB ")
                         + " A test failed by exceeding the time limit. You likely have an infinite loop somewhere.");
 
                 System.exit(-1);
