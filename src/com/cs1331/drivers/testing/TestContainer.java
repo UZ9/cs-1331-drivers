@@ -98,10 +98,7 @@ public class TestContainer implements Runnable {
 
                 System.out.println(StringUtils.formatIndented(tfe.getMessage()));
 
-                if (tip != null)
-                    System.out.print(ColorUtils.formatColorString(AsciiColorCode.BRIGHT_WHITE_BACKGROUND,
-                            AsciiColorCode.BLACK_FOREGROUND, StringUtils.formatIndented(String.format("%s\n", "HINT: " + tip.description()))));
-            } else if (e.getCause() instanceof StackOverflowError) {
+                } else if (e.getCause() instanceof StackOverflowError) {
                 e.printStackTrace();
                 
                 System.out.println(ColorUtils.formatColorString(AsciiColorCode.WHITE_BACKGROUND,
@@ -115,6 +112,11 @@ public class TestContainer implements Runnable {
 
                 e.getCause().printStackTrace();
             }
+
+            if (tip != null)
+                    System.out.print(ColorUtils.formatColorString(AsciiColorCode.BRIGHT_WHITE_BACKGROUND,
+                            AsciiColorCode.BLACK_FOREGROUND, StringUtils.formatIndented(String.format("%s\n", "HINT: " + tip.description()))));
+            
 
             return false;
         } catch (IllegalAccessException e) {
