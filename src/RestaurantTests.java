@@ -242,17 +242,17 @@ public class RestaurantTests {
         SushiRoll[] rolls = new SushiRoll[] {
             new SushiRoll("Apple", Color.RED),
             new SushiRoll("Banana", Color.RED),
-            new SushiRoll("Door", Color.BLUE),
             new SushiRoll("Cantaloupe", Color.BLUE),
+            new SushiRoll("Door", Color.BLUE),
             new SushiRoll("Elephant", Color.GREEN),
-            new SushiRoll("Help", Color.GREEN),
-            new SushiRoll("Green", Color.RED),
-            new SushiRoll("Indiana", Color.RED),
-            new SushiRoll("Minneapolis", Color.GREEN),
             new SushiRoll("Fan", Color.BLUE),
+            new SushiRoll("Green", Color.RED),
+            new SushiRoll("Help", Color.GREEN),
+            new SushiRoll("Indiana", Color.RED),
             new SushiRoll("Jimothy", Color.BLUE),
             new SushiRoll("Loser", Color.GREEN),
             new SushiRoll("Kangaroo", Color.GREEN),
+            new SushiRoll("Minneapolis", Color.GREEN),
         };
 
         SushiRoll[] sortedRolls = new SushiRoll[] {
@@ -274,17 +274,17 @@ public class RestaurantTests {
         SushiRoll[] rolls = new SushiRoll[] {
             new SushiRoll("Apple", Color.RED),
             new SushiRoll("Banana", Color.RED),
-            new SushiRoll("Door", Color.BLUE),
             new SushiRoll("Cantaloupe", Color.BLUE),
+            new SushiRoll("Door", Color.BLUE),
             new SushiRoll("Elephant", Color.GREEN),
-            new SushiRoll("Help", Color.GREEN),
-            new SushiRoll("Green", Color.RED),
-            new SushiRoll("Indiana", Color.RED),
-            new SushiRoll("Minneapolis", Color.GREEN),
             new SushiRoll("Fan", Color.BLUE),
+            new SushiRoll("Green", Color.RED),
+            new SushiRoll("Help", Color.GREEN),
+            new SushiRoll("Indiana", Color.RED),
             new SushiRoll("Jimothy", Color.BLUE),
             new SushiRoll("Loser", Color.GREEN),
             new SushiRoll("Kangaroo", Color.GREEN),
+            new SushiRoll("Minneapolis", Color.GREEN),
         };
 
         SushiRoll[] sortedRolls = new SushiRoll[] {
@@ -327,6 +327,41 @@ public class RestaurantTests {
             new SushiRoll("Loser", Color.GREEN),
             new SushiRoll("Minneapolis", Color.GREEN),
         };
+
+        TestFunction.assertEqual(StringUtils.arrayToString(Restaurant.platesOfColor(rolls, Color.GREEN)), StringUtils.arrayToString(sortedRolls));
+
+    }
+
+    @TestCase(name = "platesOfColor: None have specified color")
+    @Tip(description = "If no plates match the specified color, what should platesOfColor() return?")
+    public void platesOfColorNone() throws TestFailedException {
+
+        
+        SushiRoll[] rolls = new SushiRoll[] {
+            new SushiRoll("Apple", Color.RED),
+            new SushiRoll("Banana", Color.RED),
+            new SushiRoll("Door", Color.BLUE),
+            new SushiRoll("Cantaloupe", Color.BLUE),
+            new SushiRoll("Green", Color.RED),
+            new SushiRoll("Indiana", Color.RED),
+            new SushiRoll("Fan", Color.BLUE),
+            new SushiRoll("Jimothy", Color.BLUE),
+        };
+
+        SushiRoll[] sortedRolls = new SushiRoll[] {};
+
+        TestFunction.assertEqual(StringUtils.arrayToString(Restaurant.platesOfColor(rolls, Color.GREEN)), StringUtils.arrayToString(sortedRolls));
+
+    }
+
+    @TestCase(name = "platesOfColor: Empty list of SushiRoll")
+    @Tip(description = "Although you may assume the given array is not null or contain null elements, you may not assume that it is not empty. Make sure to handle this case!")
+    public void platesOfColorEmpty() throws TestFailedException {
+
+        
+        SushiRoll[] rolls = new SushiRoll[] {};
+
+        SushiRoll[] sortedRolls = new SushiRoll[] {};
 
         TestFunction.assertEqual(StringUtils.arrayToString(Restaurant.platesOfColor(rolls, Color.GREEN)), StringUtils.arrayToString(sortedRolls));
 
