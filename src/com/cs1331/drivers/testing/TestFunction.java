@@ -151,6 +151,9 @@ public class TestFunction {
             throw new TestFailedException(exceptionType.getSimpleName() + " did NOT occur when it was supposed to!");
         } catch (Exception e) {
             if (e.getClass() == exceptionType) {
+                if (e.getMessage() == null || e.getMessage().isBlank()) {
+                    throw new TestFailedException("Make sure you're setting a descriptive message for your " + e.getClass().getSimpleName() + "!");
+                }
                 // Test passed! Finish running method and return to the invoker
             } else if (e.getClass() == TestFailedException.class && e.getMessage().contains("did NOT occur")) {
 
