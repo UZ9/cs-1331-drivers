@@ -50,7 +50,7 @@ with open(filename, "wb") as outfile:
                 line = line.replace("public enum", "enum")
                 line = line.replace("public @interface", "@interface")
                 line = line.replace("public final", "final")
-                line = line.replace("HW07Driver", "Driver")
+                line = line.replace("HW08Driver", "Driver")
 
                 if inject_path != None:
                     regex = r"^(.*?)\""

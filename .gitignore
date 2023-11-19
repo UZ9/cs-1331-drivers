@@ -29,6 +29,12 @@ RecursionUtils.java
 SushiRoll.java
 Color.java
 
+# HW08 source files
+List.java
+Node.java
+LinkedListIterator.java
+LinkedList.java
+
 # Ignores the assembled Driver file
 Driver.java
 

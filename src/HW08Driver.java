@@ -6,7 +6,7 @@ import com.cs1331.drivers.utils.AsciiColorCode;
 import com.cs1331.drivers.utils.ColorUtils;
 import com.cs1331.drivers.utils.StringUtils;
 
-public class HW07Driver {
+public class HW08Driver {
     public static void main(String[] args) {
         StringUtils.printHorizontalLine();
 
@@ -44,7 +44,7 @@ public class HW07Driver {
         } else {
 
             TestManager.setTestFilter(filter);
-            TestManager.runTestsOn(RestaurantTests.class);
+            TestManager.runTestsOn(NodeTests.class, LinkedListIteratorTests.class, LinkedListTests.class);
 
         }
 
