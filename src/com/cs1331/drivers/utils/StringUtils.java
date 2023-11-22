@@ -58,7 +58,7 @@ public class StringUtils {
 
         StringBuilder sb = new StringBuilder(stackTrace[0].toString());
         for (int i = 1; i < stackTrace.length; i++) {
-            sb.append("\n    ");
+            sb.append("\n\t");
             sb.append(stackTrace[i].toString());
         }
         return sb.toString();
@@ -162,6 +162,7 @@ public class StringUtils {
     }
 
     public static String formatIndented(String s) {
+
         String[] split = s.split("\n");
 
         StringBuilder output = new StringBuilder();
@@ -181,7 +182,7 @@ public class StringUtils {
         StringBuilder builder = new StringBuilder("\t" + s);
 
         while (currentLength + HORIZONTAL_LINE_LENGTH < builder.length()
-                && (currentLength = builder.lastIndexOf(" ", currentLength + HORIZONTAL_LINE_LENGTH)) != -1) {
+                && (currentLength = builder.indexOf(" ", currentLength + HORIZONTAL_LINE_LENGTH)) != -1) {
             
             builder.replace(currentLength, currentLength + 1, "\n\t");
         }

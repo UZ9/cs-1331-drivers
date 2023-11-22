@@ -157,11 +157,12 @@ public class TestContainer implements Runnable {
                 }
             }
 
-            for (Tuple<Method, BeforeTest> tuple : beforeTest) {
-                executeFunction(tuple.first);
-            }
-
             for (Tuple<Method, TestCase> tuple : testMethods) {
+
+                for (Tuple<Method, BeforeTest> beforeTuple : beforeTest) {
+                    executeFunction(beforeTuple.first);
+                }
+
                 boolean result = executeTestCase(tuple);
 
                 classTests++;
