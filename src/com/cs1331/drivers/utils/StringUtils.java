@@ -65,10 +65,17 @@ public class StringUtils {
     }
 
     public static String arrayListToString(ArrayList<? extends Object> inputs) {
-        return arrayToString(inputs.toArray());
+        return arrayToString(inputs.toArray(), ",");
     }
 
-    public static String arrayToString(Object[] inputs) {
+    /**
+     * Returns the Array as a String using the toString() method of each item.
+     * The resulting String has an itemSeparator between each element.
+     * @param inputs The Array to convert to String.
+     * @param itemSeparator The String to put BETWEEN each item.
+     * @return
+     */
+    public static String arrayToString(Object[] inputs, String itemSeparator) {
         if (inputs.length == 0) {
             return "";
         }
@@ -76,10 +83,14 @@ public class StringUtils {
         StringBuilder builder = new StringBuilder();
 
         for (Object input : inputs) {
-            builder.append(input.toString()).append("\n");
+            builder.append(input.toString()).append(itemSeparator);
         }
 
         return builder.toString();
+    }
+
+    public static String arrayToString(Object[] inputs) {
+        return arrayToString(inputs, ",");
     }
 
     public static String fileToString(String path) throws FileNotFoundException {

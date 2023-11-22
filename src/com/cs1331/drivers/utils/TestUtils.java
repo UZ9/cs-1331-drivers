@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileSystemException;
 import java.nio.file.Files;
+import java.util.Iterator;
 import java.util.List;
 
 public class TestUtils {
@@ -76,5 +77,28 @@ public class TestUtils {
             }
         } catch (IOException ignored) {
         }
+    }
+
+    /**
+     * Converts the given Iterable to String by calling the toString() method of each
+     * element in the iterator, in the order given, with commas (but no spaces) between
+     * each element.
+     * @param iterable The Iterable object to be converted to String.
+     * @return The combined String, in the aforementioned format.
+     */
+    public static String iterableToString(Iterable<?> iterable) {
+        Iterator<?> iterator = iterable.iterator();
+        if (!iterator.hasNext()) { // If the iterator is empty, then return nothing
+            return "";
+        }
+        
+        StringBuilder builder = new StringBuilder();
+        builder.append(iterator.next().toString());
+        
+        while (iterator.hasNext()) {
+            builder.append("," + iterator.next().toString());
+        }
+
+        return builder.toString();
     }
 }

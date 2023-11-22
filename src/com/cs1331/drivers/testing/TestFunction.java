@@ -1,4 +1,5 @@
 package com.cs1331.drivers.testing;
+import java.util.Iterator;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -47,6 +48,35 @@ public class TestFunction {
             throw new TestFailedException(
                     "Strings different! Received " + coloredActual + " but expected " + expectedString);
         }
+    }
+
+    public static void assertEqual(Iterable<?> actual, Iterable<?> expected) throws TestFailedException {
+
+        boolean failed = false;
+
+        if (actual == null || expected == null) {
+            failed = actual == expected;
+            throw new TestFailedException(
+                    "List different! Received \"" + actual == null ? "null" : TestUtils.iterableToString(actual) + "\", expected \"" + expected == null ? "null" : TestUtils.iterableToString(expected) + "\"");
+        } else {
+            Iterator<?> aIterator = actual.iterator();
+            Iterator<?> eIterator = expected.iterator();
+            while (aIterator.hasNext() && eIterator.hasNext()) {
+                if (!aIterator.next().equals(eIterator.next())) {
+                    failed = true;
+                }
+            }
+
+            if (aIterator.hasNext() != eIterator.hasNext()) {
+                throw new TestFailedException("List lengths different! Received \"" + TestUtils.iterableToString(actual) + "\" but expected \"" + TestUtils.iterableToString(expected) + "\"");
+            }
+        }
+
+        if (failed) {
+            throw new TestFailedException(
+                    "List different! Received \"" + TestUtils.iterableToString(actual) + "\", expected \"" + TestUtils.iterableToString(expected) + "\"");
+        }
+
     }
 
     public static void assertEqual(List<String> actual, List<String> expected) throws TestFailedException {
