@@ -44,7 +44,7 @@ public class HW08Driver {
         } else {
 
             TestManager.setTestFilter(filter);
-            TestManager.runTestsOn(NodeTests.class, LinkedListTests.class, LinkedListIteratorTests.class);
+            TestManager.runTestsOn(NodeTests.class, LinkedListIteratorTests.class, LinkedListGeneralTests.class, LinkedListAddTests.class, LinkedListRemoveTests.class, LinkedListGetSetTests.class);
 
         }
 

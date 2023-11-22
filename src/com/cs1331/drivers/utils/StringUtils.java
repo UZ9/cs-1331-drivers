@@ -15,7 +15,7 @@ public class StringUtils {
     /**
      * The amount of HORIZONTAL_LINE_CHARACTER elements to use in a line
      */
-    public static final int HORIZONTAL_LINE_LENGTH = 48;
+    public static final int HORIZONTAL_LINE_LENGTH = 64;
 
     /**
      * Prints a horizontal line to the terminal.
