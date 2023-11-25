@@ -16,8 +16,8 @@ public class LinkedListAddTests {
         emptyList = new LinkedList<>();
     }
 
-    @TestCase(name = "add(): Add elements to an empty list")
-    @Tip(description = "Make sure that your add() method works when you start with an empty List!, and that size() is properly updated!")
+    @TestCase(name = "add(T element): Add elements to an empty list")
+    @Tip(description = "Make sure that your add() method works when you start with an empty List, and that size() is properly updated!")
     public static void addToEmpty() throws TestFailedException {
 
         emptyList.add("Lindsay");
@@ -27,7 +27,7 @@ public class LinkedListAddTests {
 
     }
 
-    @TestCase(name = "add(): Add element to the end of an existing list")
+    @TestCase(name = "add(T element): Add element to the end of an existing list")
     @Tip(description = "Make sure that you can add to the end, and that size() is properly updated!")
     public static void addToEnd() throws TestFailedException {
 
@@ -39,7 +39,7 @@ public class LinkedListAddTests {
 
     }
 
-    @TestCase(name = "add(): Add two elements to the end of an existing list")
+    @TestCase(name = "add(T element): Add two elements to the end of an existing list")
     @Tip(description = "Make sure that you can add to the end, and that size() is properly updated!")
     public static void addTwoToEnd() throws TestFailedException {
 
@@ -52,7 +52,7 @@ public class LinkedListAddTests {
 
     }
 
-    @TestCase(name = "add(): Giving null to one-arg add()")
+    @TestCase(name = "add(T element): Giving null to one-arg add(T)")
     @Tip(description = "What should happen if you try to add a null element?")
     public static void addOneNull() throws TestFailedException {
 
@@ -138,7 +138,7 @@ public class LinkedListAddTests {
     }
 
     @TestCase(name = "add(int index): Give index \"size\"")
-    @Tip(description = "Can you add an element at this index?")
+    @Tip(description = "Can you add an element at this index? Check the javadocs under the add method!")
     public static void addToIndexSize() throws TestFailedException {
 
         LinkedList<Object> list = new LinkedList<>(new Object[] {"Lindsay", "Elise", "Tarini", "Ethan", "Katia", "Laura", "Kritt"});

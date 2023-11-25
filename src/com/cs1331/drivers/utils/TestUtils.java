@@ -96,7 +96,7 @@ public class TestUtils {
         builder.append(iterator.next().toString());
         
         while (iterator.hasNext()) {
-            builder.append("," + iterator.next().toString());
+            builder.append(",").append(iterator.next().toString());
         }
 
         return builder.toString();

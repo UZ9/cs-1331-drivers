@@ -6,6 +6,8 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.cs1331.drivers.exception.TestFailedException;
+
 public class StringUtils {
     /**
      * The ASCII character to use for horizontal lines
@@ -64,7 +66,7 @@ public class StringUtils {
         return sb.toString();
     }
 
-    public static String arrayListToString(ArrayList<? extends Object> inputs) {
+    public static String arrayListToString(ArrayList<? extends Object> inputs) throws TestFailedException {
         return arrayToString(inputs.toArray(), ",");
     }
 
@@ -75,7 +77,7 @@ public class StringUtils {
      * @param itemSeparator The String to put BETWEEN each item.
      * @return
      */
-    public static String arrayToString(Object[] inputs, String itemSeparator) {
+    public static String arrayToString(Object[] inputs, String itemSeparator) throws TestFailedException {
         if (inputs.length == 0) {
             return "";
         }
@@ -83,13 +85,13 @@ public class StringUtils {
         StringBuilder builder = new StringBuilder();
 
         for (Object input : inputs) {
-            builder.append(input.toString()).append(itemSeparator);
+            builder.append(input == null ? "null" : input.toString()).append(itemSeparator);
         }
 
         return builder.toString();
     }
 
-    public static String arrayToString(Object[] inputs) {
+    public static String arrayToString(Object[] inputs) throws TestFailedException {
         return arrayToString(inputs, ",");
     }
 
@@ -168,7 +170,7 @@ public class StringUtils {
         StringBuilder output = new StringBuilder();
 
         for (int i = 0; i < split.length - 1; i++) {
-            output.append(formatSingleLine(split[i]) + "\n");
+            output.append(formatSingleLine(split[i])).append("\n");
         }
 
         output.append(formatSingleLine(split[split.length - 1]));
