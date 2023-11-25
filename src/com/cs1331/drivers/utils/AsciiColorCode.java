@@ -28,7 +28,7 @@ public final class AsciiColorCode {
     public static final String WHITE_FOREGROUND = "\033[37m";
     public static final String WHITE_BACKGROUND = "\033[47m";
 
-    public static final String BRIHGT_BLACK_FOREGROUND = "\033[90m";
+    public static final String BRIGHT_BLACK_FOREGROUND = "\033[90m";
     public static final String BRIGHT_BLACK_BACKGROUND = "\033[100m";
 
     public static final String BRIGHT_RED_FOREGROUND = "\033[91m";

@@ -60,7 +60,7 @@ public class TestManager {
      * @param clazz The input class
      */
     public static void registerClass(Class<?> clazz) {
-        if (filter.size() == 0 || filter.stream().anyMatch(s -> s.equals(clazz.getName()))) {
+        if (filter.isEmpty() || filter.stream().anyMatch(s -> s.equals(clazz.getName()))) {
             testClazzes.add(clazz);
         }
     }
@@ -156,14 +156,6 @@ public class TestManager {
 
                 }
             }
-            // getClass().getDeclaredField()
-            // setAccessible
-
-            // Field modifiers = getDeclaredField("modifiers")
-
-            // modifiers.setInt(field, field.getModifiers() & ~Modifier.FINAL);
-
-            // field.set(instance, newValue);
         }
     }
 
@@ -178,11 +170,12 @@ public class TestManager {
         System.out.println();
     }
 
-    protected static void submitTest(int result) {
-        // classTests++;
-        // classTestsFailed += result;
-    }
 
+    /**
+     * Sets a filter to determine what test class files can be run.
+     * This is primarily used in the CLI options.
+     * @param filter The filter of classes
+     */
     public static void setTestFilter(List<String> filter) {
         TestManager.filter = filter;
     }
