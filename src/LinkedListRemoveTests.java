@@ -347,4 +347,13 @@ public class LinkedListRemoveTests {
         TestFunction.testForException(NoSuchElementException.class, () -> emptyList.remove("Janhavi"));
 
     }
+
+    @TestCase(name = "remove(T element): Removing a null element from empty list")
+    @Tip(description = "Can null be found in an empty list? What should happen if null is passed in, regardless of whether the list is empty?")
+    public static void removeNullFromEmpty() throws TestFailedException {
+
+        TestFunction.testForException(IllegalArgumentException.class, () -> emptyList.remove(null));
+
+    }
+    
 }
