@@ -15,23 +15,7 @@ public class HW08Driver {
         TerminalOption helpOption = new TerminalOption("-h", "List all commands", "java <COMPILED_DRIVER_FILE> -h");
         TerminalOption runClassesOption = new TerminalOption("-c", "Run only specific test classes", "java <COMPILED_DRIVER_FILE> -c SomeClassWithTests AnotherClassWithTests");
 
-        TerminalOption[] options = { helpOption, runClassesOption };
-
-        TerminalOption currentOption = null;
-
-        argloop: for (int i = 0; i < args.length; i++) {
-            for (TerminalOption o : options) {
-                if (o.getFlag().equals(args[i])) {
-                    currentOption = o;
-                    currentOption.setReceived(true);
-                    continue argloop;
-                }
-            }
-
-            if (currentOption != null) {
-                currentOption.addInput(args[i]);
-            }
-        }
+        TerminalOption[] options = getTerminalOptions(args, helpOption, runClassesOption);
 
         List<String> filter = runClassesOption.getInput();
 
@@ -48,5 +32,27 @@ public class HW08Driver {
 
         }
 
+    }
+
+    private static TerminalOption[] getTerminalOptions(String[] args, TerminalOption helpOption, TerminalOption runClassesOption) {
+        TerminalOption[] options = {helpOption, runClassesOption};
+
+        TerminalOption currentOption = null;
+
+        argloop:
+        for (String arg : args) {
+            for (TerminalOption o : options) {
+                if (o.getFlag().equals(arg)) {
+                    currentOption = o;
+                    currentOption.setReceived(true);
+                    continue argloop;
+                }
+            }
+
+            if (currentOption != null) {
+                currentOption.addInput(arg);
+            }
+        }
+        return options;
     }
 }

@@ -6,6 +6,8 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.cs1331.drivers.exception.TestFailedException;
+
 public class StringUtils {
     /**
      * The ASCII character to use for horizontal lines
@@ -44,10 +46,10 @@ public class StringUtils {
     }
 
     /**
-     * Util that a stack trace into a printable string.
+     * Utility for converting a Throwable to a stack trace string.
      * 
      * @param e Exception to print the stacktrace of
-     * @return
+     * @return The formatted stack trace
      */
     public static String stackTraceToString(Throwable e) {
         StackTraceElement[] stackTrace = e.getStackTrace();
@@ -64,7 +66,13 @@ public class StringUtils {
         return sb.toString();
     }
 
-    public static String arrayListToString(ArrayList<? extends Object> inputs) {
+    /**
+     * Converts an arraylist into a readable string.
+     * @param inputs the input arraylist
+     * @return the arraylist as a string
+     * @throws TestFailedException if the method was unable to convert the arraylist
+     */
+    public static String arrayListToString(ArrayList<?> inputs) throws TestFailedException {
         return arrayToString(inputs.toArray(), ",");
     }
 
@@ -73,9 +81,9 @@ public class StringUtils {
      * The resulting String has an itemSeparator between each element.
      * @param inputs The Array to convert to String.
      * @param itemSeparator The String to put BETWEEN each item.
-     * @return
+     * @return the array as a string
      */
-    public static String arrayToString(Object[] inputs, String itemSeparator) {
+    public static String arrayToString(Object[] inputs, String itemSeparator) throws TestFailedException {
         if (inputs.length == 0) {
             return "";
         }
@@ -83,16 +91,23 @@ public class StringUtils {
         StringBuilder builder = new StringBuilder();
 
         for (Object input : inputs) {
-            builder.append(input.toString()).append(itemSeparator);
+            builder.append(input == null ? "null" : input.toString()).append(itemSeparator);
         }
 
         return builder.toString();
     }
 
-    public static String arrayToString(Object[] inputs) {
+    public static String arrayToString(Object[] inputs) throws TestFailedException {
         return arrayToString(inputs, ",");
     }
 
+    /**
+     * Reads the contents of a file and converts it into a string,
+     * using \n as the delimiter.
+     * @param path the path to the file
+     * @return the file's contents as a string
+     * @throws FileNotFoundException if the file cannot be found
+     */
     public static String fileToString(String path) throws FileNotFoundException {
         Scanner scanner = new Scanner(new File(path));
 
@@ -115,7 +130,7 @@ public class StringUtils {
      * 
      * @param path Path to write at.
      * @param data Data to write to the file.
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException if the file cannot be found
      */
     public static void stringToFile(String path, String data) throws FileNotFoundException {
 
@@ -129,12 +144,11 @@ public class StringUtils {
 
     /**
      * Returns a modified version of 'actual', where the first character that
-     * differs from
-     * 'expected' is highlighted RED.
+     * differs from 'expected' is highlighted RED.
      * 
      * @param actual   The 'actual' String
      * @param expected The 'expected' String to compare against
-     * @return
+     * @return The string showing the color coded difference.
      */
     public static String getColorCodedDifference(String actual, String expected) {
         StringBuilder colored = new StringBuilder();
@@ -168,12 +182,12 @@ public class StringUtils {
         StringBuilder output = new StringBuilder();
 
         for (int i = 0; i < split.length - 1; i++) {
-            output.append(formatSingleLine(split[i]) + "\n");
+            output.append(formatSingleLine(split[i])).append("\n");
         }
 
         output.append(formatSingleLine(split[split.length - 1]));
 
-        return output.toString() + "\n";
+        return output + "\n";
     }
 
     private static String formatSingleLine(String s) {

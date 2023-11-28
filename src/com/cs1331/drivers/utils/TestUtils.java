@@ -12,7 +12,7 @@ public class TestUtils {
     /**
      * Returns either 1, 0, or -1 depending on the sign of the input.
      * 
-     * @param input
+     * @param input the input number
      * @return -1 if input < 0, 0 if input = 0, 1 if input > 0
      */
     public static int signOf(int input) {
@@ -23,8 +23,14 @@ public class TestUtils {
         }
     }
 
+    /**
+     * Utility method for taking in a list of strings and converting it into one string,
+     * separated by newline characters.
+     * @param printedMessages The messages to combine
+     * @return The combined final string
+     */
     public static String combinePrintStatements(List<String> printedMessages) {
-        if (printedMessages == null || printedMessages.size() == 0) {
+        if (printedMessages == null || printedMessages.isEmpty()) {
             return "";
         }
 
@@ -62,6 +68,10 @@ public class TestUtils {
         String run(String str);
     }
 
+    /**
+     * Delete a file at a given path
+     * @param path The file to delete
+     */
     public static void deleteFile(String path) {
         File file = new File(path);
 
@@ -96,7 +106,7 @@ public class TestUtils {
         builder.append(iterator.next().toString());
         
         while (iterator.hasNext()) {
-            builder.append("," + iterator.next().toString());
+            builder.append(",").append(iterator.next().toString());
         }
 
         return builder.toString();

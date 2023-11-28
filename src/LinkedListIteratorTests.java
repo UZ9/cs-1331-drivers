@@ -9,7 +9,7 @@ import com.cs1331.drivers.testing.TestFunction;
 public class LinkedListIteratorTests {
 
     @TestCase(name = "Constructor: Valid array of String")
-    @Tip(description = "Make sure you have a constructor!")
+    @Tip(description = "Make sure you have a constructor! If your add method is incorrect, this test will likely fail.")
     public static void constructorValidInput() throws TestFailedException {
 
         LinkedList<String> list = new LinkedList<>(new String[] {"Ansel", "Ethan"});
@@ -98,7 +98,7 @@ public class LinkedListIteratorTests {
         builder.append(iterator.next());
         
         while (iterator.hasNext()) {
-            builder.append("," + iterator.next());
+            builder.append(",").append(iterator.next());
         }
 
         TestFunction.assertEqual(builder.toString(), "Ansel,Ethan,Lindsay,Elise,Kritt,Tarini,Roopa,Katia,Laura,Aarushi,Clarence,Skyla");
