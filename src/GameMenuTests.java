@@ -1,5 +1,3 @@
-import java.util.List;
-
 import com.cs1331.drivers.annotations.TestCase;
 import com.cs1331.drivers.annotations.Tip;
 import com.cs1331.drivers.exception.TestFailedException;
@@ -11,11 +9,21 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.stage.Window;
 
 public class GameMenuTests {
+    @TestCase(name = "Check guess button is enabled")
+    @Tip(description = "Make sure your guess button is enabled!")
+    public void checkGuessButtonCanFire() throws TestFailedException {
+        Scene scene = StageData.stage.getScene();
+
+        Button returned = RecursiveSearch.recursiveSearch(
+                ((Button b) -> b.getText().contains("GUESS")),
+                Button.class,
+                (Pane) scene.getRoot());
+
+        TestFunction.assertEqual(returned.isDisabled(), false);
+    }
+
     @TestCase(name = "Game menu window name is still Battleship")
     @Tip(description = "Don't change the title!")
     public void checkApplicationName() throws TestFailedException {
@@ -29,7 +37,7 @@ public class GameMenuTests {
         Scene scene = StageData.stage.getScene();
 
         Label returned = RecursiveSearch.recursiveSearch(
-                ((Label b) -> b.getText().equals("Your Ships")),
+                ((Label b) -> b.getText().contains("Your Ships")),
                 Label.class,
                 (Pane) scene.getRoot());
 
@@ -58,7 +66,7 @@ public class GameMenuTests {
         Scene scene = StageData.stage.getScene();
 
         Label returned = RecursiveSearch.recursiveSearch(
-                ((Label b) -> b.getText().equals("Enemy Ships")),
+                ((Label b) -> b.getText().contains("Enemy Ships")),
                 Label.class,
                 (Pane) scene.getRoot());
 
@@ -127,4 +135,6 @@ public class GameMenuTests {
         TestFunction.assertEqual(true, returned != null);
 
     }
+
+
 }
