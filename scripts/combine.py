@@ -68,6 +68,8 @@ with open(filename, "wb") as outfile:
                     continue
 
                 if "@InjectData" in line:
+                    if "stage" in line:
+                        continue
                     regex = r'"(.*?)"'
 
                     match = re.findall(regex, line)[0]
