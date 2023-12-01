@@ -52,7 +52,7 @@ with open(filename, "wb") as outfile:
                 line = line.replace("public @interface", "@interface")
                 line = line.replace("public interface", "interface")
                 line = line.replace("public final", "final")
-                line = line.replace(DRIVER_NAME, "Driver")
+                line = line.replace("class " + DRIVER_NAME, "public class Driver")
 
                 if inject_path != None:
                     regex = r"^(.*?)\""
