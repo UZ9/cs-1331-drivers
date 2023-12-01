@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.function.Consumer;
 
 import com.cs1331.drivers.exception.TestFailedException;
-import com.cs1331.drivers.utils.AsciiColorCode;
-import com.cs1331.drivers.utils.ColorUtils;
 import com.cs1331.drivers.utils.StringUtils;
 import com.cs1331.drivers.utils.TestUtils;
 
@@ -184,7 +182,7 @@ public class TestFunction {
         } catch (Exception e) {
             if (e.getClass() == exceptionType) {
                 if (e.getMessage() == null || e.getMessage().isBlank()) {
-                    throw new TestFailedException(ColorUtils.formatColorString(AsciiColorCode.WHITE_FOREGROUND, AsciiColorCode.RED_BACKGROUND, "You must have a descriptive message for your " + e.getClass().getSimpleName() + "."));
+                    throw new TestFailedException("Make sure you're setting a descriptive message for your " + e.getClass().getSimpleName() + "!");
                 }
                 // Test passed! Finish running method and return to the invoker
             } else if (e.getClass() == TestFailedException.class && e.getMessage().contains("did NOT occur")) {
