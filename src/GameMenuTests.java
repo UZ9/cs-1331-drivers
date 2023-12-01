@@ -119,10 +119,6 @@ public class GameMenuTests {
     @TestCase(name = "Game menu integer combobox has default value 1")
     @Tip(description = "Make sure your combobox is set to the correct default value!")
     public void checkDefaultIntegerCombobox() throws TestFailedException {
-        StageData.stage.setOnShowing(e -> {
-            System.out.println("ASHDAHDIWAJ");
-        });
-
         Scene scene = StageData.stage.getScene();
 
         ComboBox<Integer> returned = RecursiveSearch.recursiveSearch(
