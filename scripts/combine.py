@@ -5,6 +5,7 @@ from pathlib import Path
 filename = "../Driver.java"
 
 JAVA_PACKAGE_NAME = "com.cs1331.drivers" 
+DRIVER_NAME = "HW09Driver"
 
 os.makedirs(os.path.dirname(filename), exist_ok=True)
 
@@ -49,8 +50,9 @@ with open(filename, "wb") as outfile:
                 line = line.replace("public class", "class")
                 line = line.replace("public enum", "enum")
                 line = line.replace("public @interface", "@interface")
+                line = line.replace("public interface", "interface")
                 line = line.replace("public final", "final")
-                line = line.replace("HW08Driver", "Driver")
+                line = line.replace(DRIVER_NAME, "Driver")
 
                 if inject_path != None:
                     regex = r"^(.*?)\""
@@ -69,6 +71,7 @@ with open(filename, "wb") as outfile:
 
                 if "@InjectData" in line:
                     if "stage" in line:
+                        code_lines.append(line.encode())
                         continue
                     regex = r'"(.*?)"'
 
