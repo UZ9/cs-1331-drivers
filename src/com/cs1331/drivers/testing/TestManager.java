@@ -1,4 +1,5 @@
 package com.cs1331.drivers.testing;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Field;
@@ -17,6 +18,8 @@ import com.cs1331.drivers.annotations.InjectData;
 import com.cs1331.drivers.utils.AsciiColorCode;
 import com.cs1331.drivers.utils.ColorUtils;
 import com.cs1331.drivers.utils.StringUtils;
+
+import javafx.stage.Stage;
 
 public class TestManager {
     protected volatile static AtomicInteger classTests = new AtomicInteger();
@@ -40,12 +43,12 @@ public class TestManager {
      * 
      * @param classes The classes to test.
      */
-    public static void runTestsOn(Class<?>... classes) {
+    public static void runTestsOn(Stage stage, Class<?>... classes) {
         for (Class<?> currentClass : classes) {
             registerClass(currentClass);
         }
 
-        executeTests();
+        executeNextTest(stage);
     }
 
     public static void registerDataClasses(Class<?>... classes) {
@@ -54,13 +57,15 @@ public class TestManager {
         }
     }
 
+    private static int currentTestChain = 0;
+
     /**
      * Registers and marks test class to be scanned during test execution.
      * 
      * @param clazz The input class
      */
     public static void registerClass(Class<?> clazz) {
-        if (filter.isEmpty() || filter.stream().anyMatch(s -> s.equals(clazz.getName()))) {
+        if (filter == null || filter.isEmpty() || filter.stream().anyMatch(s -> s.equals(clazz.getName()))) {
             testClazzes.add(clazz);
         }
     }
@@ -69,19 +74,25 @@ public class TestManager {
         dataClazzes.add(clazz);
     }
 
+    public static void startNextTestSuite() {
+
+    }
+
     /**
      * Executes all registered tests.
      */
-    public static void executeTests() {
-        injectData();
+    public static void executeNextTest(Stage stage) {
+        injectData(stage);
 
         ExecutorService executor = Executors.newFixedThreadPool(1);
 
         List<Runnable> runnables = new ArrayList<>();
 
-        for (Class<?> testClass : testClazzes) {
-            runnables.add(new TestContainer(testClass));
-        }
+        runnables.add(new TestContainer(testClazzes.get(currentTestChain)));
+
+        // for (Class<?> testClass : testClazzes) {
+        //     runnables.add(new TestContainer(testClass));
+        // }
 
         for (Runnable r : runnables) {
             Future<?> future = executor.submit(r);
@@ -115,9 +126,11 @@ public class TestManager {
                         classTests.get()));
         StringUtils.printHorizontalLine();
 
+        currentTestChain++;
+
     }
 
-    private static void injectData() {
+    private static void injectData(Stage stage) {
 
         for (Class<?> dataClass : dataClazzes) {
             for (Field f : dataClass.getFields()) {
@@ -128,18 +141,30 @@ public class TestManager {
 
                     StringBuilder output = new StringBuilder();
 
-                    try {
-                        scanner = new Scanner(new File(injectAnnotation.name()));
+                    if (injectAnnotation.name().equals("stage")) {
+                        f.setAccessible(true);
 
-                        while (scanner.hasNextLine()) {
-                            output.append(scanner.nextLine()).append("\n");
+                        try {
+                            f.set(null, stage);
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
-                    } catch (FileNotFoundException e) {
-                        System.out.println("COULDN'T FIND INJECT DATA FILE " + injectAnnotation.name());
-                        System.exit(-1);
-                    } finally {
-                        if (scanner != null) {
-                            scanner.close();
+                        
+                        return;
+                    } else {
+                        try {
+                            scanner = new Scanner(new File(injectAnnotation.name()));
+
+                            while (scanner.hasNextLine()) {
+                                output.append(scanner.nextLine()).append("\n");
+                            }
+                        } catch (FileNotFoundException e) {
+                            System.out.println("COULDN'T FIND INJECT DATA FILE " + injectAnnotation.name());
+                            System.exit(-1);
+                        } finally {
+                            if (scanner != null) {
+                                scanner.close();
+                            }
                         }
                     }
 
@@ -170,10 +195,10 @@ public class TestManager {
         System.out.println();
     }
 
-
     /**
      * Sets a filter to determine what test class files can be run.
      * This is primarily used in the CLI options.
+     * 
      * @param filter The filter of classes
      */
     public static void setTestFilter(List<String> filter) {
